@@ -1,11 +1,12 @@
 interface CardProps {
     title: string;
+    description: string;
 }
 
 const LandingPage = () => {
    const Header = () => {
     return (
-        <header className="flex items-center justify-between p-6 bg-[#282828] w-full text-white">
+        <header className="flex items-center justify-between p-4 bg-[#282828] w-full text-white">
             
             {/* left side */}
             <div className="flex flex-col text-sm">
@@ -33,14 +34,18 @@ const LandingPage = () => {
     );
    };
 
-   const Card = ({ title }: CardProps) => {
+   const Card = ({ title, description }: CardProps) => {
     return (
-        <div className="flex flex-col items-center justify-center p-6 bg-[#343536] rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+        <div className=
+            "flex flex-col items-center justify-center p-6 bg-[#343536] h-48 rounded-lg shadow-lg hover:shadow-xl cursor-pointer group hover:bg-[#282828] border border-transparent hover:border-blue-500">
             {/* DUMMY ICON */}
-            <div className="w-16 h-16 rounded-full bg-yellow-400 flex items-center justify-center mb-4 text-black">
+            <div className="w-14 h-14 rounded-full bg-teal-400 flex items-center justify-center mb-4 text-black">
                 <span className="text-3xl font-bold text-gray-800">{title.charAt(0)}</span>
             </div>
-            <h3 className="text-white text-lg font-semibold text-center">{title}</h3>
+            <p className="text-white text-sm text-center flex-grow">{title}</p>
+            <p className="text-[#343536]-400 text-xs text-center opacity-0 group-hover:opacity-100">
+                {description}
+            </p>
         </div>
     );
    };
@@ -80,22 +85,22 @@ const LandingPage = () => {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
-                    <Card title="Vendor Agreement & Query" />
-                    <Card title="Vendor Management" />
-                    <Card title="Vendor Communication" />
-                    <Card title="Policy Configuration" />
-                    <Card title="User Management" />
-                    <Card title="Network Planning" />
-                    <Card title="Service Assurance" />
-                    <Card title="Inventory" />
-                    <Card title="Network Configuration" />
-                    <Card title="Service Flow Design" />
-                    <Card title="Reporting & Analytics" />
-                    <Card title="Notifications" />
+                    <Card title="Vendor Agreement & Query" description="text" />
+                    <Card title="Vendor Management" description="text" />
+                    <Card title="Vendor Communication" description="text" />
+                    <Card title="Policy Configuration" description="text" />
+                    <Card title="User Management" description="text" />
+                    <Card title="Network Planning" description="text" />
+                    <Card title="Service Assurance" description="text" />
+                    <Card title="Inventory" description="text" />
+                    <Card title="Network Configuration" description="text" />
+                    <Card title="Service Flow Design" description="text" />
+                    <Card title="Reporting & Analytics" description="text" />
+                    <Card title="Notifications" description="text" />
                 </div>                
             </main>
 
-            <footer className="p-6" />
+            <footer className="p-4" />
         </div>
     );
 };
