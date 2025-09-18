@@ -1,6 +1,7 @@
 # Installation
 - npm install react-router-dom
 - npm install tailwindcss @tailwindcss/vite
+- npm install react-icons --save
 
 # React + TypeScript + Vite
 
