@@ -92,7 +92,7 @@ const LandingPage = () => {
         </div>
     );
    };
-    
+  
     return (
         <div className="min-h-screen bg-[#282828] text-white">
             <Header />
@@ -108,7 +108,7 @@ const LandingPage = () => {
                     <div className="flex items-center justify-between mb-4 text-sm">
                         <p className="text-gray-400 text-sm flex items-center gap-x-1"> <FaRegCalendarCheck />Last sign in: {currentUser?.lastSignIn || 'N/A'}</p>
                         {/* row data section */}
-                        <div className="flex flex-wrap md:flexnowrap justify-end space-x-8">
+                        <div className="flex flex-wrap md:flex-nowrap justify-end space-x-8">
                             <div className="flex items-center space-x-2">
                                 <span className='flex items-center gap-x-1'> <GoOrganization /> <span className="font-semibold text-blue-400">87</span> Enterprise</span>
                             </div>
@@ -124,6 +124,7 @@ const LandingPage = () => {
                         </div>
                     </div>
                 </div>
+
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
                     <Card title="Vendor Agreement & Query"  color="#3498b3" icon={< LuClipboardList />} redirectLink='vendor-agreement-query' />
