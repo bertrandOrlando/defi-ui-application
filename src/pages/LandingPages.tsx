@@ -15,8 +15,17 @@ import { BiServer } from 'react-icons/bi';
 import { RiFlowChart } from 'react-icons/ri';
 import { TbFileAnalytics } from 'react-icons/tb';
 import { MdOutlineNotificationsActive } from 'react-icons/md';
+import { FaRegCalendarCheck } from 'react-icons/fa';
 
 import { useNavigate } from 'react-router-dom';
+import usersData from '../data/users.json';
+import rolesData from '../data/roles.json';
+
+/* TODO :
+ * - Harus Handle User Profile
+ * - Handle Row Data Section masih dummy (Enterprise, Locations, Alarms, Total gNB)
+ * - Handle Total enterprise in Service Assurance
+ */
 interface CardProps {
     title: string;
     description?: string;
@@ -26,6 +35,10 @@ interface CardProps {
 }
 
 const LandingPage = () => {
+
+    const currentUser = usersData.users.find(user => user.userId === "001") 
+    const currentRole = rolesData.roles.find(role => role.roleId === currentUser?.roleId)
+
    const Header = () => {
     return (
         <header className="flex items-center justify-between p-4 bg-[#282828] w-full text-white">
@@ -44,10 +57,8 @@ const LandingPage = () => {
             {/* right side */}
             <div className="flex items-center space-x-4">
                 <div className="flex flex-col items-end text-sm">
-                    {/* DUMMY NAME */}
-                    <span>Name</span>
-                    {/* DUMMY ROLE */}
-                    <p className="text-sm">Role</p>
+                    <span>{currentUser?.name || 'User Name'}</span>
+                    <p className="text-sm">{currentRole?.roleName || 'User Role'}</p>
                 </div>
                 {/* DUMMY ICON */}
                 <img src="src\assets\user.png" className="h-10 w-10"></img>
@@ -68,8 +79,6 @@ const LandingPage = () => {
             "flex flex-col items-center justify-center p-6 bg-[#343536] h-48 rounded-lg shadow-lg hover:shadow-xl cursor-pointer group hover:bg-[#282828] border border-transparent hover:border-blue-500"
             onClick={handleClick}
             >
-            
-            {/* DUMMY ICON */}
             <div style={{backgroundColor : color}}
                 className="w-14 h-14 rounded-full flex items-center justify-center mb-4 text-black"
             >
@@ -93,13 +102,11 @@ const LandingPage = () => {
                 <div className="mb-2">
                     {/* Welcome, User */}
                     <div>
-                        {/* DUMMY NAME */}
-                        <h2 className="text-3x1 font-bold">Welcome, User</h2>
+                        <h2 className="text-3x1 font-bold">Welcome, {currentUser?.name || 'User'}</h2>
                     </div>
                     
                     <div className="flex items-center justify-between mb-4 text-sm">
-                        {/* DUMMY DATE */}
-                        <p className="text-gray-400 text-sm">Last sign in: 11/09/25</p>
+                        <p className="text-gray-400 text-sm flex items-center gap-x-1"> <FaRegCalendarCheck />Last sign in: {currentUser?.lastSignIn || 'N/A'}</p>
                         {/* row data section */}
                         <div className="flex flex-wrap md:flexnowrap justify-end space-x-8">
                             <div className="flex items-center space-x-2">
@@ -112,7 +119,7 @@ const LandingPage = () => {
                                 <span className="flex items-center gap-x-1"> <AiOutlineAlert/> <span className="font-semibold text-green-400">46</span> Alarms</span>
                             </div>
                             <div className="flex items-center space-x-2">
-                                <span className="flex items-center gap-x-1"> <FaChartBar /> <span className="font-semibold text-teal-400">15</span> total gNB</span>
+                                <span className="flex items-center gap-x-1"> <FaChartBar /> <span className="font-semibold text-teal-400">15</span> Total gNB</span>
                             </div>
                         </div>
                     </div>
@@ -125,7 +132,7 @@ const LandingPage = () => {
                     <Card title="Policy Configuration"  color="#e58029" icon={< FaRegFolderOpen />} redirectLink='policy-configuration' />
                     <Card title="User Management"  color="#d1664f" icon={< FaUsersGear />} redirectLink='user-management' />
                     <Card title="Network Planning"  color="#c4515c" icon={< LuNetwork />} redirectLink='network-planning' />
-                    <Card title="Service Assurance" description="text" color="#8a5480" icon={< TbWorld />} redirectLink='service-assurance' />
+                    <Card title="Service Assurance" description="N Enterprises in total" color="#8a5480" icon={< TbWorld />} redirectLink='service-assurance' />
                     <Card title="Inventory" color="#8a5480" icon={< MdOutlineInventory2 />} redirectLink='inventory' />
                     <Card title="Network Configuration" color="#746fa7" icon={< BiServer />} redirectLink='network-configuration' />
                     <Card title="Service Flow Design" color="#7dc161" icon={< RiFlowChart />} redirectLink='service-flow-design' />
