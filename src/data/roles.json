@@ -1,0 +1,40 @@
+{
+    "roles" : [
+        {
+            "roleId" : "1",
+            "roleName" : "Super Admin"
+        },
+        {
+            "roleId" : "2",
+            "roleName" : "Vendor/OEM"
+        },
+        {
+            "roleId" : "3",
+            "roleName" : "NOC User"
+        },
+        {
+            "roleId" : "4",
+            "roleName" : "Site Manager"
+        },
+        {
+            "roleId" : "5",
+            "roleName" : "Super Admin"
+        },
+        {
+            "roleId" : "6",
+            "roleName" : "Network Admin"
+        },
+        {
+            "roleId" : "7",
+            "roleName" : "Network Planner"
+        },
+        {
+            "roleId" : "8",
+            "roleName" : "Admin - 1"
+        },
+        {
+            "roleId" : "9",
+            "roleName" : "Admin - 2"
+        }
+    ]
+}
