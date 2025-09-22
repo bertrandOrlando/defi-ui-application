@@ -25,6 +25,7 @@ import rolesData from '../data/roles.json';
  * - Harus Handle User Profile
  * - Handle Row Data Section masih dummy (Enterprise, Locations, Alarms, Total gNB)
  * - Handle Total enterprise in Service Assurance
+ * - Handle Authentication User
  */
 interface CardProps {
     title: string;
