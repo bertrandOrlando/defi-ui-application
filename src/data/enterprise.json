@@ -1,0 +1,145 @@
+[
+  {
+    "id": 1,
+    "address": "123 Main St, New York, NY, 10001",
+    "lat": 40.7128,
+    "long": -74.006,
+    "enterprise": "Enterprise A",
+    "status": "Healthy",
+    "core": "5G core 1",
+    "ran": ["RAN Alpha 4"],
+    "cpe": ["Horeta-AP-02", "Horeta-AP-01"]
+  },
+  {
+    "id": 2,
+    "address": "456 Elm St, Los Angeles, CA, 90001",
+    "lat": 34.0522,
+    "long": -118.2437,
+    "enterprise": "Enterprise B",
+    "status": "Major",
+    "core": "5G core 2",
+    "ran": ["RAN Alpha 4"],
+    "cpe": ["Horeta-AP-01", "Demo AP1"]
+  },
+  {
+    "id": 3,
+    "address": "789 Oak Rd, Chicago, IL, 60601",
+    "lat": 41.8781,
+    "long": -87.6298,
+    "enterprise": "Enterprise C",
+    "status": "Critical",
+    "core": "5G core 1",
+    "ran": ["RAN Alpha 4"],
+    "cpe": ["Demo AP1", "Demo AP2"]
+  },
+  {
+    "id": 4,
+    "address": "101 Pine Blvd, Houston, TX, 77001",
+    "lat": 29.7604,
+    "long": -95.3698,
+    "enterprise": "Enterprise A",
+    "status": "Healthy",
+    "core": "5G core 2",
+    "ran": ["RAN Alpha 4"],
+    "cpe": ["Horeta-AP-22-AP01", "Horeta-AP-01"]
+  },
+  {
+    "id": 5,
+    "address": "202 Maple Ln, Phoenix, AZ, 85001",
+    "lat": 33.4484,
+    "long": -112.074,
+    "enterprise": "Enterprise B",
+    "status": "Healthy",
+    "core": "5G core 1",
+    "ran": ["RAN Alpha 4"],
+    "cpe": ["Horeta-AP-02"]
+  },
+  {
+    "id": 6,
+    "address": "303 Cedar St, Philadelphia, PA, 19102",
+    "lat": 39.9526,
+    "long": -75.1652,
+    "enterprise": "Enterprise C",
+    "status": "Major",
+    "core": "5G core 2",
+    "ran": ["RAN Alpha 4"],
+    "cpe": ["Demo AP1", "Demo AP2"]
+  },
+  {
+    "id": 7,
+    "address": "404 Birch Ave, Dallas, TX, 75201",
+    "lat": 32.7767,
+    "long": -96.797,
+    "enterprise": "Enterprise A",
+    "status": "Critical",
+    "core": "5G core 2",
+    "ran": ["RAN Alpha 4"],
+    "cpe": ["Horeta-AP-02", "Horeta-AP-01"]
+  },
+  {
+    "id": 8,
+    "address": "505 Birchwood Dr, San Diego, CA, 92101",
+    "lat": 32.7157,
+    "long": -117.1611,
+    "enterprise": "Enterprise B",
+    "status": "Healthy",
+    "core": "5G core 1",
+    "ran": ["RAN Alpha 4"],
+    "cpe": ["Horeta-AP-01", "Demo AP1"]
+  },
+  {
+    "id": 9,
+    "address": "606 Redwood Rd, Seattle, WA, 98101",
+    "lat": 47.6062,
+    "long": -122.3321,
+    "enterprise": "Enterprise C",
+    "status": "Major",
+    "core": "5G core 1",
+    "ran": ["RAN Alpha 4"],
+    "cpe": ["Horeta-AP-22-AP01", "Demo AP2"]
+  },
+  {
+    "id": 10,
+    "address": "707 Walnut St, Miami, FL, 33101",
+    "lat": 25.7617,
+    "long": -80.1918,
+    "enterprise": "Enterprise A",
+    "status": "Critical",
+    "core": "5G core 2",
+    "ran": ["RAN Alpha 4"],
+    "cpe": ["Horeta-AP-02", "Demo AP1"]
+  },
+  {
+    "id": 11,
+    "address": "808 Spruce Ave, Denver, CO, 80202",
+    "lat": 39.7392,
+    "long": -104.9903,
+    "enterprise": "Enterprise B",
+    "status": "Healthy",
+    "core": "5G core 1",
+    "ran": ["RAN Alpha 4"],
+    "cpe": ["Demo AP2"]
+  },
+  {
+    "id": 12,
+    "address": "909 Fir St, Austin, TX, 73301",
+    "lat": 30.2672,
+    "long": -97.7431,
+    "enterprise": "Enterprise C",
+    "status": "Critical",
+    "core": "5G core 2",
+    "ran": ["RAN Alpha 4"],
+    "cpe": ["Horeta-AP-01", "Demo AP1"]
+  },
+  {
+    "id": 13,
+    "address": "123 Birch St, Boston, MA, 02108",
+    "lat": 42.3601,
+    "long": -71.0589,
+    "enterprise": "Enterprise A",
+    "status": "Major",
+    "core": "5G core 1",
+    "ran": ["RAN Alpha 4"],
+    "cpe": ["Horeta-AP-22-AP01", "Demo AP2"]
+  }
+]
