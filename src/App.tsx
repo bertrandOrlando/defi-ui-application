@@ -1,17 +1,17 @@
 import { Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPages";
-import ServiceAssuranceTreeView from "./pages/ServiceAssuranceTreeView";
+import VendorManagement from "./pages/VendorManagement";
 
 
 function App() {
   return (
     <Routes>
-      <Route path="/Dashboard" element={<LandingPage />}/>
+      <Route path="/dashboard" element={<LandingPage />}/>
       <Route path="/login" element={<h1>Login Page</h1>}/>
       <Route path="/register" element={<h1>Register Page</h1>}/>
 
       <Route path="/vendor-agreement-query" element={<h1>vendor-agreement-query Page</h1>}/>
-      <Route path="/vendor-management" element={<h1>vendor-management Page</h1>}/>
+      <Route path="/vendor-management" element={<VendorManagement />}/>
       <Route path="/vendor-communication" element={<h1>vendor-communication Page</h1>}/>
       <Route path="/policy-configuration" element={<h1>policy-configuration Page</h1>}/>
       <Route path="/user-management" element={<h1>user-management Page</h1>}/>
