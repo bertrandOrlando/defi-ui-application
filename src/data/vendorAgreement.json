@@ -6,7 +6,7 @@
       "companyName": "PT Digital Nusantara",
       "verificationStatus": "Verified",
       "tocStatus": "Accepted",
-      "agreementStatus": "Active",
+      "agreementStatus": "Fulfilled",
       "viewAgreementDocs": "View Document"
     },
     {
@@ -15,7 +15,7 @@
       "companyName": "Innovate Supplies Ltd.",
       "verificationStatus": "Pending",
       "tocStatus": "Pending",
-      "agreementStatus": "Pending Verification",
+      "agreementStatus": "Not Fulfilled",
       "viewAgreementDocs": "View Document"
     },
     {
@@ -24,7 +24,7 @@
       "companyName": "Aditya Consulting",
       "verificationStatus": "Verified",
       "tocStatus": "Accepted",
-      "agreementStatus": "Expired",
+      "agreementStatus": "Not Fulfilled",
       "viewAgreementDocs": "View Document"
     },
     {
@@ -42,7 +42,7 @@
       "companyName": "Bandung Kreatif Cipta",
       "verificationStatus": "Rejected",
       "tocStatus": "Not Accepted",
-      "agreementStatus": "Terminated",
+      "agreementStatus": "Not Fulfilled",
       "viewAgreementDocs": "View Document"
     },
     {
@@ -51,7 +51,7 @@
       "companyName": "Lion City Logistics",
       "verificationStatus": "Verified",
       "tocStatus": "Pending",
-      "agreementStatus": "Awaiting Signature",
+      "agreementStatus": "Fulfilled",
       "viewAgreementDocs": "View Document"
     },
     {
@@ -60,16 +60,16 @@
       "companyName": "Wipro",
       "verificationStatus": "Verified",
       "tocStatus": "Accepted",
-      "agreementStatus": "Active",
+      "agreementStatus": "Fulfilled",
       "viewAgreementDocs": "View Document"
     },
     {
       "email": "k.mueller@eurotech-comp.de",
       "name": "Klaus Mueller",
       "companyName": "EuroTech Components",
-      "verificationStatus": "Unverified",
+      "verificationStatus": "Pending",
       "tocStatus": "Not Accepted",
-      "agreementStatus": "Onboarding Failed",
+      "agreementStatus": "Not Fulfilled",
       "viewAgreementDocs": "View Document"
     },
     {

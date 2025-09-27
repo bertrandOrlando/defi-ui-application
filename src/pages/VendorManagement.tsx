@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { Box, Breadcrumbs, Button, Link, Paper, Tab, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tabs, Typography } from "@mui/material";
-
+import { HiOutlineClipboardDocumentCheck } from 'react-icons/hi2';
 import Header from "../component/header"
+import DynamicBreadcrumb from "../component/dynamicBreadCrumbs";
 import deviceCertificationData from '../data/deviceCertification.json';
 import vendorAgreementData from '../data/vendorAgreement.json';
 import vendorRegistrationData from '../data/vendorRegistration.json';
 
+/**
+ * TO DO:
+ * - Update JSON when doing Action
+ * - Optional : Link Document
+ */
 interface vendorAgreement {
     email: string,
     name: string,
@@ -31,6 +37,34 @@ interface ConditionalTableProps {
     onVerify: (email: string, status: 'Verified' | 'Rejected') => void;
 }
 
+const StatusBubble = ({ status }: { status: string }) => {
+    const statusColors: { [key: string]: string } = {
+        'Verified': '#4caf50',
+        'Fulfilled': '#4caf50',
+        'Accepted': '#4caf50',
+        'Pending': '#ff9800',
+        'Rejected': '#f44336',
+        'Not Accepted': '#f44336',
+        'Not Fulfilled': '#f44336',
+    };
+
+    const bubbleStyle = {
+        display: 'inline-flex',
+        alignItems: 'center',
+        padding: '4px 12px',
+        borderRadius: '16px',
+        backgroundColor: statusColors[status] || '#5a5a5a',
+        color: 'white',
+        fontsize: '0.7rem',
+        fontWeight: '500'
+    };
+    
+    return (
+        <Box component="span" sx={bubbleStyle}>
+            {status}
+        </Box>
+    );
+}
 
 const ConditionalTable = ({ activeTab, agreementData, registrationData, onAgree, onVerify}: ConditionalTableProps) => {
     
@@ -76,11 +110,14 @@ const ConditionalTable = ({ activeTab, agreementData, registrationData, onAgree,
                             <TableCell sx={firstCellStyle}>{row.email}</TableCell>
                             <TableCell sx={cellStyle}>{row.name}</TableCell>
                             <TableCell sx={cellStyle}>{row.companyName}</TableCell>
-                            <TableCell sx={cellStyle}>{row.verificationStatus}</TableCell>
-                            <TableCell sx={cellStyle}>{row.tocStatus}</TableCell>
-                            <TableCell sx={cellStyle}>{row.agreementStatus}</TableCell>
+                            <TableCell sx={cellStyle}><StatusBubble status={row.verificationStatus} /></TableCell>
+                            <TableCell sx={cellStyle}><StatusBubble status={row.tocStatus} /></TableCell>
+                            <TableCell sx={cellStyle}><StatusBubble status={row.agreementStatus} /></TableCell>
                             <TableCell sx={cellStyle}>
-                                <Link href="#" underline="always">{row.viewAgreementDocs}</Link>
+                                <Link 
+                                    href="https://www.topcoder.com/challenges/61fc66fe-80ad-4ead-9717-78bdbf55f009?tab=details" 
+                                    underline="always"
+                                    target="_blank"><HiOutlineClipboardDocumentCheck/> {row.viewAgreementDocs}</Link>
                             </TableCell>
                             <TableCell sx={lastCellStyle}>
                                 <Button variant="contained" size="small" onClick={() => onAgree(row.email)} sx={{ textTransform: 'none', fontSize: '0.7rem' }}>
@@ -101,7 +138,7 @@ const ConditionalTable = ({ activeTab, agreementData, registrationData, onAgree,
                             <TableCell sx={firstCellStyle}>{row.email}</TableCell>
                             <TableCell sx={cellStyle}>{row.name}</TableCell>
                             <TableCell sx={cellStyle}>{row.companyName}</TableCell>
-                            <TableCell sx={cellStyle}>{row.verificationStatus}</TableCell>
+                            <TableCell sx={cellStyle}><StatusBubble status={row.verificationStatus} /></TableCell>
                             <TableCell sx={lastCellStyle}>
                                 <Box sx={{ display: 'flex', gap: 1 }}>
                                     <Button variant="contained" color="success" size="small" onClick={() => onVerify(row.email, 'Verified')} sx={{ textTransform: 'none', fontSize: '0.7rem' }}>
@@ -169,14 +206,7 @@ const VendorManagement = () => {
 
             <main className="container mx-auto p-8">
                 {/* breadcrumbs */}
-                <Breadcrumbs aria-label="breadcrumb" sx={{ color: 'white', fontSize: '10px' }}>
-                    <Link underline="hover" color="inherit" href="/dashboard">
-                        Dashboard
-                    </Link>
-                    <Typography sx={{color: 'orange', fontSize: '10px'}}>
-                        Vendor Management
-                    </Typography>
-                </Breadcrumbs>
+                <DynamicBreadcrumb />
 
                 {/* page title */}
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 1}}>

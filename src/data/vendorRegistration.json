@@ -10,7 +10,7 @@
       "email": "chloe.chen@innovatesupplies.com",
       "name": "Chloe Chen",
       "companyName": "Innovate Supplies Ltd.",
-      "verificationStatus": "Not-Fulfilled"
+      "verificationStatus": "Pending"
     },
     {
       "email": "aditya.consulting@gmail.com",
@@ -28,7 +28,7 @@
       "email": "rina.creative@bkcipta.id",
       "name": "Rina Amelia",
       "companyName": "Bandung Kreatif Cipta",
-      "verificationStatus": "Not-Fulfilled"
+      "verificationStatus": "Pending"
     },
     {
       "email": "wei.li@lclogistics.sg",
@@ -46,7 +46,7 @@
       "email": "k.mueller@eurotech-comp.de",
       "name": "Klaus Mueller",
       "companyName": "EuroTech Components",
-      "verificationStatus": "Not-Fulfilled"
+      "verificationStatus": "Rejected"
     },
     {
       "email": "kontak@sedaprasa-catering.com",
