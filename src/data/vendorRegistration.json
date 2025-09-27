@@ -1,0 +1,58 @@
+{
+  "vendorRegistration": [
+    {
+      "email": "budi.s@digitalnusantara.co.id",
+      "name": "Budi Santoso",
+      "companyName": "PT Digital Nusantara",
+      "verificationStatus": "Verified"
+    },
+    {
+      "email": "chloe.chen@innovatesupplies.com",
+      "name": "Chloe Chen",
+      "companyName": "Innovate Supplies Ltd.",
+      "verificationStatus": "Not-Fulfilled"
+    },
+    {
+      "email": "aditya.consulting@gmail.com",
+      "name": "Aditya Pratama",
+      "companyName": "Aditya Consulting",
+      "verificationStatus": "Verified"
+    },
+    {
+      "email": "mjohnson@codegenius.io",
+      "name": "Michael Johnson",
+      "companyName": "CodeGenius Inc.",
+      "verificationStatus": "Verified"
+    },
+    {
+      "email": "rina.creative@bkcipta.id",
+      "name": "Rina Amelia",
+      "companyName": "Bandung Kreatif Cipta",
+      "verificationStatus": "Not-Fulfilled"
+    },
+    {
+      "email": "wei.li@lclogistics.sg",
+      "name": "Wei Li",
+      "companyName": "Lion City Logistics",
+      "verificationStatus": "Verified"
+    },
+    {
+      "email": "D4_x99.PS@wipro.com",
+      "name": "Priya Sharma",
+      "companyName": "Wipro",
+      "verificationStatus": "Verified"
+    },
+    {
+      "email": "k.mueller@eurotech-comp.de",
+      "name": "Klaus Mueller",
+      "companyName": "EuroTech Components",
+      "verificationStatus": "Not-Fulfilled"
+    },
+    {
+      "email": "kontak@sedaprasa-catering.com",
+      "name": "Siti Hartati",
+      "companyName": "Sedap Rasa Catering",
+      "verificationStatus": "Verified"
+    }
+  ]
+}

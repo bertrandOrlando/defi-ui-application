@@ -1,19 +1,149 @@
 import { useState } from "react";
+import { Box, Breadcrumbs, Button, Link, Paper, Tab, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tabs, Typography } from "@mui/material";
+
 import Header from "../component/header"
-import { Box, Breadcrumbs, Link, Paper, Tab, Table, TableCell, TableContainer, TableHead, TableRow, Tabs, Typography } from "@mui/material";
+import deviceCertificationData from '../data/deviceCertification.json';
+import vendorAgreementData from '../data/vendorAgreement.json';
+import vendorRegistrationData from '../data/vendorRegistration.json';
+
+interface vendorAgreement {
+    email: string,
+    name: string,
+    companyName: string,
+    verificationStatus: string,
+    tocStatus: string,
+    agreementStatus: string,
+    viewAgreementDocs: string
+}
+
+interface vendorRegistration {
+    email: string, 
+    name: string, 
+    companyName: string, 
+    verificationStatus: string
+}
+
+interface ConditionalTableProps {
+    activeTab: number;
+    agreementData: vendorAgreement[];
+    registrationData: vendorRegistration[];
+    onAgree: (email: string) => void;
+    onVerify: (email: string, status: 'Verified' | 'Rejected') => void;
+}
 
 
-const mockData = [
-  { id: 'DI172391983', type: 'Integrated', manufacturer: 'EDMI', model: 'ECM-5t', market: 'Market Name A', submitted: '17/23/2023 12:00:00 AM', status: 'Testing', certified: '17/23/2023 12:00:00 AM', submitter: 'AN20291904@wipro.com' },
-  { id: 'AZ379191983', type: 'Integrated', manufacturer: 'EDMI', model: 'ECM-5t', market: 'Market Name A', submitted: '17/23/2023 12:00:00 AM', status: 'RFI', certified: '17/23/2023 12:00:00 AM', submitter: 'AN20291904@wipro.com' },
-  { id: 'DI172391983', type: 'Integrated', manufacturer: 'EDMI', model: 'ECM-5t', market: 'Market Name B', submitted: '17/23/2023 12:00:00 AM', status: 'Testing', certified: '17/23/2023 12:00:00 AM', submitter: 'AN20291904@wipro.com' },
-  { id: 'AZ379191983', type: 'Integrated', manufacturer: 'EDMI', model: 'ECM-5t', market: 'Market Name B', submitted: '17/23/2023 12:00:00 AM', status: 'RFI', certified: '17/23/2023 12:00:00 AM', submitter: 'AN20291904@wipro.com' },
-];
+const ConditionalTable = ({ activeTab, agreementData, registrationData, onAgree, onVerify}: ConditionalTableProps) => {
+    
+    const stripeColor = '#343536';
+    const cellStyle = {
+        color: 'white',
+        borderBottom: 'none',
+        fontSize: '0.75rem',
+        padding: '12px'
+    };
+    const firstCellStyle = { ...cellStyle, borderTopLeftRadius: '8px', borderBottomLeftRadius: '8px'};
+    const lastCellStyle = { ...cellStyle, borderTopRightRadius: '8px', borderBottomRightRadius: '8px'}
+    
+    switch (activeTab) {
+        case 0:
+            const certRow = deviceCertificationData.deviceCertification;
+            return (
+                <TableBody>
+                    {certRow.map((row) => (
+                        <TableRow 
+                            key={row.requestId}
+                            sx={{ '&:nth-of-type(odd)': { backgroundColor: stripeColor } }} >
+                            <TableCell sx={firstCellStyle}>{row.requestId}</TableCell>
+                            <TableCell sx={cellStyle}>{row.type}</TableCell>
+                            <TableCell sx={cellStyle}>{row.deviceManufacturer}</TableCell>
+                            <TableCell sx={cellStyle}>{row.deviceModel}</TableCell>
+                            <TableCell sx={cellStyle}>{row.deviceMarket}</TableCell>
+                            <TableCell sx={cellStyle}>{row.deviceSubmitted}</TableCell>
+                            <TableCell sx={cellStyle}>{row.status}</TableCell>
+                            <TableCell sx={cellStyle}>{row.dataCertified || 'N/A'}</TableCell>
+                            <TableCell sx={lastCellStyle}>{row.submitterId}</TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            );
+        case 1:
+            return (
+                <TableBody>
+                    {agreementData.map((row) => (
+                        <TableRow 
+                            key={row.email}
+                            sx={{ '&:nth-of-type(odd)': { backgroundColor: stripeColor } }}>
+                            <TableCell sx={firstCellStyle}>{row.email}</TableCell>
+                            <TableCell sx={cellStyle}>{row.name}</TableCell>
+                            <TableCell sx={cellStyle}>{row.companyName}</TableCell>
+                            <TableCell sx={cellStyle}>{row.verificationStatus}</TableCell>
+                            <TableCell sx={cellStyle}>{row.tocStatus}</TableCell>
+                            <TableCell sx={cellStyle}>{row.agreementStatus}</TableCell>
+                            <TableCell sx={cellStyle}>
+                                <Link href="#" underline="always">{row.viewAgreementDocs}</Link>
+                            </TableCell>
+                            <TableCell sx={lastCellStyle}>
+                                <Button variant="contained" size="small" onClick={() => onAgree(row.email)} sx={{ textTransform: 'none', fontSize: '0.7rem' }}>
+                                    Fullfill
+                                </Button>
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            );
+        case 2:
+            return (
+                <TableBody>
+                    {registrationData.map((row) => (
+                        <TableRow 
+                            key={row.email}
+                            sx={{ '&:nth-of-type(odd)': { backgroundColor: stripeColor } }}>
+                            <TableCell sx={firstCellStyle}>{row.email}</TableCell>
+                            <TableCell sx={cellStyle}>{row.name}</TableCell>
+                            <TableCell sx={cellStyle}>{row.companyName}</TableCell>
+                            <TableCell sx={cellStyle}>{row.verificationStatus}</TableCell>
+                            <TableCell sx={lastCellStyle}>
+                                <Box sx={{ display: 'flex', gap: 1 }}>
+                                    <Button variant="contained" color="success" size="small" onClick={() => onVerify(row.email, 'Verified')} sx={{ textTransform: 'none', fontSize: '0.7rem' }}>
+                                        Verify
+                                    </Button>
+                                    <Button variant="contained" color="error" size="small" onClick={() => onVerify(row.email, 'Rejected')} sx={{ textTransform: 'none', fontSize: '0.7rem' }}>
+                                        Reject
+                                    </Button>
+                                </Box>
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            );
+        default:
+            return <TableBody><TableRow><TableCell>No Data Found</TableCell></TableRow></TableBody>
+    }
+};
+
 
 const VendorManagement = () => {
     
     const [activeTab, setActiveTab] = useState(0);
+    const [agreementData, setAgreementData] = useState<vendorAgreement[]>(vendorAgreementData.vendoragreement);
+    const [registrationData, setRegistrationData] = useState<vendorRegistration[]>(vendorRegistrationData.vendorRegistration);
     
+    const handleAgreement = (email: string) => {
+        setAgreementData(prevData => 
+            prevData.map(vendor =>
+                vendor.email === email ? { ...vendor, agreementStatus: 'Fulfilled' } : vendor
+            )
+        );
+    };
+
+    const handleVerification = (email: string, newStatus: 'Verified' | 'Rejected') => {
+        setRegistrationData(prevData => 
+            prevData.map(vendor => 
+                vendor.email === email ? { ...vendor, verificationStatus: newStatus} : vendor
+            )
+        );
+    };
+
     const handleTabChange = (event : React.SyntheticEvent, newValue: number) => {
         setActiveTab(newValue);
     };
@@ -23,6 +153,15 @@ const VendorManagement = () => {
         'Manage Vendor Agreement',
         'Manage Vendor Registration',
     ];
+
+    const getHeaders = (tabIndex: number) => {
+        switch (tabIndex) {
+            case 0: return ['Request ID', 'Type', 'Device Manufacturer', 'Device Model', 'Device Market', 'Device Submitted', 'Status', 'Data Certified', 'Submitter ID'];
+            case 1: return ['Email', 'Name', 'Company Name', 'Verification Status', 'TOC Status', 'Agreement Status', 'View Agreement', 'Agreement Action'];
+            case 2: return ['Email', 'Name', 'Company Name', 'Verification Status', 'Verification Action'];
+            default: return [];
+        }
+    }
 
     return (
         <div className="min-h-screen bg-[#282828] text-white">
@@ -49,69 +188,72 @@ const VendorManagement = () => {
 
                 {/* table */}
                 <Paper sx={{ mt: 2, p : 1.5, backgroundColor: '#343536', borderRadius: 2 }}>
-                    <Box>
-                        <Tabs
-                            value={activeTab}
-                            onChange={handleTabChange}
-                            aria-label="vendor management tabs"
+                    <Tabs
+                        value={activeTab}
+                        onChange={handleTabChange}
+                        aria-label="vendor management tabs"
                             sx={{
+                            minHeight: 'auto',
+                            '& .MuiTabs-indicator': {
+                                display: 'none'
+                            },
+                            '& .MuiTab-root': {
+                                backgroundColor: '#5a5a5a',
+                                color: "#a0a0a0",
+                                textTransform: 'none',
+                                fontSize: '0.8rem',
+                                padding: '8px 10px',
                                 minHeight: 'auto',
-                                '& .MuiTabs-indicator': {
-                                    display: 'none'
+                                marginRight: '-5px',
+                                borderRadius: '4px',
+                                '&.Mui-selected': {
+                                    backgroundColor: '#355493',
+                                    color: 'white'
                                 },
-                                '& .MuiTab-root': {
-                                    backgroundColor: '#5a5a5a',
-                                    color: "#a0a0a0",
-                                    textTransform: 'none',
-                                    fontSize: '0.8rem',
-                                    padding: '8px 10px',
-                                    minHeight: 'auto',
-                                    marginRight: '-5px',
-                                    borderRadius: '4px',
-                                    '&.Mui-selected': {
-                                        backgroundColor: '#355493',
-                                        color: 'white'
-                                    },
-                                },
-                            }}
-                        >
-                            <Tab label = "Manage Device Certification"/>
-                            <Tab label = "Manage Vendor Agreement"/>
-                            <Tab label = "Manage Vendor Registration"/>
-                        </Tabs>
-                        
-                        <Box sx={{ mt: 1, p : 1.5, backgroundColor: '#2d2d2e', borderRadius: 2 }}>            
-                            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2}}>
-                                <Typography sx={{ color: 'white', fontWeight: 'semi-bold'}}>
-                                    {tabTitles[activeTab]}
-                                </Typography>
-                            </Box>
-
-                            <TableContainer>
-                                <Table sx={{ minWidth: 650 }} aria-label="vendor data table">
-                                    <TableHead sx={{ backgroundColor: '#746fa7'}}>
-                                        <TableRow>
-                                            {[
-                                                'Request ID', 
-                                                'Type', 
-                                                'Device Manufacturer', 
-                                                'Device Model No.', 
-                                                'Device Market Name', 
-                                                'Device Submitted', 
-                                                'Status', 
-                                                'Data Certified', 
-                                                'Submitter ID'].map((headCell) => (
-                                                    <TableCell key={headCell} sx={{ color: '#d0d0d0', fontWeight: 'bold', borderBottom: 'none' }}>{headCell}</TableCell>
-                                                ))}
-                                        </TableRow>
-                                    </TableHead>
-                                    
-                                </Table>
-                            </TableContainer>
+                            },
+                        }}
+                    >
+                        <Tab label = "Manage Device Certification"/>
+                        <Tab label = "Manage Vendor Agreement"/>
+                        <Tab label = "Manage Vendor Registration"/>
+                    </Tabs>
+                    
+                    <Box sx={{ mt: 1, p : 1.5, backgroundColor: '#2d2d2e', borderRadius: 2 }}>            
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2}}>
+                            <Typography sx={{ color: 'white', fontWeight: 'semi-bold'}}>
+                                {tabTitles[activeTab]}
+                            </Typography>
                         </Box>
+
+                        <TableContainer>
+                            <Table aria-label="vendor data table">
+                                <TableHead>
+                                    <TableRow sx={{ backgroundColor: '#746fa7'}}>
+                                        {getHeaders(activeTab).map((headCell) => (
+                                            <TableCell 
+                                                key={headCell}
+                                                sx={{ 
+                                                    color: 'white', 
+                                                    fontWeight: 'semi-bold', 
+                                                    borderBottom: 'none', 
+                                                    fontSize: '0.75rem', 
+                                                    padding: '12px'}}>
+                                                {headCell}
+                                            </TableCell>
+                                        ))}
+                                    </TableRow>
+                                </TableHead>
+                                <ConditionalTable 
+                                    activeTab={activeTab}
+                                    agreementData={agreementData}
+                                    registrationData={registrationData}
+                                    onAgree={handleAgreement}
+                                    onVerify={handleVerification}
+                                />
+                            </Table>
+                        </TableContainer>
                     </Box>
-                </Paper>
-                
+                </Paper>            
             </main>    
         </div>
     );

@@ -1,0 +1,85 @@
+{
+  "vendoragreement": [
+    {
+      "email": "budi.s@digitalnusantara.co.id",
+      "name": "Budi Santoso",
+      "companyName": "PT Digital Nusantara",
+      "verificationStatus": "Verified",
+      "tocStatus": "Accepted",
+      "agreementStatus": "Active",
+      "viewAgreementDocs": "View Document"
+    },
+    {
+      "email": "chloe.chen@innovatesupplies.com",
+      "name": "Chloe Chen",
+      "companyName": "Innovate Supplies Ltd.",
+      "verificationStatus": "Pending",
+      "tocStatus": "Pending",
+      "agreementStatus": "Pending Verification",
+      "viewAgreementDocs": "View Document"
+    },
+    {
+      "email": "aditya.consulting@gmail.com",
+      "name": "Aditya Pratama",
+      "companyName": "Aditya Consulting",
+      "verificationStatus": "Verified",
+      "tocStatus": "Accepted",
+      "agreementStatus": "Expired",
+      "viewAgreementDocs": "View Document"
+    },
+    {
+      "email": "mjohnson@codegenius.io",
+      "name": "Michael Johnson",
+      "companyName": "CodeGenius Inc.",
+      "verificationStatus": "Verified",
+      "tocStatus": "Accepted",
+      "agreementStatus": "Fulfilled",
+      "viewAgreementDocs": "View Document"
+    },
+    {
+      "email": "rina.creative@bkcipta.id",
+      "name": "Rina Amelia",
+      "companyName": "Bandung Kreatif Cipta",
+      "verificationStatus": "Rejected",
+      "tocStatus": "Not Accepted",
+      "agreementStatus": "Terminated",
+      "viewAgreementDocs": "View Document"
+    },
+    {
+      "email": "wei.li@lclogistics.sg",
+      "name": "Wei Li",
+      "companyName": "Lion City Logistics",
+      "verificationStatus": "Verified",
+      "tocStatus": "Pending",
+      "agreementStatus": "Awaiting Signature",
+      "viewAgreementDocs": "View Document"
+    },
+    {
+      "email": "D4_x99.PS@wipro.com",
+      "name": "Priya Sharma",
+      "companyName": "Wipro",
+      "verificationStatus": "Verified",
+      "tocStatus": "Accepted",
+      "agreementStatus": "Active",
+      "viewAgreementDocs": "View Document"
+    },
+    {
+      "email": "k.mueller@eurotech-comp.de",
+      "name": "Klaus Mueller",
+      "companyName": "EuroTech Components",
+      "verificationStatus": "Unverified",
+      "tocStatus": "Not Accepted",
+      "agreementStatus": "Onboarding Failed",
+      "viewAgreementDocs": "View Document"
+    },
+    {
+      "email": "kontak@sedaprasa-catering.com",
+      "name": "Siti Hartati",
+      "companyName": "Sedap Rasa Catering",
+      "verificationStatus": "Verified",
+      "tocStatus": "Accepted",
+      "agreementStatus": "Fulfilled",
+      "viewAgreementDocs": "View Document"
+    }
+  ]
+}
