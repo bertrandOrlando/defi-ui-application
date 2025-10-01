@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route } from "react-router-dom";
+import LandingPage from "./pages/LandingPages";
+import VendorManagement from "./pages/VendorManagement";
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Routes>
+      <Route path="/dashboard" element={<LandingPage />}/>
+      <Route path="/login" element={<h1>Login Page</h1>}/>
+      <Route path="/register" element={<h1>Register Page</h1>}/>
+
+      <Route path="/vendor-agreement-query" element={<h1>vendor-agreement-query Page</h1>}/>
+      <Route path="/vendor-management" element={<VendorManagement />}/>
+      <Route path="/vendor-communication" element={<h1>vendor-communication Page</h1>}/>
+      <Route path="/policy-configuration" element={<h1>policy-configuration Page</h1>}/>
+      <Route path="/user-management" element={<h1>user-management Page</h1>}/>
+      <Route path="/network-planning" element={<h1>network-planning Page</h1>}/>
+      <Route path="/service-assurance" element={<h1>service-assurance Page</h1>}/>
+      <Route path="/inventory" element={<h1>inventory Page</h1>}/>
+      <Route path="/network-configuration" element={<h1>network-configuration Page</h1>}/>
+      <Route path="/service-flow-design" element={<h1>service-flow-design Page</h1>}/>
+      <Route path="/reporting-analytics" element={<h1>reporting-analytics Page</h1>}/>
+      <Route path="/notifications" element={<h1>notifications Page</h1>}/>
+    </Routes>
   )
 }
 
-export default App
+export default App;

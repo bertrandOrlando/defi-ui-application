@@ -1,0 +1,103 @@
+{
+  "deviceCertification": [
+    {
+      "requestId": "D172984",
+      "type": "Modular",
+      "deviceManufacturer": "Landis+Gyr",
+      "deviceModel": "E350",
+      "deviceMarket": "EU Smart Grid",
+      "deviceSubmitted": "01/10/2024 09:00:00 AM",
+      "status": "Certified",
+      "dataCertified": "03/22/2024 03:15:00 PM",
+      "submitterId": "JS123456@landisgyr.com"
+    },
+    {
+      "requestId": "D172985",
+      "type": "Integrated",
+      "deviceManufacturer": "Itron",
+      "deviceModel": "Centron II",
+      "deviceMarket": "North American Utility",
+      "deviceSubmitted": "02/05/2024 11:21:00 AM",
+      "status": "Testing",
+      "dataCertified": null,
+      "submitterId": "MK789012@itron.com"
+    },
+    {
+      "requestId": "D172986",
+      "type": "Integrated",
+      "deviceManufacturer": "Honeywell",
+      "deviceModel": "AS3000",
+      "deviceMarket": "Asia-Pacific Region",
+      "deviceSubmitted": "04/18/2024 02:00:00 PM",
+      "status": "Submitted",
+      "dataCertified": null,
+      "submitterId": "LP556677@honeywell.com"
+    },
+    {
+      "requestId": "D172987",
+      "type": "Hybrid",
+      "deviceManufacturer": "Innovatech",
+      "deviceModel": "IN-H7",
+      "deviceMarket": "Market Name C",
+      "deviceSubmitted": "05/20/2024 08:45:00 AM",
+      "status": "Pending Review",
+      "dataCertified": null,
+      "submitterId": "AN20291904@wipro.com"
+    },
+    {
+      "requestId": "D172988",
+      "type": "Modular",
+      "deviceManufacturer": "Siemens",
+      "deviceModel": "IM300",
+      "deviceMarket": "German Central Market",
+      "deviceSubmitted": "06/01/2024 10:10:10 AM",
+      "status": "Testing",
+      "dataCertified": null,
+      "submitterId": "user01@siemens.de"
+    },
+    {
+      "requestId": "D172989",
+      "type": "Integrated",
+      "deviceManufacturer": "EDMI",
+      "deviceModel": "Atlas Mk10",
+      "deviceMarket": "Australian Market",
+      "deviceSubmitted": "07/15/2023 04:30:00 PM",
+      "status": "Failed",
+      "dataCertified": "09/01/2023 11:00:00 AM",
+      "submitterId": "tech@edmi-meters.com.au"
+    },
+    {
+      "requestId": "D172990",
+      "type": "Integrated",
+      "deviceManufacturer": "FlexiGrid",
+      "deviceModel": "FG-500X",
+      "deviceMarket": "Market Name B",
+      "deviceSubmitted": "08/22/2024 09:30:00 AM",
+      "status": "Submitted",
+      "dataCertified": null,
+      "submitterId": "submit@flexigrid.io"
+    },
+    {
+      "requestId": "D172991",
+      "type": "Modular",
+      "deviceManufacturer": "Sensus",
+      "deviceModel": "iConA Gen 4",
+      "deviceMarket": "UK Smart Metering",
+      "deviceSubmitted": "09/01/2024 12:00:00 PM",
+      "status": "Testing",
+      "dataCertified": null,
+      "submitterId": "AN20291904@wipro.com"
+    },
+    {
+      "requestId": "D172992",
+      "type": "Hybrid",
+      "deviceManufacturer": "Aclara",
+      "deviceModel": "kV2c+",
+      "deviceMarket": "Canadian Utilities",
+      "deviceSubmitted": "03/03/2023 01:55:00 PM",
+      "status": "Certified",
+      "dataCertified": "05/19/2023 10:00:00 AM",
+      "submitterId": "ca_support@aclara.com"
+    }
+  ]
+}
