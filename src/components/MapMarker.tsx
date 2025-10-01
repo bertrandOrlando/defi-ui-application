@@ -4,7 +4,7 @@ import L from "leaflet";
 import { BsGraphUp } from "react-icons/bs";
 import { GoOrganization } from "react-icons/go";
 import type { WorldMapProps } from "./WorldMap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material";
 
 const getStatusColor = (status: string) => {
@@ -51,21 +51,31 @@ const theme = createTheme({
   },
 });
 
-const MapMarker = (enterprise: WorldMapProps) => {
+type MapMarkerProps = {
+  enterprise: WorldMapProps;
+  onUpdateAddress: (id: number, newAddress: string) => void;
+};
+
+const MapMarker = ({ enterprise, onUpdateAddress }: MapMarkerProps) => {
   const [isEdited, setIsEdited] = useState<boolean>(false);
   const [address, setAddress] = useState<string>(enterprise.address);
-
-  const { lat, long } = enterprise;
-  const position: [number, number] = [lat, long];
 
   const cancelHandler = () => {
     setIsEdited(false);
     setAddress(enterprise.address);
   };
 
-  const editHandler = () => {
+  const saveHandler = () => {
+    onUpdateAddress(enterprise.id, address);
     setIsEdited(false);
   };
+
+  useEffect(() => {
+    setAddress(enterprise.address); // keep local state in sync with props
+  }, [enterprise.address]);
+
+  const { lat, long } = enterprise;
+  const position: [number, number] = [lat, long];
 
   return (
     <ThemeProvider theme={theme}>
@@ -122,7 +132,7 @@ const MapMarker = (enterprise: WorldMapProps) => {
                   Cancel
                 </button>
                 <button
-                  onClick={editHandler}
+                  onClick={saveHandler}
                   className="underline cursor-pointer"
                 >
                   Save
