@@ -4,7 +4,7 @@ import enterpriseData from "../data/enterprise.json";
 import ServiceAssuranceTreeView from "./ServiceAssuranceTreeView";
 
 const ServiceAssurance = () => {
-  const [view, setView] = useState("mdap");
+  const [view] = useState("mdap");
   return (
     <>
       {view === "map" ? (

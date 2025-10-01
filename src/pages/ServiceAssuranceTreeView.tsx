@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import type { MouseEvent, WheelEvent } from 'react';
 
 const ServiceAssuranceTreeView = () => {
