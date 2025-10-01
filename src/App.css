@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+.MuiSlider-thumb input {
+  -webkit-appearance: slider-vertical;
+}
+
+.popup .leaflet-popup-content-wrapper {
+  @apply bg-[#343536] text-white p-2 rounded-lg;
+}
+
+.popup .leaflet-popup-tip {
+  @apply bg-[#343536];
+}
+
+.leaflet-control-attribution {
+  display: none !important;
+}
+
