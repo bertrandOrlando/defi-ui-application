@@ -1,3 +1,22 @@
+@import "tailwindcss";
+
+.MuiSlider-thumb input {
+  -webkit-appearance: slider-vertical;
+}
+
+.popup .leaflet-popup-content-wrapper {
+  @apply bg-[#343536] text-white p-2 rounded-lg;
+}
+
+.popup .leaflet-popup-tip {
+  @apply bg-[#343536];
+}
+
+.leaflet-control-attribution {
+  display: none !important;
+}
+
+/* 
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -39,4 +58,8 @@
 
 .read-the-docs {
   color: #888;
-}
+} */
+/* 
+#service-navigation * {
+  border: 1px solid red;
+} */
