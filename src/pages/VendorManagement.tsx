@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Box, Breadcrumbs, Button, Link, Paper, Tab, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tabs, Typography } from "@mui/material";
+import { Box, Button, Link, Paper, Tab, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tabs, Typography } from "@mui/material";
 import { HiOutlineClipboardDocumentCheck } from 'react-icons/hi2';
 import Header from "../component/header"
-import DynamicBreadcrumb from "../component/dynamicBreadCrumbs";
+import DynamicBreadcrumb from "../component/DynamicBreadCrumbs";
 import deviceCertificationData from '../data/deviceCertification.json';
 import vendorAgreementData from '../data/vendorAgreement.json';
 import vendorRegistrationData from '../data/vendorRegistration.json';
@@ -79,7 +79,7 @@ const ConditionalTable = ({ activeTab, agreementData, registrationData, onAgree,
     const lastCellStyle = { ...cellStyle, borderTopRightRadius: '8px', borderBottomRightRadius: '8px'}
     
     switch (activeTab) {
-        case 0:
+        case 0: {
             const certRow = deviceCertificationData.deviceCertification;
             return (
                 <TableBody>
@@ -100,6 +100,7 @@ const ConditionalTable = ({ activeTab, agreementData, registrationData, onAgree,
                     ))}
                 </TableBody>
             );
+        }
         case 1:
             return (
                 <TableBody>
@@ -181,7 +182,7 @@ const VendorManagement = () => {
         );
     };
 
-    const handleTabChange = (event : React.SyntheticEvent, newValue: number) => {
+    const handleTabChange = (newValue: number) => {
         setActiveTab(newValue);
     };
 
@@ -220,7 +221,7 @@ const VendorManagement = () => {
                 <Paper sx={{ mt: 2, p : 1.5, backgroundColor: '#343536', borderRadius: 2 }}>
                     <Tabs
                         value={activeTab}
-                        onChange={handleTabChange}
+                        onChange={(_, newVal) => handleTabChange(newVal)}
                         aria-label="vendor management tabs"
                             sx={{
                             minHeight: 'auto',
