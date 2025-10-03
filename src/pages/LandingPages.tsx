@@ -134,7 +134,7 @@ const LandingPage = () => {
                     <Card title="Policy Configuration"  color="#e58029" icon={< FaRegFolderOpen />} redirectLink='policy-configuration' />
                     <Card title="User Management"  color="#d1664f" icon={< FaUsersGear />} redirectLink='user-management' />
                     <Card title="Network Planning"  color="#c4515c" icon={< LuNetwork />} redirectLink='network-planning' />
-                    <Card title="Service Assurance" description="N Enterprises in total" color="#8a5480" icon={< TbWorld />} redirectLink='service-assurance' />
+                    <Card title="Service Assurance" description="21 Enterprises in total" color="#8a5480" icon={< TbWorld />} redirectLink='service-assurance' />
                     <Card title="Inventory" color="#8a5480" icon={< MdOutlineInventory2 />} redirectLink='inventory' />
                     <Card title="Network Configuration" color="#746fa7" icon={< BiServer />} redirectLink='network-configuration' />
                     <Card title="Service Flow Design" color="#7dc161" icon={< RiFlowChart />} redirectLink='service-flow-design' />
