@@ -78,63 +78,6 @@ const ServiceAssuranceTreeView = () => {
     );
   };
 
-  const FloatingHeader = () => (
-    <>
-      {/* Kiri */}
-      <div className="fixed left-7 top-5 z-50  flex flex-col space-y-4">
-        <button 
-          className="flex items-center space-x-3 px-3 py-1 bg-[#3a3a3a]/90 backdrop-blur-sm rounded-lg hover:bg-[#4a4a4a] transition-colors w-fit"
-          onClick={() => window.history.back()}
-        >
-          <span className="text-xl text-white">←</span>
-          <span className="text-white font-medium">Back</span>
-        </button>
-        
-        <div className="flex flex-col space-y-1">
-          <span className="text-orange-500 text-sm">Dashboard / Service Assurance</span>
-          <h1 className="text-2xl font-bold text-white">Service Assurance</h1>
-        </div>
-
-        <div className="flex items-center space-x-3 py-1 rounded-lg w-fit">
-          <div
-            className={`w-10 h-6 rounded-full cursor-pointer transition-colors ${
-              focusedMode ? 'bg-green-500' : 'bg-gray-600'
-            }`}
-            onClick={() => setFocusedMode(!focusedMode)}
-          >
-            <div
-              className={`w-5 h-5 bg-white rounded-full mt-0.5 transition-transform duration-200 ${
-                focusedMode ? 'translate-x-4' : 'translate-x-0.5'
-              }`}
-            />
-          </div>
-          <span className="text-white font-medium">Focused</span>
-        </div>
-      </div>
-
-      {/* Tengah */}
-      <div className="fixed top-5 left-1/2 -translate-x-1/2 z-50">
-        <div className="flex items-center space-x-2 px-4 py-2  rounded-lg">
-          <div className="w-6 h-6 bg-teal-400 rounded-full"></div>
-          <span className="text-lg font-semibold text-white">5G Def-i</span>
-        </div>
-      </div>
-
-      {/* Kanan */}
-      <div className="fixed right-4 top-5 z-50">
-        <div className="flex items-center space-x-3 px-4 py-2 rounded-lg">
-          <div className="flex flex-col items-end text-sm">
-            <span className="text-white">Mir Rahim Ali</span>
-            <p className="text-sm text-gray-400">Admin</p>
-          </div>
-         <div className="w-10 h-10 bg-[#449877] rounded-full flex items-center justify-center text-black font-bold">
-            M
-          </div>
-        </div>
-      </div>
-    </>
-  );
-
   type Kind = 'enterprise' | 'site' | 'core' | 'ran' | 'cpe' | 'unknown';
 
   const COLOR_MAP: Record<string, string> = {
