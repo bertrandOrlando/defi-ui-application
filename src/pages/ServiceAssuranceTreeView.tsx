@@ -11,6 +11,9 @@ import {
   Position,
 } from '@xyflow/react';
 
+import Header from "../component/header"
+import DynamicBreadcrumb from "../component/DynamicBreadCrumbs";
+
 /* TODO :
  * - Buat Alarm, konek dengan data, tampilan pake MUI
  * - Buat Location, konek dengan data juga.
@@ -352,12 +355,37 @@ const ServiceAssuranceTreeView = () => {
   
   return (
     <div className="min-h-screen bg-[#282828] text-white flex flex-col">
-      <FloatingHeader />
+      {/* <FloatingHeader /> */}
+      
+      <div className="fixed top-0 left-0 right-0 z-50 p-4">
+        <Header />
+      </div>
+      
+      <div className="fixed left-7 top-24 z-50 flex flex-col space-y-4">
+        <div className="flex flex-col space-y-1">
+          <DynamicBreadcrumb />
+          <h1 className="text-2xl font-bold text-white mt-1">
+            Service Assurance
+          </h1>
+        </div>
+        
+        <div className="flex items-center space-x-3">
+          <span className="text-white font-medium">Focused</span>
+          <div
+            className={`w-10 h-6 rounded-full cursor-pointer transition-colors 
+              ${focusedMode ? 'bg-green-500' : 'bg-gray-500'}`}
+            onClick={() => setFocusedMode(!focusedMode)}
+          >
+            <div
+              className={`w-5 h-5 bg-white rounded-full mt-0.5 transition-transform duration-200
+                ${focusedMode ? 'translate-x-4' : 'translate-x-0.5'}`}
+            />
+          </div>
+        </div>
+      </div>
 
-      <div className="flex flex-1 overflow-hidden">
-        <div className="flex-1 flex flex-col">
+        <div className="w-full h-screen">
           <ReactFlowProvider>
-            <div className="flex-1 relative bg-[#2a2a2a] overflow-hidden">
               <ReactFlow
                 nodes={filteredNodes}
                 edges={filteredEdges}
@@ -390,8 +418,7 @@ const ServiceAssuranceTreeView = () => {
                   border: '1px solid rgba(255,255,255,0.08)',
                   backdropFilter: 'blur(6px)',
                   pointerEvents: 'none', // tidak block zoom
-                }}
-              >
+                }}>
                 <div className="flex items-center space-x-6 text-sm text-white/90">
                   {/* Enterprise */}
                   <div className="flex items-center space-x-2">
@@ -423,10 +450,10 @@ const ServiceAssuranceTreeView = () => {
                     <span>CPE</span>
                   </div>
                 </div>
-              </div>
+            </div>
             {selectedId && panelData && (
               <div
-                className="fixed right-4 top-30 bottom-15 w-80 z-200 rounded-2xl shadow-2xl p-2 flex flex-col"
+                className="fixed right-4 top-28 bottom-16 w-80 z-[200] rounded-2xl shadow-2xl p-2 flex flex-col"
                 style={{
                   background: 'rgba(47,48,53,0.95)',
                   border: '1px solid rgba(255,255,255,0.08)',
@@ -587,10 +614,8 @@ const ServiceAssuranceTreeView = () => {
               
                 </div>
               )}
-            </div>
           </ReactFlowProvider>
         </div>
-      </div>
     </div>
   );
 };
