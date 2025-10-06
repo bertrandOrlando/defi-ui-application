@@ -26,6 +26,7 @@ import { FaSliders } from "react-icons/fa6";
 import { IoIosClose } from "react-icons/io";
 import MapMarker from "./MapMarker";
 import { viewTypes, type ViewType } from "../../pages/ServiceAssurance";
+import Header from "../header";
 
 export type WorldMapProps = {
   id: number;
@@ -218,6 +219,7 @@ export const WorldMap = ({
   return (
     <>
       <div className="relative">
+        <Header className="absolute z-[1000]" />
         <div
           id="zoom-control"
           className="absolute flex flex-col items-center justify-center gap-y-2 z-[1000] bottom-0 left-0 translate-x-4 -translate-y-6 bg-[#343434] py-2 px-1 rounded-xl "
@@ -266,7 +268,7 @@ export const WorldMap = ({
 
         <div
           id="service-navigation"
-          className="absolute z-[1000] p-6 text-sm w-full"
+          className="absolute z-[1000] p-6 text-sm w-full top-12"
         >
           <div className="grid grid-cols-2">
             <Breadcrumbs
