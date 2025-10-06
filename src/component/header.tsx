@@ -2,6 +2,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import usersData from "../data/users.json";
 import rolesData from "../data/roles.json";
 import { useNavigate } from "react-router-dom";
+import UserIcon from "../assets/user.png";
 
 /* TODO :
  * - Harus Handle User Profile
@@ -49,7 +50,7 @@ const Header = ({ className }: { className?: string }) => {
           <p className="text-sm">{currentRole?.roleName || "User Role"}</p>
         </div>
         {/* DUMMY ICON */}
-        <img src="src\assets\user.png" className="h-10 w-10"></img>
+        <img src={UserIcon} className="h-10 w-10"></img>
       </div>
     </header>
   );
