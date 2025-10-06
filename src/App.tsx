@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPages";
+import LoginPage from "./pages/LoginPage";
 import VendorManagement from "./pages/VendorManagement";
 import ServiceAssurance from "./pages/ServiceAssurance";
 
@@ -7,7 +8,7 @@ function App() {
   return (
     <Routes>
       <Route path="/dashboard" element={<LandingPage />} />
-      <Route path="/login" element={<h1>Login Page</h1>} />
+      <Route path="/login" element={<LoginPage/>} />
       <Route path="/register" element={<h1>Register Page</h1>} />
       <Route
         path="/vendor-agreement-query"

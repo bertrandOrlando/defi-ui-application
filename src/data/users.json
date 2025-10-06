@@ -1,95 +1,104 @@
 {
-    "users" : [
-        {
-            "userId": "001",
-            "name": "Alice Johnson",
-            "email": "alice.j@example.com",
-            "roleId": "1", 
-            "updatedBy": "admin_user",
-            "lastSignIn": "18-09-2025",
-            "isDeleted": "false"
-        },
-        {
-            "userId": "002",
-            "name": "Bob Williams",
-            "email": "bob.w@example.com",
-            "roleId": "2",
-            "updatedBy": "Alice Johnson",
-            "lastSignIn": "17-09-2025",
-            "isDeleted": "false"
-        },
-        {
-            "userId": "003",
-            "name": "Charlie Brown",
-            "email": "charlie.b@example.com",
-            "roleId": "3",
-            "updatedBy": "admin_user",
-            "lastSignIn": "18-09-2025",
-            "isDeleted": "true"
-        },
-        {
-            "userId": "004",
-            "name": "Diana Prince",
-            "email": "diana.p@example.com",
-            "roleId": "2",
-            "updatedBy": "Alice Johnson",
-            "lastSignIn": "16-09-2025",
-            "isDeleted": "false"
-        },
-         {
-            "userId": "005",
-            "name": "Evan Davis",
-            "email": "evan.d@example.com",
-            "roleId": "3",
-            "updatedBy": "admin_user",
-            "lastSignIn": "15-09-2025",
-            "isDeleted": "false"
-        },
-        {
-            "userId": "006",
-            "name": "Fiona Gallagher",
-            "email": "fiona.g@example.com",
-            "roleId": "2",
-            "updatedBy": "Alice Johnson",
-            "lastSignIn": "18-09-2025",
-            "isDeleted": "false"
-        },
-        {
-            "userId": "007",
-            "name": "George Harrison",
-            "email": "george.h@example.com",
-            "roleId": "1",
-            "updatedBy": "admin_user",
-            "lastSignIn": "14-09-2025",
-            "isDeleted": "false"
-        },
-        {
-            "userId": "008",
-            "name": "Hannah Montana",
-            "email": "hannah.m@example.com",
-            "roleId": "3",
-            "updatedBy": "Alice Johnson",
-            "lastSignIn": "13-09-2025",
-            "isDeleted": "true"
-        },
-        {
-            "userId": "009",
-            "name": "Ian Wright",
-            "email": "ian.w@example.com",
-            "roleId": "2",
-            "updatedBy": "admin_user",
-            "lastSignIn": "17-09-2025",
-            "isDeleted": "false"
-        },
-        {
-            "userId": "010",
-            "name": "Jane Doe",
-            "email": "jane.d@example.com",
-            "roleId": "3",
-            "updatedBy": "Alice Johnson",
-            "lastSignIn": "18-09-2025",
-            "isDeleted": "false"
-        }
-    ]
-    
+  "users": [
+    {
+      "userId": "001",
+      "name": "Alice Johnson",
+      "email": "alice.j@example.com",
+      "roleId": "1",
+      "updatedBy": "admin_user",
+      "lastSignIn": "18-09-2025",
+      "isDeleted": "false",
+      "password": "password"
+    },
+    {
+      "userId": "002",
+      "name": "Bob Williams",
+      "email": "bob.w@example.com",
+      "roleId": "2",
+      "updatedBy": "Alice Johnson",
+      "lastSignIn": "17-09-2025",
+      "isDeleted": "false",
+      "password": "password"
+    },
+    {
+      "userId": "003",
+      "name": "Charlie Brown",
+      "email": "charlie.b@example.com",
+      "roleId": "3",
+      "updatedBy": "admin_user",
+      "lastSignIn": "18-09-2025",
+      "isDeleted": "true",
+      "password": "password"
+    },
+    {
+      "userId": "004",
+      "name": "Diana Prince",
+      "email": "diana.p@example.com",
+      "roleId": "2",
+      "updatedBy": "Alice Johnson",
+      "lastSignIn": "16-09-2025",
+      "isDeleted": "false",
+      "password": "password"
+    },
+    {
+      "userId": "005",
+      "name": "Evan Davis",
+      "email": "evan.d@example.com",
+      "roleId": "3",
+      "updatedBy": "admin_user",
+      "lastSignIn": "15-09-2025",
+      "isDeleted": "false",
+      "password": "password"
+    },
+    {
+      "userId": "006",
+      "name": "Fiona Gallagher",
+      "email": "fiona.g@example.com",
+      "roleId": "2",
+      "updatedBy": "Alice Johnson",
+      "lastSignIn": "18-09-2025",
+      "isDeleted": "false",
+      "password": "password"
+    },
+    {
+      "userId": "007",
+      "name": "George Harrison",
+      "email": "george.h@example.com",
+      "roleId": "1",
+      "updatedBy": "admin_user",
+      "lastSignIn": "14-09-2025",
+      "isDeleted": "false",
+      "password": "password"
+    },
+    {
+      "userId": "008",
+      "name": "Hannah Montana",
+      "email": "hannah.m@example.com",
+      "roleId": "3",
+      "updatedBy": "Alice Johnson",
+      "lastSignIn": "13-09-2025",
+      "isDeleted": "true",
+      "password": "password"
+    },
+    {
+      "userId": "009",
+      "name": "Ian Wright",
+      "email": "ian.w@example.com",
+      "roleId": "2",
+      "updatedBy": "admin_user",
+      "lastSignIn": "17-09-2025",
+      "isDeleted": "false",
+      "password": "password"
+    },
+    {
+      "userId": "010",
+      "name": "Jane Doe",
+      "email": "jane.d@example.com",
+      "roleId": "3",
+      "updatedBy": "Alice Johnson",
+      "lastSignIn": "18-09-2025",
+      "isDeleted": "false",
+      "password": "password"
+    }
+  ]
 }
