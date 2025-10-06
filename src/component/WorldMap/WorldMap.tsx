@@ -536,6 +536,32 @@ export const WorldMap = ({
           )}
         </div>
 
+        <div
+          id="status-information"
+          className="absolute z-[1000] px-4 py-2 text-sm bottom-6 left-1/2 -translate-x-28 bg-[#282828]/75 text-white rounded-md"
+        >
+          <div className="flex gap-x-3">
+            <div className="flex items-center justify-center gap-1">
+              <div
+                className={`h-2 w-2 bg-[#7dc161] rounded-full text-center`}
+              ></div>{" "}
+              Healthy
+            </div>
+            <div className="flex items-center justify-center gap-1">
+              <div
+                className={`h-2 w-2 bg-[#ffcd2e] rounded-full text-center`}
+              ></div>{" "}
+              Major
+            </div>
+            <div className="flex items-center justify-center gap-1">
+              <div
+                className={`h-2 w-2 bg-[#d1664f] rounded-full text-center`}
+              ></div>{" "}
+              Critical
+            </div>
+          </div>
+        </div>
+
         <div className="w-screen h-screen ">
           <MapContainer
             className="h-full w-full "
@@ -548,6 +574,7 @@ export const WorldMap = ({
             doubleClickZoom={false}
             minZoom={MIN_ZOOM}
             maxZoom={MAX_ZOOM}
+            worldCopyJump={true}
           >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
