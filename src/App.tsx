@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPages";
 import VendorManagement from "./pages/VendorManagement";
 import ServiceAssurance from "./pages/ServiceAssurance";
+import AlarmGraph from "./pages/AlarmDetailsCharts";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         element={<h1>network-planning Page</h1>}
       />
       <Route path="/service-assurance" element={<ServiceAssurance />} />
+      <Route path="/alarm-graph" element={<AlarmGraph />} />
       <Route path="/inventory" element={<h1>inventory Page</h1>} />
       <Route
         path="/network-configuration"

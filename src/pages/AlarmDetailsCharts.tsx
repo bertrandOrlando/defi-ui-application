@@ -3,6 +3,9 @@ import alarms from '../data/alarm.json';
 import { PieChart } from '@mui/x-charts/PieChart';
 import { BarChart } from '@mui/x-charts/BarChart';
 
+import Header from "../component/header";
+import DynamicBreadcrumb from "../component/DynamicBreadCrumbs";
+
 type Severity = 'Minor' | 'Warning' | 'Critical';
 type Status = 'Active' | 'Open' | 'Closed';
 
@@ -88,27 +91,15 @@ const AlarmDetailsCharts: React.FC = () => {
   return (
     <div className="min-h-screen" style={{ background: COLORS.bg, color: COLORS.text }}>
       {/* Top bar */}
-      <div
-        className="sticky top-0 z-10 border-b"
-        style={{ background: '#252628', borderColor: COLORS.divider }}
-      >
-        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-3">
-          <button
-            onClick={() => window.history.back()}
-            className="text-white/90 hover:text-white px-2 py-1 rounded"
-            aria-label="Back"
-          >
-            ←
-          </button>
-          <h1 className="font-bold text-lg">Alarms Details</h1>
-          <span
-            className="ml-2 text-sm px-2 py-1 rounded border"
-            style={{ background: 'rgba(99,102,241,0.15)', borderColor: COLORS.divider }}
-          >
-            {total} Total alarms
-          </span>
+      <Header />
+      {/* NEW: breadcrumb + page title row */}
+       <div className="max-w-7xl mx-auto px-4">
+        <div className="flex flex-col gap-1">
+          <DynamicBreadcrumb />
+          <h1 className="text-2xl font-semibold mt-1">Alarms Details</h1>
         </div>
       </div>
+     
 
       <div className="max-w-7xl mx-auto px-4 py-6">
         <div
