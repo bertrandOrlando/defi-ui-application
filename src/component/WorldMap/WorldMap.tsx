@@ -25,6 +25,7 @@ import { IoSearch } from "react-icons/io5";
 import { FaSliders } from "react-icons/fa6";
 import { IoIosClose } from "react-icons/io";
 import MapMarker from "./MapMarker";
+import { viewTypes, type ViewType } from "../../pages/ServiceAssurance";
 
 export type WorldMapProps = {
   id: number;
@@ -41,7 +42,15 @@ export type WorldMapProps = {
 const MIN_ZOOM = 2;
 const MAX_ZOOM = 9;
 
-export const WorldMap = ({ data }: { data: WorldMapProps[] }) => {
+export const WorldMap = ({
+  data,
+  view,
+  setView,
+}: {
+  data: WorldMapProps[];
+  view: ViewType;
+  setView: (view: ViewType) => void;
+}) => {
   // Map
   const [zoom, setZoom] = useState<number>(4);
   const mapRef = useRef(null);
@@ -289,15 +298,36 @@ export const WorldMap = ({ data }: { data: WorldMapProps[] }) => {
                     id="view-type"
                     className="bg-[#747282] h-7 p-[2px] flex flex-row rounded-sm"
                   >
-                    <button className="cursor-pointer bg-[#355493] p-1 w-7 flex justify-center items-center rounded-sm">
+                    <button
+                      className={`${
+                        view === viewTypes.Map
+                          ? `bg-[#355493]`
+                          : `cursor-pointer`
+                      } p-1 w-7 flex justify-center items-center rounded-sm`}
+                      onClick={() => setView(viewTypes.Map)}
+                    >
                       <BiWorld color="white" />
                     </button>
 
-                    <button className="cursor-pointer bg-[#355493] p-1 w-7 flex justify-center items-center rounded-sm">
+                    <button
+                      className={`${
+                        view === viewTypes.Satelite
+                          ? `bg-[#355493]`
+                          : `cursor-pointer`
+                      } p-1 w-7 flex justify-center items-center rounded-sm`}
+                      onClick={() => setView(viewTypes.Satelite)}
+                    >
                       <MdCellTower color="white" />
                     </button>
 
-                    <button className="cursor-pointer bg-[#355493] p-1 w-7 flex justify-center items-center rounded-sm">
+                    <button
+                      className={`${
+                        view === viewTypes.Tree
+                          ? `bg-[#355493]`
+                          : `cursor-pointer`
+                      } p-1 w-7 flex justify-center items-center rounded-sm`}
+                      onClick={() => setView(viewTypes.Tree)}
+                    >
                       <TbHierarchy color="white" />
                     </button>
                   </div>
@@ -530,6 +560,7 @@ export const WorldMap = ({ data }: { data: WorldMapProps[] }) => {
                 key={`marker-${enterprise.id}`}
                 enterprise={enterprise}
                 onUpdateAddress={updateAddress}
+                type={view}
               />
             ))}
           </MapContainer>
