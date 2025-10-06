@@ -20,9 +20,17 @@ const getStatusColor = (status: string) => {
   }
 };
 
-const getOfficeIcon = (status: string) => {
+const getIcon = (status: string, type: string) => {
   const color = getStatusColor(status);
 
+  if (type === "Map") {
+    return getOfficeIcon(color);
+  } else {
+    return getCircleIcon(color);
+  }
+};
+
+const getOfficeIcon = (color: string) => {
   const iconHtml = `
       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
         <circle cx="16" cy="16" r="15" fill="${color}" stroke="black" stroke-width="1.5"/>
@@ -40,6 +48,41 @@ const getOfficeIcon = (status: string) => {
   });
 };
 
+const getCircleIcon = (color: string) => {
+  const iconHtml = `
+    <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="glow${color}" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="${color}" stop-opacity="1"/>
+          <stop offset="100%" stop-color="${color}" stop-opacity="0"/>
+        </radialGradient>
+
+        <filter id="glowFilter" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="6" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- Outer glowing circle (same color) -->
+      <circle cx="30" cy="30" r="16" fill="url(#glow${color})" filter="url(#glowFilter)" />
+
+      <!-- Inner solid circle (same color) -->
+      <circle cx="30" cy="30" r="5" fill="${color}" stroke="white" stroke-width="2" />
+    </svg>
+  `;
+
+  return L.divIcon({
+    html: iconHtml,
+    className: "",
+    iconSize: [60, 60],
+    iconAnchor: [30, 30], // centers the icon
+    popupAnchor: [0, -30],
+  });
+};
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -53,10 +96,11 @@ const theme = createTheme({
 
 type MapMarkerProps = {
   enterprise: WorldMapProps;
+  type: string;
   onUpdateAddress: (id: number, newAddress: string) => void;
 };
 
-const MapMarker = ({ enterprise, onUpdateAddress }: MapMarkerProps) => {
+const MapMarker = ({ enterprise, type, onUpdateAddress }: MapMarkerProps) => {
   const [isEdited, setIsEdited] = useState<boolean>(false);
   const [address, setAddress] = useState<string>(enterprise.address);
 
@@ -79,7 +123,7 @@ const MapMarker = ({ enterprise, onUpdateAddress }: MapMarkerProps) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Marker position={position} icon={getOfficeIcon(enterprise.status)}>
+      <Marker position={position} icon={getIcon(enterprise.status, type)}>
         <Popup closeOnClick={false} className="popup text-white bg-[#343536]">
           <h1 className="font-semibold text-base flex items-center gap-x-2">
             <GoOrganization color="grey" /> {enterprise.enterprise}
