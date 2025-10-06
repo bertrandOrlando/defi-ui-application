@@ -4,10 +4,13 @@ import LoginPage from "./pages/LoginPage";
 import VendorManagement from "./pages/VendorManagement";
 import ServiceAssurance from "./pages/ServiceAssurance";
 import ProtectedRoute from "./component/ProtectedRoute";
+import NotFoundPage from "./pages/NotFoundPage";
+import RootHandler from "./pages/RootHandler";
 
 function App() {
   return (
     <Routes>
+      <Route path="/" element={<RootHandler />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<h1>Register Page</h1>} />
       <Route
@@ -114,6 +117,7 @@ function App() {
           </ProtectedRoute>
         }
       />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }
