@@ -7,7 +7,8 @@
             "roleId": "1", 
             "updatedBy": "admin_user",
             "lastSignIn": "18-09-2025",
-            "isDeleted": "false"
+            "isDeleted": "false",
+            "Password": "password"
         },
         {
             "userId": "002",
@@ -16,7 +17,8 @@
             "roleId": "2",
             "updatedBy": "Alice Johnson",
             "lastSignIn": "17-09-2025",
-            "isDeleted": "false"
+            "isDeleted": "false",
+            "Password": "password"
         },
         {
             "userId": "003",
@@ -25,7 +27,8 @@
             "roleId": "3",
             "updatedBy": "admin_user",
             "lastSignIn": "18-09-2025",
-            "isDeleted": "true"
+            "isDeleted": "true",
+            "Password": "password"
         },
         {
             "userId": "004",
@@ -34,7 +37,8 @@
             "roleId": "2",
             "updatedBy": "Alice Johnson",
             "lastSignIn": "16-09-2025",
-            "isDeleted": "false"
+            "isDeleted": "false",
+            "Password": "password"
         },
          {
             "userId": "005",
@@ -43,7 +47,8 @@
             "roleId": "3",
             "updatedBy": "admin_user",
             "lastSignIn": "15-09-2025",
-            "isDeleted": "false"
+            "isDeleted": "false",
+            "Password": "password"
         },
         {
             "userId": "006",
@@ -52,7 +57,8 @@
             "roleId": "2",
             "updatedBy": "Alice Johnson",
             "lastSignIn": "18-09-2025",
-            "isDeleted": "false"
+            "isDeleted": "false",
+            "Password": "password"
         },
         {
             "userId": "007",
@@ -61,7 +67,8 @@
             "roleId": "1",
             "updatedBy": "admin_user",
             "lastSignIn": "14-09-2025",
-            "isDeleted": "false"
+            "isDeleted": "false",
+            "Password": "password"
         },
         {
             "userId": "008",
@@ -70,7 +77,8 @@
             "roleId": "3",
             "updatedBy": "Alice Johnson",
             "lastSignIn": "13-09-2025",
-            "isDeleted": "true"
+            "isDeleted": "true",
+            "Password": "password"
         },
         {
             "userId": "009",
@@ -79,7 +87,8 @@
             "roleId": "2",
             "updatedBy": "admin_user",
             "lastSignIn": "17-09-2025",
-            "isDeleted": "false"
+            "isDeleted": "false",
+            "Password": "password"
         },
         {
             "userId": "010",
@@ -88,7 +97,8 @@
             "roleId": "3",
             "updatedBy": "Alice Johnson",
             "lastSignIn": "18-09-2025",
-            "isDeleted": "false"
+            "isDeleted": "false",
+            "Password": "password"
         }
     ]
     
