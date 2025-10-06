@@ -99,6 +99,16 @@
       "lastSignIn": "18-09-2025",
       "isDeleted": "false",
       "password": "password"
+    },
+    {
+      "userId": "011",
+      "name": "Proyek Informatika",
+      "email": "proif@gmail.com",
+      "roleId": "3",
+      "updatedBy": "Alice Johnson",
+      "lastSignIn": "18-09-2025",
+      "isDeleted": "false",
+      "password": "proif"
     }
   ]
 }
