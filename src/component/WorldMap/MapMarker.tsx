@@ -127,7 +127,7 @@ const MapMarker = ({ enterprise, type, onUpdateAddress }: MapMarkerProps) => {
       <Marker
         position={position}
         icon={getIcon(enterprise.status, type)}
-        interactive={false}
+        interactive={type === viewTypes.Map}
       >
         {type === viewTypes.Map && (
           <Popup closeOnClick={false} className="popup text-white bg-[#343536]">
