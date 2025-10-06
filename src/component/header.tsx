@@ -2,7 +2,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import usersData from "../data/users.json";
 import rolesData from "../data/roles.json";
 import { useNavigate } from "react-router-dom";
-import UserIcon from "../assets/user.png";
+import UserIcon from "/user.png";
 
 /* TODO :
  * - Harus Handle User Profile
