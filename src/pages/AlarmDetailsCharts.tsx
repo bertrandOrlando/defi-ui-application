@@ -158,7 +158,7 @@ const AlarmDetailsCharts: React.FC = () => {
                   sx={{
                     '& .MuiChartsLegend-root': { display: 'none' },
                     '& text': { fill: COLORS.text },
-                    '& path': { stroke: '#000', strokeWidth: 1 },
+                    '& path': { stroke: '#000', strokeWidth: 0 },
                   }}
                 />
                 <div className="absolute text-center pointer-events-none">
