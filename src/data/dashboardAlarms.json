@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "severity": "critical",
+        "source": "Enterprise A | 5G Core 1",
+        "message": "Active subs count approaching limit"
+    },
+    {
+        "id": 2,
+        "severity": "critical",
+        "source": "Enterprise A | 5G Core 2",
+        "message": "Rwenk is approaching end of life"
+    },
+    {
+        "id": 3,
+        "severity": "minor",
+        "source": "Enterprise A | 5G Core 1",
+        "message": "gNB disconnected"
+    },
+    {
+        "id": 4,
+        "severity": "warning",
+        "source": "Enterprise A | 5G Core 1",
+        "message": "Warning condition in approach"
+    }
+]
