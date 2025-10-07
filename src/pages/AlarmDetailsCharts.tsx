@@ -183,6 +183,7 @@ const AlarmDetailsCharts: React.FC = () => {
               <div className="mb-2 text-left w-full">Open Alarms Severity (Quantity)</div>
               <div className="flex-1 w-full h-[240px]">
                 <BarChart
+                  height={(260)}
                   xAxis={[{ scaleType: 'band', data: barCategories, tickLabelStyle: { fill: COLORS.text } }]}
                   yAxis={[{ tickLabelStyle: { fill: COLORS.text }, tickMinStep: 2, width: 20 }]}
                   grid={{ vertical: false, horizontal: true }}
