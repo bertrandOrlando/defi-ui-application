@@ -67,7 +67,7 @@ const RightGrid = () => {
                             />
                             <ListItemText
                                 primary={`${alarm.enterpriseName} | ${alarm.coreName} `}
-                                secondary={alarm.description}
+                                secondary={alarm.alarm}
                                 sx={{
                                     '& .MuiListItemText-primary': {
                                         fontSize: '0.8rem',

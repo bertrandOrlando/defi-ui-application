@@ -3,6 +3,7 @@ import DynamicBreadcrumb from "../component/DynamicBreadCrumbs";
 import { Box, Grid, Typography } from "@mui/material";
 import LeftGrid from "../component/SummaryDashboard/LeftGrid";
 import RightGrid from "../component/SummaryDashboard/RightGrid";
+import CenterGrid from "../component/SummaryDashboard/CenterGrid";
 
 const SummaryDashboard = () => {
 
@@ -25,25 +26,23 @@ const SummaryDashboard = () => {
                     sx={{
                         display: 'grid',
                         gridTemplateColumns: 'repeat(12, 1fr)',
-                        gap: 3,
-                        p: 2,
+                        gap: 2,
+                        p: 1,
                         alignItems: 'start'
                     }}
                 >
                     {/* left grid column */}
-                    <Grid sx={{ gridColumn: 'span 3'}}>
+                    <Grid sx={{ gridColumn: 'span 2'}}>
                         <LeftGrid />
                     </Grid>
 
                     {/* Center grid column */}
-                    <Grid sx={{ gridColumn: 'span 6'}}>
-                        <Box sx={{ bgcolor: '#3c3c3c', p: 2, borderRadius: 2, height: '400px'}}>
-                            <Typography>Center Nav</Typography>
-                        </Box>
+                    <Grid sx={{ gridColumn: 'span 8'}}>
+                        <CenterGrid />
                     </Grid>
 
                     {/* right grid colum */}
-                    <Grid sx={{ gridColumn: 'span 3'}}>
+                    <Grid sx={{ gridColumn: 'span 2'}}>
                         <RightGrid />
                     </Grid>
                 </Grid>
