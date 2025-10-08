@@ -6,6 +6,7 @@ import ServiceAssurance from "./pages/ServiceAssurance";
 import ProtectedRoute from "./component/ProtectedRoute";
 import NotFoundPage from "./pages/NotFoundPage";
 import RootHandler from "./pages/RootHandler";
+import UserManagement from "./pages/UserManagement"
 
 function App() {
   return (
@@ -57,7 +58,7 @@ function App() {
         path="/user-management"
         element={
           <ProtectedRoute>
-            <h1>user-management Page</h1>
+        <UserManagement/>
           </ProtectedRoute>
         }
       />
