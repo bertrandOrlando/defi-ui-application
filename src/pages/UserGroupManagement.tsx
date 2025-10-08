@@ -115,7 +115,7 @@ export default function UserGroupManagement() {
             value={tab}
             onChange={(_, v) => {
               setTab(v);
-              if (v === 0) navigate("/user-management");
+              if (v === 0) navigate("/user-management", { replace: true });
             }}
           >
             <Tab
@@ -210,7 +210,9 @@ export default function UserGroupManagement() {
                   borderRadius: "6px",
                   "&:hover": { bgcolor: "#1565c0" },
                 }}
-                onClick={() => navigate("/create-user-group")}
+                onClick={() =>
+                  navigate("/create-user-group", { replace: true })
+                }
               >
                 Create New User Group
               </Button>
@@ -254,7 +256,7 @@ export default function UserGroupManagement() {
                     key={i}
                     sx={{ bgcolor: i % 2 === 0 ? "#2d2d2d" : "#1e1e1e" }}
                   >
-                    <TableCell sx={{ color: "white" ,borderBottom:"none"}}>
+                    <TableCell sx={{ color: "white", borderBottom: "none" }}>
                       {editIndex === i ? (
                         <TextField
                           value={editValue}

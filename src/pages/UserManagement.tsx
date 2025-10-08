@@ -170,7 +170,7 @@ export default function UserManagement() {
             //_event: _ artinya parameter itu tidak dipakai.
             setTab(newValue);
             if (newValue === 1) {
-              navigate("/user-group-management");
+              navigate("/user-group-management", { replace: true });
             } else {
               setTab(newValue);
             }
