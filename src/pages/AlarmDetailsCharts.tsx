@@ -117,7 +117,7 @@ const AlarmDetailsCharts: React.FC = () => {
             <div className="text-sm" style={{ color: COLORS.subtext }}>Total alarms</div>
           </div>
 
-          {/* Charts Container -> Changed to Flexbox */}
+          {/* Charts Container */}
           <div className="flex flex-col lg:flex-row gap-4">
             {/* Open Pie (1fr) */}
             <div className="rounded-xl p-4 border min-w-[300px] lg:flex-1"
@@ -257,7 +257,7 @@ const AlarmDetailsCharts: React.FC = () => {
                     cx: 130, cy: 120,
                   }))(pct(closedCounts.Minor, totalClosed)),
 
-                  // Warning (innermost)
+                  // Warning (paling dalam)
                   ((p) => ({
                     data: [
                       { id: 'warn-rem', value: Math.max(100 - p, 0.0001), color: '#2a2b2f' },
