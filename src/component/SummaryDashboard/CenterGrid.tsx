@@ -1,6 +1,8 @@
-import { Box, TextField, Typography } from "@mui/material";
+import { Box, TextField} from "@mui/material";
 import UserWidget from "./UserWidget";
 import SystemWidget from "./SystemWidget";
+import PerformanceWidget from "./PerformanceWidget";
+import AlarmsWidget from "./AlarmsWidget";
 
 const CenterGrid = () => {
     return (
@@ -11,6 +13,7 @@ const CenterGrid = () => {
                     fullWidth
                     variant="outlined"
                     size="small"
+                    placeholder="search"
                     sx={{
                         '& .MuiInputBase-root': {
                             backgroundColor: 'white',
@@ -42,8 +45,18 @@ const CenterGrid = () => {
             </Box>
             
             {/* bottom widget */}
-            <Box sx={{ bgcolor: '#3c3c3c', p: 2, borderRadius: 2, height: '200px' }}>
-                <Typography>Bottom chart will go here</Typography>
+            <Box sx={{ 
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: 3,    
+                }}
+            >
+                <Box sx={{ flexGrow: 1, minWidth: '300px', flexBasis: '50%'}}>
+                    <PerformanceWidget />
+                </Box>
+                <Box sx={{ flexGrow: 1, minWidth: '300px', flexBasis: '40%'}}>
+                    <AlarmsWidget />
+                </Box>
             </Box>
         </Box>
     );

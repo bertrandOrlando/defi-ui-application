@@ -85,7 +85,7 @@ const SystemWidget = () => {
                 defaultValue="select"
                 size="small"
                 sx={{
-                    mb: 3, backgroundColor: '#424242', color: 'white', borderRadius: 2,
+                    mb: 3, backgroundColor: '#282828', color: 'white', borderRadius: 2,
                     '.MuiOutlinedInput-notchedOutline': { borderColor: '#555' },
                     '& .MuiSvgIcon-root': { color: 'white' },
                 }}

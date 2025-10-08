@@ -5,6 +5,12 @@ import LeftGrid from "../component/SummaryDashboard/LeftGrid";
 import RightGrid from "../component/SummaryDashboard/RightGrid";
 import CenterGrid from "../component/SummaryDashboard/CenterGrid";
 
+/**
+ * TODO :
+ * - Alarms Chart
+ * - Small CSS like text styling
+ */
+
 const SummaryDashboard = () => {
 
     return (

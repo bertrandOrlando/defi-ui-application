@@ -32,11 +32,11 @@ const LeftGrid = () => {
     const [expandedEnterprise, setExpandedEnterprise] = useState<string | false>('Enterprise A');
     const [expandedCore, setExpandedCore] = useState<string | false>('5G Core 1');
 
-    const handleEnterpriseChange = (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+    const handleEnterpriseChange = (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
         setExpandedEnterprise(isExpanded ? panel : false);
     };
 
-    const handleCoreChange = (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+    const handleCoreChange = (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
         setExpandedCore(isExpanded ? panel : false);
     };
 
