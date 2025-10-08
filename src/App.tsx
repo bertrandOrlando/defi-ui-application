@@ -3,9 +3,13 @@ import LandingPage from "./pages/LandingPages";
 import LoginPage from "./pages/LoginPage";
 import VendorManagement from "./pages/VendorManagement";
 import ServiceAssurance from "./pages/ServiceAssurance";
+import AlarmGraph from "./pages/AlarmDetailsCharts";
 import ProtectedRoute from "./component/ProtectedRoute";
 import NotFoundPage from "./pages/NotFoundPage";
 import RootHandler from "./pages/RootHandler";
+import UserManagement from "./pages/UserManagement";
+import UserGroupManagement from "./pages/UserGroupManagement";
+import CreateUserGroup from "./pages/CreateUserGroup";
 
 function App() {
   return (
@@ -57,10 +61,28 @@ function App() {
         path="/user-management"
         element={
           <ProtectedRoute>
-            <h1>user-management Page</h1>
+            <UserManagement />
           </ProtectedRoute>
         }
       />
+      <Route
+        path="/user-group-management"
+        element={
+          <ProtectedRoute>
+            <UserGroupManagement />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/create-user-group"
+        element={
+          <ProtectedRoute>
+            <CreateUserGroup />
+          </ProtectedRoute>
+        }
+      />
+
       <Route
         path="/network-planning"
         element={
@@ -85,6 +107,16 @@ function App() {
           </ProtectedRoute>
         }
       />
+
+      <Route
+        path="/alarm-graph"
+        element={
+          <ProtectedRoute>
+            <AlarmGraph />
+          </ProtectedRoute>
+        }
+      />
+
       <Route
         path="/network-configuration"
         element={
