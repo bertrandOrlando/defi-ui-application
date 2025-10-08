@@ -102,6 +102,14 @@ function App() {
         }
       />
       <Route
+        path="/service-assurance/dashboard"
+        element={
+          <ProtectedRoute>
+              <SummaryDashboard/>
+          </ProtectedRoute>
+        }
+      />
+      <Route
         path="/inventory"
         element={
           <ProtectedRoute>

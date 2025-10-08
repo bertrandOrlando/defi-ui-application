@@ -2,11 +2,10 @@ import { Accordion, AccordionSummary, Box, List, ListItem, ListItemText, Typogra
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { RiAlarmWarningLine } from 'react-icons/ri';
 import { GoOrganization } from 'react-icons/go';
-import alarms from '../../data/dashboardAlarms.json'
+import alarms from '../../data/alarm.json'
 
-
-const getSeverityColor = (severity: 'critical' | 'warning' | 'minor') => {
-    switch (severity) {
+const getSeverityColor = (severity: string) => {
+    switch (severity.toLowerCase()) {
         case 'critical':
             return '#f44336';
         case 'warning':
@@ -61,14 +60,14 @@ const RightGrid = () => {
                                 width: 10,
                                 height: 10,
                                 borderRadius: '50%',
-                                backgroundColor: getSeverityColor(alarm.severity as any),
+                                backgroundColor: getSeverityColor(alarm.severity),
                                 mr: 2,
                                 flexShrink: 0,
                                 }}
                             />
                             <ListItemText
-                                primary={alarm.source}
-                                secondary={alarm.message}
+                                primary={`${alarm.enterpriseName} | ${alarm.coreName} `}
+                                secondary={alarm.description}
                                 sx={{
                                     '& .MuiListItemText-primary': {
                                         fontSize: '0.8rem',
