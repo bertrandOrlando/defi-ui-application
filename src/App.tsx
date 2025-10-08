@@ -7,6 +7,8 @@ import ProtectedRoute from "./component/ProtectedRoute";
 import NotFoundPage from "./pages/NotFoundPage";
 import RootHandler from "./pages/RootHandler";
 import UserManagement from "./pages/UserManagement"
+import UserGroupManagement from "./pages/UserGroupManagement"
+import CreateUserGroup from "./pages/CreateUserGroup";
 
 function App() {
   return (
@@ -62,6 +64,25 @@ function App() {
           </ProtectedRoute>
         }
       />
+      <Route
+        path="/user-group-management"
+        element={
+          <ProtectedRoute>
+       <UserGroupManagement />
+          </ProtectedRoute>
+        }
+      />
+
+       <Route
+        path="/create-user-group"
+        element={
+          <ProtectedRoute>
+       <CreateUserGroup />
+          </ProtectedRoute>
+        }
+      />
+      
+      
       <Route
         path="/network-planning"
         element={
