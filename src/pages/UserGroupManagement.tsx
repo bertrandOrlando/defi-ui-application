@@ -226,12 +226,22 @@ export default function UserGroupManagement() {
           >
             <Table>
               <TableHead>
-                <TableRow sx={{ bgcolor: "#8e44ad" }}>
-                  <TableCell sx={{ color: "white", fontWeight: "bold" }}>
+                <TableRow sx={{ bgcolor: "#8a5480" }}>
+                  <TableCell
+                    sx={{
+                      color: "white",
+                      fontWeight: "bold",
+                      borderBottom: "none",
+                    }}
+                  >
                     USER GROUP
                   </TableCell>
                   <TableCell
-                    sx={{ color: "white", fontWeight: "bold" }}
+                    sx={{
+                      color: "white",
+                      fontWeight: "bold",
+                      borderBottom: "none",
+                    }}
                     align="right"
                   >
                     ACTIONS
@@ -244,7 +254,7 @@ export default function UserGroupManagement() {
                     key={i}
                     sx={{ bgcolor: i % 2 === 0 ? "#2d2d2d" : "#1e1e1e" }}
                   >
-                    <TableCell sx={{ color: "white" }}>
+                    <TableCell sx={{ color: "white" ,borderBottom:"none"}}>
                       {editIndex === i ? (
                         <TextField
                           value={editValue}
@@ -259,7 +269,7 @@ export default function UserGroupManagement() {
                         g
                       )}
                     </TableCell>
-                    <TableCell align="right">
+                    <TableCell align="right" sx={{ borderBottom: "none" }}>
                       {/* Tombol Detail */}
                       <IconButton
                         sx={{ color: "gray" }}

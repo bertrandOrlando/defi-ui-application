@@ -157,7 +157,7 @@ export default function UserManagement() {
         <DynamicBreadcrumb />
       </Box>
       {/* Content container */}
-      <Box sx={{ flex: 1, p: 3, overflow: "auto" }}>
+      <Box sx={{ flex: 1, p: 3, overflow: "auto", color: "#fff" }}>
         {/* Page Title */}
         <Typography variant="h5" sx={{ mt: 1, fontWeight: "bold" }}>
           User Management <span style={{ color: "limegreen" }}>●</span>
@@ -206,7 +206,7 @@ export default function UserManagement() {
           <Box
             sx={{
               mt: 2,
-              bgcolor: "#1e1e1e",
+              bgcolor: "#2d2d2e",
               borderRadius: 2,
               p: 2,
             }}
@@ -264,21 +264,48 @@ export default function UserManagement() {
               sx={{
                 bgcolor: "#1e1e1e",
                 border: "1px solid #333",
+                borderRadius: "10px",
               }}
             >
               <Table>
                 <TableHead>
-                  <TableRow sx={{ bgcolor: "#7b1fa2" }}>
-                    <TableCell sx={{ color: "white", fontWeight: "bold" }}>
+                  <TableRow sx={{ bgcolor: "#8a5480" }}>
+                    <TableCell
+                      sx={{
+                        color: "white",
+                        fontWeight: "bold",
+                        borderBottom: "none",
+                      }}
+                    >
                       USER EMAIL
                     </TableCell>
-                    <TableCell sx={{ color: "white", fontWeight: "bold" }}>
+                    <TableCell
+                      sx={{
+                        color: "white",
+                        fontWeight: "bold",
+                        borderBottom: "none",
+                      }}
+                    >
                       ROLE
                     </TableCell>
-                    <TableCell sx={{ color: "white", fontWeight: "bold" }}>
+                    <TableCell
+                      sx={{
+                        color: "white",
+                        fontWeight: "bold",
+                        borderBottom: "none",
+                      }}
+                    >
                       UPDATE BY
                     </TableCell>
-                    <TableCell sx={{ color: "white", fontWeight: "bold" }}>
+                    <TableCell
+                      sx={{
+                        color: "white",
+                        fontWeight: "bold",
+                        display: "flex",
+                        justifyContent: "center",
+                        borderBottom: "none",
+                      }}
+                    >
                       DELETE USER
                     </TableCell>
                   </TableRow>
@@ -288,25 +315,37 @@ export default function UserManagement() {
                     .filter((u) =>
                       u.email.toLowerCase().includes(search.toLowerCase())
                     )
-                    .map((user) => (
+                    .map((user, index) => (
                       <TableRow
                         key={user.id}
                         sx={{
-                          bgcolor: "#2a2a2a",
-                          "&:nth-of-type(even)": { bgcolor: "#252525" },
+                          bgcolor: index % 2 === 0 ? "#343536" : "transparent",
+                          borderRadius: "10px",
                         }}
                       >
-                        <TableCell sx={{ color: "white" }}>
+                        <TableCell
+                          sx={{ color: "white", borderBottom: "none" }}
+                        >
                           {user.email}
                         </TableCell>
-                        <TableCell sx={{ color: "white" }}>
+                        <TableCell
+                          sx={{ color: "white", borderBottom: "none" }}
+                        >
                           {getRoleName(user.roleId)}
                         </TableCell>
-                        <TableCell sx={{ color: "white" }}>
+                        <TableCell
+                          sx={{ color: "white", borderBottom: "none" }}
+                        >
                           {user.updatedBy} on{" "}
                           {new Date(user.updatedAt).toLocaleString()}
                         </TableCell>
-                        <TableCell>
+                        <TableCell
+                          sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            borderBottom: "none",
+                          }}
+                        >
                           <IconButton
                             color="error"
                             onClick={() => handleDeleteUser(user.id)}

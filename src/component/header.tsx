@@ -29,7 +29,7 @@ const Header = ({ className }: { className?: string }) => {
       <div className="flex flex-col text-sm">
         <button
           onClick={onBack}
-          className="flex items-center overflow-hidden rounded-md bg-[#5a5a5a] hover:bg-[#4a4a4a] text-sm font-semibold"
+          className="flex items-center overflow-hidden rounded-md bg-[#5a5a5a] hover:bg-[#4a4a4a] text-sm font-semibold cursor-pointer"
         >
           <span className="p-2 bg-[#6b6b6b] bg-opacity-20 flex items-center justify-center">
             <FaArrowLeft size={16} />
