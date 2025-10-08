@@ -16,6 +16,7 @@ import { RiFlowChart } from 'react-icons/ri';
 import { TbFileAnalytics } from 'react-icons/tb';
 import { MdOutlineNotificationsActive } from 'react-icons/md';
 import { FaRegCalendarCheck } from 'react-icons/fa';
+import userIcon from '/user.png';
 
 import { useNavigate } from 'react-router-dom';
 import usersData from '../data/users.json';
@@ -62,7 +63,7 @@ const LandingPage = () => {
                     <p className="text-sm">{currentRole?.roleName || 'User Role'}</p>
                 </div>
                 {/* DUMMY ICON */}
-                <img src="src\assets\user.png" className="h-10 w-10"></img>
+                <img src={userIcon} className="h-10 w-10"></img>
             </div>
         </header>
     );
