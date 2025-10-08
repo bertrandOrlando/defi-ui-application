@@ -3,6 +3,7 @@ import LandingPage from "./pages/LandingPages";
 import LoginPage from "./pages/LoginPage";
 import VendorManagement from "./pages/VendorManagement";
 import ServiceAssurance from "./pages/ServiceAssurance";
+import AlarmGraph from "./pages/AlarmDetailsCharts";
 import ProtectedRoute from "./component/ProtectedRoute";
 import NotFoundPage from "./pages/NotFoundPage";
 import RootHandler from "./pages/RootHandler";
@@ -107,6 +108,16 @@ function App() {
           </ProtectedRoute>
         }
       />
+
+      <Route
+        path="/alarm-graph" 
+        element={
+          <ProtectedRoute>
+            <AlarmGraph />
+          </ProtectedRoute>
+        }
+      />
+  
       <Route
         path="/network-configuration"
         element={
