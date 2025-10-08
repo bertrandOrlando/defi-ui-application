@@ -317,12 +317,12 @@ export const WorldMap = ({
 
         <div
           id="service-navigation"
-          className="absolute z-[1000] p-6 text-sm w-full top-12"
+          className="absolute z-[1000] p-6 text-sm w-full top-12 pointer-events-none"
         >
-          <div className="grid grid-cols-2">
+          <div className="grid grid-cols-2 ">
             <Breadcrumbs
               aria-label="breadcrumb"
-              className="col-span-2"
+              className="col-span-2 pointer-events-auto"
               separator="/"
             >
               <Link
@@ -347,7 +347,7 @@ export const WorldMap = ({
                 <>
                   <div
                     id="view-type"
-                    className="bg-[#747282] h-7 p-[2px] flex flex-row rounded-sm"
+                    className="bg-[#747282] h-7 p-[2px] flex flex-row rounded-sm pointer-events-auto"
                   >
                     <button
                       className={`${
@@ -382,7 +382,7 @@ export const WorldMap = ({
                       <TbHierarchy color="white" />
                     </button>
                   </div>
-                  <div className="bg-[#747282] h-7 p-[2px] flex flex-row rounded-md ml-6">
+                  <div className="bg-[#747282] h-7 p-[2px] flex flex-row rounded-md ml-6 pointer-events-auto">
                     <button
                       className="cursor-pointer p-1 w-7 flex justify-center items-center rounded-sm"
                       onClick={() => setIsSearch(true)}
@@ -392,7 +392,7 @@ export const WorldMap = ({
                   </div>
                 </>
               ) : (
-                <div className="bg-white flex rounded-md">
+                <div className="bg-white flex rounded-md pointer-events-auto">
                   <Autocomplete
                     disablePortal
                     value={value}
@@ -418,7 +418,7 @@ export const WorldMap = ({
                   </button>
                 </div>
               )}
-              <div className="bg-[#747282] h-7 p-[2px] flex flex-row rounded-md ml-2">
+              <div className="bg-[#747282] h-7 p-[2px] flex flex-row rounded-md ml-2 pointer-events-auto">
                 {!isFilter ? (
                   <button
                     className="cursor-pointer p-1 w-7 flex justify-center items-center rounded-sm"
@@ -438,7 +438,7 @@ export const WorldMap = ({
             </div>
           </div>
           {isFilter && (
-            <div className="absolute w-80 p-6 bg-[#2d2d2d] text-white rounded-md shadow-lg z-50 -bottom-[575px] right-4 transition ">
+            <div className="absolute w-80 p-6 bg-[#2d2d2d] text-white rounded-md shadow-lg z-50 -bottom-[575px] right-4 transition pointer-events-auto">
               <h3 className="font-medium text-xl">Filter</h3>
               <div className="w-full h-[1px] bg-slate-500 my-2"></div>
 
