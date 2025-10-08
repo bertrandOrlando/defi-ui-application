@@ -15,7 +15,6 @@ import {
   MenuItem,
   Select,
   Slider,
-  Stack,
   TextField,
 } from "@mui/material";
 import { BiWorld } from "react-icons/bi";
@@ -40,7 +39,7 @@ export type WorldMapProps = {
   cpe: string[];
 };
 
-const MIN_ZOOM = 2;
+const MIN_ZOOM = 3;
 const MAX_ZOOM = 9;
 
 export const WorldMap = ({
@@ -53,7 +52,7 @@ export const WorldMap = ({
   setView: (view: ViewType) => void;
 }) => {
   // Map
-  const [zoom, setZoom] = useState<number>(4);
+  const [zoom, setZoom] = useState<number>(5);
   const mapRef = useRef(null);
 
   // enterprise filter
@@ -224,8 +223,8 @@ export const WorldMap = ({
           id="zoom-control"
           className="absolute flex flex-col items-center justify-center gap-y-2 z-[1000] bottom-0 left-0 translate-x-4 -translate-y-6 bg-[#343434] py-2 px-1 rounded-xl "
         >
-          <button
-            onClick={() => setZoom(zoom + 1)}
+          {/* <button
+            onClick={() => setZoom((prev) => prev + 1)}
             className="text-white text-2xl cursor-pointer"
           >
             +
@@ -263,6 +262,56 @@ export const WorldMap = ({
             className="text-white text-2xl cursor-pointer"
           >
             -
+          </button> */}
+          <button
+            onClick={() => setZoom((prev) => prev + 1)}
+            className="text-white text-xl mb-2 hover:bg-[#4a4a4a] rounded w-8 h-8 flex items-center justify-center transition-colors"
+          >
+            +
+          </button>
+          <Slider
+            aria-label="zoom-control"
+            orientation="vertical"
+            defaultValue={zoom}
+            onChange={(_, value) => setZoom(value as number)}
+            valueLabelDisplay="auto"
+            value={zoom}
+            step={1}
+            marks
+            min={MIN_ZOOM}
+            max={MAX_ZOOM}
+            sx={{
+              height: 120,
+              color: "#fff",
+              "& .MuiSlider-track": {
+                width: 3,
+                background: "#4a7c9e",
+                border: "none",
+              },
+              "& .MuiSlider-rail": {
+                width: 3,
+                backgroundColor: "#acacacff",
+                opacity: 1,
+              },
+              "& .MuiSlider-thumb": {
+                width: 24,
+                height: 12,
+                borderRadius: "6px",
+                backgroundColor: "#fff",
+                "&:hover, &.Mui-focusVisible": {
+                  boxShadow: "0 0 0 8px rgba(255, 255, 255, 0.16)",
+                },
+                "&.Mui-active": {
+                  boxShadow: "0 0 0 14px rgba(255, 255, 255, 0.16)",
+                },
+              },
+            }}
+          />
+          <button
+            onClick={() => setZoom((prev) => prev - 1)}
+            className="text-white text-xl mt-2 hover:bg-[#4a4a4a] rounded w-8 h-8 flex items-center justify-center transition-colors"
+          >
+            −
           </button>
         </div>
 
