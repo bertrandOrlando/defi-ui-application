@@ -26,6 +26,7 @@ import { FaSliders } from "react-icons/fa6";
 import { IoIosClose } from "react-icons/io";
 import MapMarker from "./MapMarker";
 import { viewTypes, type ViewType } from "../../pages/ServiceAssurance";
+import Header from "../header";
 
 export type WorldMapProps = {
   id: number;
@@ -218,6 +219,7 @@ export const WorldMap = ({
   return (
     <>
       <div className="relative">
+        <Header className="absolute z-[1000]" />
         <div
           id="zoom-control"
           className="absolute flex flex-col items-center justify-center gap-y-2 z-[1000] bottom-0 left-0 translate-x-4 -translate-y-6 bg-[#343434] py-2 px-1 rounded-xl "
@@ -266,7 +268,7 @@ export const WorldMap = ({
 
         <div
           id="service-navigation"
-          className="absolute z-[1000] p-6 text-sm w-full"
+          className="absolute z-[1000] p-6 text-sm w-full top-12"
         >
           <div className="grid grid-cols-2">
             <Breadcrumbs
@@ -536,6 +538,32 @@ export const WorldMap = ({
           )}
         </div>
 
+        <div
+          id="status-information"
+          className="absolute z-[1000] px-4 py-2 text-sm bottom-6 left-1/2 -translate-x-28 bg-[#282828]/75 text-white rounded-md"
+        >
+          <div className="flex gap-x-3">
+            <div className="flex items-center justify-center gap-1">
+              <div
+                className={`h-2 w-2 bg-[#7dc161] rounded-full text-center`}
+              ></div>{" "}
+              Healthy
+            </div>
+            <div className="flex items-center justify-center gap-1">
+              <div
+                className={`h-2 w-2 bg-[#ffcd2e] rounded-full text-center`}
+              ></div>{" "}
+              Major
+            </div>
+            <div className="flex items-center justify-center gap-1">
+              <div
+                className={`h-2 w-2 bg-[#d1664f] rounded-full text-center`}
+              ></div>{" "}
+              Critical
+            </div>
+          </div>
+        </div>
+
         <div className="w-screen h-screen ">
           <MapContainer
             className="h-full w-full "
@@ -548,6 +576,7 @@ export const WorldMap = ({
             doubleClickZoom={false}
             minZoom={MIN_ZOOM}
             maxZoom={MAX_ZOOM}
+            worldCopyJump={true}
           >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
