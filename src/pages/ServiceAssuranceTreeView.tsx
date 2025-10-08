@@ -13,6 +13,10 @@ import {
 
 import Header from "../component/header";
 import DynamicBreadcrumb from "../component/DynamicBreadCrumbs";
+import { viewTypes, type ViewType } from "./ServiceAssurance";
+import { BiWorld } from "react-icons/bi";
+import { MdCellTower } from "react-icons/md";
+import { TbHierarchy } from "react-icons/tb";
 
 /* TODO :
  * - Buat Alarm, konek dengan data, tampilan pake MUI
@@ -20,7 +24,13 @@ import DynamicBreadcrumb from "../component/DynamicBreadCrumbs";
  * - Selain itu all working
  */
 
-const ServiceAssuranceTreeView = () => {
+const ServiceAssuranceTreeView = ({
+  view,
+  setView,
+}: {
+  view: ViewType;
+  setView: (view: ViewType) => void;
+}) => {
   const [focusedMode, setFocusedMode] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [zoom, setZoom] = useState(1);
@@ -343,6 +353,41 @@ const ServiceAssuranceTreeView = () => {
                 ${focusedMode ? "translate-x-4" : "translate-x-0.5"}`}
             />
           </div>
+        </div>
+      </div>
+
+      <div className="fixed right-7 top-24 z-50 flex flex-col space-y-4">
+        <div></div>
+        <div
+          id="view-type"
+          className="bg-[#747282] h-7 p-[2px] flex flex-row rounded-sm"
+        >
+          <button
+            className={`${
+              view === viewTypes.Map ? `bg-[#355493]` : `cursor-pointer`
+            } p-1 w-7 flex justify-center items-center rounded-sm`}
+            onClick={() => setView(viewTypes.Map)}
+          >
+            <BiWorld color="white" />
+          </button>
+
+          <button
+            className={`${
+              view === viewTypes.Satelite ? `bg-[#355493]` : `cursor-pointer`
+            } p-1 w-7 flex justify-center items-center rounded-sm`}
+            onClick={() => setView(viewTypes.Satelite)}
+          >
+            <MdCellTower color="white" />
+          </button>
+
+          <button
+            className={`${
+              view === viewTypes.Tree ? `bg-[#355493]` : `cursor-pointer`
+            } p-1 w-7 flex justify-center items-center rounded-sm`}
+            onClick={() => setView(viewTypes.Tree)}
+          >
+            <TbHierarchy color="white" />
+          </button>
         </div>
       </div>
 

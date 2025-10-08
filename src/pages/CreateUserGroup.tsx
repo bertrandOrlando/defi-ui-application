@@ -10,14 +10,12 @@ import {
   List,
   ListItem,
   ListItemText,
-
   Dialog,
   DialogContent,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import Header from "../component/header"
-
+import Header from "../component/header";
 
 interface Permission {
   group: string;
@@ -62,8 +60,8 @@ export default function CreateUserGroup() {
   const [successOpen, setSuccessOpen] = useState(false);
   const [tempCount, setTempCount] = useState(0);
 
-
-  const handleToggle = (group: string, name: string) => {//cek box
+  const handleToggle = (group: string, name: string) => {
+    //cek box
     const exists = selected.some((p) => p.group === group && p.name === name);
     if (exists) {
       setSelected(
@@ -84,12 +82,11 @@ export default function CreateUserGroup() {
   const handleClearAll = () => setSelected([]);
 
   const handleSubmit = () => {
-  const count = selected.length; 
-  setSuccessOpen(true);
-  setTempCount(count); 
-  setSelected([]);
-};
-
+    const count = selected.length;
+    setSuccessOpen(true);
+    setTempCount(count);
+    setSelected([]);
+  };
 
   return (
     <Box
@@ -103,11 +100,11 @@ export default function CreateUserGroup() {
         boxSizing: "border-box",
       }}
     >
-             <Header />
-         <Typography variant="body2" color="gray" sx={{ mt: 2, mb: 1 }}>
-            Dashboard / User Management <span style={{ color: "#f39c12" }}>/ Create New User Group</span>
-          </Typography>
-    
+      <Header />
+      <Typography variant="body2" color="gray" sx={{ mt: 2, mb: 1 }}>
+        Dashboard / User Management{" "}
+        <span style={{ color: "#f39c12" }}>/ Create New User Group</span>
+      </Typography>
 
       <Typography variant="h4" fontWeight="bold" mb={3} sx={{ color: "white" }}>
         Create New User Group
@@ -211,7 +208,10 @@ export default function CreateUserGroup() {
 
             <List>
               {permissionsData.map((group, i) => (
-                <Box key={i} sx={{ bgcolor: "#2a2a2a", mb: 2, borderRadius: 1 }}>
+                <Box
+                  key={i}
+                  sx={{ bgcolor: "#2a2a2a", mb: 2, borderRadius: 1 }}
+                >
                   <Typography
                     variant="subtitle1"
                     sx={{
@@ -224,25 +224,24 @@ export default function CreateUserGroup() {
                     {group.group}
                   </Typography>
                   {group.items.map((item, idx) => (
-                   <ListItem
-  key={idx}
-  secondaryAction={
-    <Checkbox
-      edge="end"
-      checked={selected.some(
-        (p) => p.group === group.group && p.name === item
-      )}
-      onChange={() => handleToggle(group.group, item)}
-      sx={{ color: "white" }}
-    />
-  }
->
-  <ListItemText
-    primary={item}
-    primaryTypographyProps={{ style: { color: "white" } }}
-  />
-</ListItem>
-
+                    <ListItem
+                      key={idx}
+                      secondaryAction={
+                        <Checkbox
+                          edge="end"
+                          checked={selected.some(
+                            (p) => p.group === group.group && p.name === item
+                          )}
+                          onChange={() => handleToggle(group.group, item)}
+                          sx={{ color: "white" }}
+                        />
+                      }
+                    >
+                      <ListItemText
+                        primary={item}
+                        primaryTypographyProps={{ style: { color: "white" } }}
+                      />
+                    </ListItem>
                   ))}
                 </Box>
               ))}
@@ -271,10 +270,9 @@ export default function CreateUserGroup() {
           <Typography variant="h6" gutterBottom>
             User group has been added
           </Typography>
-         <Typography variant="body2" color="gray">
-   <b>{groupName}</b> Role has been added with {tempCount} permissions.
-</Typography>
-
+          <Typography variant="body2" color="gray">
+            <b>{groupName}</b> Role has been added with {tempCount} permissions.
+          </Typography>
         </DialogContent>
       </Dialog>
     </Box>

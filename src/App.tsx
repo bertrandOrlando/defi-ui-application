@@ -7,8 +7,8 @@ import AlarmGraph from "./pages/AlarmDetailsCharts";
 import ProtectedRoute from "./component/ProtectedRoute";
 import NotFoundPage from "./pages/NotFoundPage";
 import RootHandler from "./pages/RootHandler";
-import UserManagement from "./pages/UserManagement"
-import UserGroupManagement from "./pages/UserGroupManagement"
+import UserManagement from "./pages/UserManagement";
+import UserGroupManagement from "./pages/UserGroupManagement";
 import CreateUserGroup from "./pages/CreateUserGroup";
 
 function App() {
@@ -61,7 +61,7 @@ function App() {
         path="/user-management"
         element={
           <ProtectedRoute>
-        <UserManagement/>
+            <UserManagement />
           </ProtectedRoute>
         }
       />
@@ -69,21 +69,20 @@ function App() {
         path="/user-group-management"
         element={
           <ProtectedRoute>
-       <UserGroupManagement />
+            <UserGroupManagement />
           </ProtectedRoute>
         }
       />
 
-       <Route
+      <Route
         path="/create-user-group"
         element={
           <ProtectedRoute>
-       <CreateUserGroup />
+            <CreateUserGroup />
           </ProtectedRoute>
         }
       />
-      
-      
+
       <Route
         path="/network-planning"
         element={
@@ -110,14 +109,14 @@ function App() {
       />
 
       <Route
-        path="/alarm-graph" 
+        path="/alarm-graph"
         element={
           <ProtectedRoute>
             <AlarmGraph />
           </ProtectedRoute>
         }
       />
-  
+
       <Route
         path="/network-configuration"
         element={

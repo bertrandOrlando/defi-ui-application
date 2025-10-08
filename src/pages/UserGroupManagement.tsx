@@ -34,7 +34,7 @@ interface Role {
   roleName: string;
 }
 
-const roles: Role[] = (roleData as any).roles || [];
+const roles: Role[] = roleData.roles || [];
 
 export default function UserGroupManagement() {
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ export default function UserGroupManagement() {
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [editValue, setEditValue] = useState("");
   const [detailOpen, setDetailOpen] = useState(false);
-  const [selectedRole, setSelectedRole] = useState<any>(null);
+  const [selectedRole, setSelectedRole] = useState<Role | null>(null);
 
   const handleDelete = (name: string) => {
     setGroups(groups.filter((g) => g !== name));
@@ -92,16 +92,15 @@ export default function UserGroupManagement() {
       <Box sx={{ p: 3, flexShrink: 0, position: "relative" }}>
         <Header />
 
-
         {/* Breadcrumb */}
         <Typography variant="body2" color="white" sx={{ mt: 3, mb: 1 }}>
           Dashboard / <span style={{ color: "#f39c12" }}>User Management</span>
         </Typography>
 
-         {/* Page Title */}
-                <Typography variant="h5" sx={{ mt: 3,mb:4, fontWeight: "bold" }}>
-                  User Management <span style={{ color: "limegreen" }}>●</span>
-                </Typography>
+        {/* Page Title */}
+        <Typography variant="h5" sx={{ mt: 3, mb: 4, fontWeight: "bold" }}>
+          User Management <span style={{ color: "limegreen" }}>●</span>
+        </Typography>
 
         {/* Tabs */}
         <Box
