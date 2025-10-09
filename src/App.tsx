@@ -9,7 +9,6 @@ import NotFoundPage from "./pages/NotFoundPage";
 import RootHandler from "./pages/RootHandler";
 import UserManagement from "./pages/UserManagement";
 import UserGroupManagement from "./pages/UserGroupManagement";
-import CreateUserGroup from "./pages/CreateUserGroup";
 
 function App() {
   return (
@@ -70,15 +69,6 @@ function App() {
         element={
           <ProtectedRoute>
             <UserGroupManagement />
-          </ProtectedRoute>
-        }
-      />
-
-      <Route
-        path="/create-user-group"
-        element={
-          <ProtectedRoute>
-            <CreateUserGroup />
           </ProtectedRoute>
         }
       />
