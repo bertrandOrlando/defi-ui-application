@@ -75,16 +75,6 @@ function App() {
         }
       />
 
-         <Route
-        path="/create-user-group"
-        element={
-          <ProtectedRoute>
-            <createUserGroup />
-          </ProtectedRoute>
-        }
-      />
-      
-
       <Route
         path="/network-planning"
         element={
