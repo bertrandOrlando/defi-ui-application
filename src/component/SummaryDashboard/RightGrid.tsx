@@ -54,7 +54,7 @@ const RightGrid = () => {
             {/* list section */}
             <Box sx={{ flexGrow: 1, overflowY: 'auto'}}>
                 <List>
-                    {alarms.map((alarm) => (
+                    {alarms.slice(0, 9).map((alarm) => (
                         <ListItem key={alarm.id} sx={{ mb: 1, bgcolor: '#2d2d2e', borderRadius: 2}}>
                             <Box sx={{
                                 width: 10,
