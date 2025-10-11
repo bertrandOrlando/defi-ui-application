@@ -10,8 +10,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import RootHandler from "./pages/RootHandler";
 import UserManagement from "./pages/UserManagement";
 import UserGroupManagement from "./pages/UserGroupManagement";
-// import AlarmDetails  from "./pages/AlarmDetails";
-
+import OutOfScope from "./pages/OutOfScope";
 
 function App() {
   return (
@@ -31,7 +30,7 @@ function App() {
         path="/vendor-agreement-query"
         element={
           <ProtectedRoute>
-            <h1>vendor-agreement-query Page</h1>
+            <OutOfScope pageName="Vendor Agreement Query Page" />
           </ProtectedRoute>
         }
       />
@@ -47,7 +46,7 @@ function App() {
         path="/vendor-communication"
         element={
           <ProtectedRoute>
-            <h1>vendor-communication Page</h1>{" "}
+            <OutOfScope pageName="Vendor Communication Page" />
           </ProtectedRoute>
         }
       />
@@ -55,7 +54,7 @@ function App() {
         path="/policy-configuration"
         element={
           <ProtectedRoute>
-            <h1>policy-configuration Page</h1>
+            <OutOfScope pageName="Policy Configuration Page" />
           </ProtectedRoute>
         }
       />
@@ -80,7 +79,7 @@ function App() {
         path="/network-planning"
         element={
           <ProtectedRoute>
-            <h1>network-planning Page</h1>
+            <OutOfScope pageName="Network Planning Page" />
           </ProtectedRoute>
         }
       />
@@ -104,7 +103,7 @@ function App() {
         path="/inventory"
         element={
           <ProtectedRoute>
-            <h1>inventory Page</h1>
+            <OutOfScope pageName="Inventory Page" />
           </ProtectedRoute>
         }
       />
@@ -122,7 +121,7 @@ function App() {
         path="/network-configuration"
         element={
           <ProtectedRoute>
-            <h1>network-configuration Page</h1>
+            <OutOfScope pageName="Network Configuration Page" />
           </ProtectedRoute>
         }
       />
@@ -130,7 +129,7 @@ function App() {
         path="/service-flow-design"
         element={
           <ProtectedRoute>
-            <h1>service-flow-design Page</h1>
+            <OutOfScope pageName="Service Flow Design Page" />
           </ProtectedRoute>
         }
       />
@@ -138,7 +137,7 @@ function App() {
         path="/reporting-analytics"
         element={
           <ProtectedRoute>
-            <h1>reporting-analytics Page</h1>
+            <OutOfScope pageName="Reporting Analytics Page" />
           </ProtectedRoute>
         }
       />
@@ -146,7 +145,7 @@ function App() {
         path="/notifications"
         element={
           <ProtectedRoute>
-            <h1>notifications Page</h1>
+            <OutOfScope pageName="Notifications Page" />
           </ProtectedRoute>
         }
       />
