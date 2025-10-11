@@ -71,7 +71,6 @@ export default function UserGroupManagement() {
   const [detailOpen, setDetailOpen] = useState(false);
   const [selectedRole, setSelectedRole] = useState<Role | null>(null);
 
-  // Create Group Dialog
   const [createOpen, setCreateOpen] = useState(false);
   const [groupName, setGroupName] = useState("");
   const [selected, setSelected] = useState<Permission[]>([]);
