@@ -38,6 +38,12 @@ const LoginPage = () => {
     <div className="min-h-screen bg-[#282828] text-white">
       <header className="flex items-center justify-center h-20 p-4 bg-[#282828] w-full text-white fixed">
         <div className="flex items-center space-x-2">
+          <img
+            src="/logo-transparent.png"
+            alt="hero logo"
+            width={75}
+            height={75}
+          />
           <span className="text-xl">
             <span className="font-semibold">5G</span> Def-i
           </span>

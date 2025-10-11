@@ -24,14 +24,13 @@ const Header = ({ className }: { className?: string }) => {
   };
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-      
-      const closeMenuHandler = () => {
-      }
-  
-      const logoutHandler = () => {
-        localStorage.removeItem("user");
-        window.location.reload();
-      }
+
+  const closeMenuHandler = () => {};
+
+  const logoutHandler = () => {
+    localStorage.removeItem("user");
+    window.location.reload();
+  };
 
   return (
     <header
@@ -52,7 +51,15 @@ const Header = ({ className }: { className?: string }) => {
 
       {/* Center*/}
       <div className="flex items-center space-x-2">
-        <span className="text-lg font-semibold">5G Def-i</span>
+        <img
+          src="/logo-transparent.png"
+          alt="hero logo"
+          width={75}
+          height={75}
+        />
+        <span className="text-xl">
+          <span className="font-semibold">5G</span> Def-i
+        </span>
       </div>
 
       {/* right side */}
