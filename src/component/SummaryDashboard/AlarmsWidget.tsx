@@ -169,17 +169,20 @@ const AlarmsWidget = () => {
             </Typography>
 
             {/* dropdown */}
-            <Box sx={{ display: 'flex', gap: 2 }}>
-                <Select defaultValue="severity" size="small" sx={selectStyles}>
+            <Box sx={{ 
+                    display: 'flex', 
+                    flexDirection: { xs: 'column', md: 'row'},
+                    gap: 2, }}>
+                <Select fullWidth defaultValue="severity" size="small" sx={selectStyles}>
                     <MenuItem value="severity">Select Severity</MenuItem>
                 </Select>
-                <Select defaultValue="node" size="small" sx={selectStyles}>
+                <Select  fullWidth defaultValue="node" size="small" sx={selectStyles}>
                     <MenuItem value="node">Select Node Type</MenuItem>
                 </Select>
             </Box>
 
             {/* chart */}
-            <Box sx={{ bgcolor: '#2D2D2E', p: 2, borderRadius: 2 }}>
+            <Box sx={{ bgcolor: '#2D2D2E', p: 2, borderRadius: 2, flexGrow: 1}}>
                 <CustomChart />
             </Box>
         </Box>
