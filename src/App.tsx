@@ -10,7 +10,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import RootHandler from "./pages/RootHandler";
 import UserManagement from "./pages/UserManagement";
 import UserGroupManagement from "./pages/UserGroupManagement";
-import AlarmDetails  from "./pages/AlarmDetails";
+// import AlarmDetails  from "./pages/AlarmDetails";
 
 
 function App() {
