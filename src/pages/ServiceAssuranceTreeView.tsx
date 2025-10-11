@@ -17,6 +17,7 @@ import { viewTypes, type ViewType } from "./ServiceAssurance";
 import { BiWorld } from "react-icons/bi";
 import { MdCellTower } from "react-icons/md";
 import { TbHierarchy } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
 
 /* TODO :
  * - Buat Alarm, konek dengan data, tampilan pake MUI
@@ -35,6 +36,8 @@ const ServiceAssuranceTreeView = ({
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [zoom, setZoom] = useState(1);
   const [highlightedIds, setHighlightedIds] = useState<string[]>([]);
+
+  const navigate = useNavigate();
 
   //debugging
   // React.useEffect(() => {
@@ -633,7 +636,7 @@ const ServiceAssuranceTreeView = ({
               <div className="px-4 pb-3 pt-2 flex items-center gap-3">
                 <button
                   className="flex-1 flex items-center justify-center gap-2 rounded-sm bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-2 py-2 transition-colors text-sm"
-                  onClick={() => console.log("Service Assurance")}
+                  onClick={() => navigate('/service-assurance/dashboard')}
                 >
                   <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current">
                     <path d="M3 3h2v18H3V3Zm4 10h2v8H7v-8Zm4-6h2v14h-2V7Zm4 4h2v10h-2V11Zm4-8h2v18h-2V3Z" />

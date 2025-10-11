@@ -3,6 +3,7 @@ import LandingPage from "./pages/LandingPages";
 import LoginPage from "./pages/LoginPage";
 import VendorManagement from "./pages/VendorManagement";
 import ServiceAssurance from "./pages/ServiceAssurance";
+import SummaryDashboard from "./pages/SummaryDashboard";
 import AlarmGraph from "./pages/AlarmDetailsCharts";
 import ProtectedRoute from "./component/ProtectedRoute";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -87,6 +88,14 @@ function App() {
         element={
           <ProtectedRoute>
             <ServiceAssurance />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/service-assurance/dashboard"
+        element={
+          <ProtectedRoute>
+              <SummaryDashboard/>
           </ProtectedRoute>
         }
       />
