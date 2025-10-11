@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Box, Button, Link, Paper, Tab, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tabs, Typography } from "@mui/material";
+import { Box, Button, InputAdornment, Link, OutlinedInput, Paper, Tab, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tabs, Typography } from "@mui/material";
 import { HiOutlineClipboardDocumentCheck } from 'react-icons/hi2';
+import SearchIcon from '@mui/icons-material/Search';
 import Header from "../component/header"
 import DynamicBreadcrumb from "../component/DynamicBreadCrumbs";
 import deviceCertificationData from '../data/deviceCertification.json';
@@ -118,7 +119,11 @@ const ConditionalTable = ({ activeTab, agreementData, registrationData, onAgree,
                                 <Link 
                                     href="https://www.topcoder.com/challenges/61fc66fe-80ad-4ead-9717-78bdbf55f009?tab=details" 
                                     underline="always"
-                                    target="_blank"><HiOutlineClipboardDocumentCheck/> {row.viewAgreementDocs}</Link>
+                                    target="_blank"
+                                    sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}    
+                                >
+                                        <HiOutlineClipboardDocumentCheck/> {row.viewAgreementDocs}
+                                </Link>
                             </TableCell>
                             <TableCell sx={lastCellStyle}>
                                 <Button variant="contained" size="small" onClick={() => onAgree(row.email)} sx={{ textTransform: 'none', fontSize: '0.7rem' }}>
@@ -254,6 +259,22 @@ const VendorManagement = () => {
                             <Typography sx={{ color: 'white', fontWeight: 'semi-bold'}}>
                                 {tabTitles[activeTab]}
                             </Typography>
+
+                            <OutlinedInput
+                                size="small"
+                                placeholder="Search"
+                                    endAdornment= {
+                                        <InputAdornment position="end">
+                                            <SearchIcon sx={{ color: '#a0a0a0' }} />
+                                        </InputAdornment>
+                                    }
+                                sx={{
+                                    width: '250px',
+                                    color: 'white',
+                                    backgroundColor: '#282828',
+                                    borderRadius: '6px',
+                                }}
+                            />
                         </Box>
 
                         <TableContainer>
