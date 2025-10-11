@@ -46,15 +46,14 @@ const LandingPage = () => {
 
   const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-    
-    const closeMenuHandler = () => {
-    }
+
+    const closeMenuHandler = () => {};
 
     const logoutHandler = () => {
       localStorage.removeItem("user");
       window.location.reload();
-    }
-    
+    };
+
     return (
       <header className="flex items-center justify-between p-4 bg-[#282828] w-full text-white">
         {/* left side */}
@@ -96,7 +95,7 @@ const LandingPage = () => {
             onClose={closeMenuHandler}
             PaperProps={{
               sx: {
-                backgroundColor: "#343536", 
+                backgroundColor: "#343536",
                 "& .MuiList-root": {
                   paddingTop: 0,
                   paddingBottom: 0,
@@ -110,7 +109,7 @@ const LandingPage = () => {
                 color: "white",
                 transition: "background-color 0.2s ease-in-out",
                 "&:hover": {
-                  backgroundColor: "#4a4b4c", 
+                  backgroundColor: "#4a4b4c",
                 },
               }}
             >
@@ -179,37 +178,43 @@ const LandingPage = () => {
             </p>
             {/* row data section */}
             <div className="flex flex-wrap md:flex-nowrap justify-end space-x-8">
-              <div className="flex items-center space-x-2">
-                <span className="flex items-center gap-x-1">
-                  {" "}
-                  <GoOrganization />{" "}
-                  <span className="font-semibold text-blue-400">87</span>{" "}
-                  Enterprise
-                </span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="flex items-center gap-x-1">
-                  {" "}
-                  <HiOutlineLocationMarker />{" "}
-                  <span className="font-semibold text-yellow-400">30</span>{" "}
-                  Locations
-                </span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="flex items-center gap-x-1">
-                  {" "}
-                  <AiOutlineAlert />{" "}
-                  <span className="font-semibold text-green-400">46</span>{" "}
-                  Alarms
-                </span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="flex items-center gap-x-1">
-                  {" "}
-                  <FaChartBar />{" "}
-                  <span className="font-semibold text-teal-400">15</span> Total
-                  gNB
-                </span>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 md:flex">
+                <div className="flex items-center space-x-2">
+                  <span className="flex items-center gap-x-1">
+                    {" "}
+                    <GoOrganization />{" "}
+                    <span className="font-semibold text-blue-400">87</span>{" "}
+                    Enterprise
+                  </span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="flex items-center gap-x-1">
+                    {" "}
+                    <HiOutlineLocationMarker />{" "}
+                    <span className="font-semibold text-yellow-400">
+                      30
+                    </span>{" "}
+                    Locations
+                  </span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="flex items-center gap-x-1">
+                    {" "}
+                    <AiOutlineAlert />{" "}
+                    <span className="font-semibold text-green-400">
+                      46
+                    </span>{" "}
+                    Alarms
+                  </span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="flex items-center gap-x-1">
+                    {" "}
+                    <FaChartBar />{" "}
+                    <span className="font-semibold text-teal-400">15</span>{" "}
+                    Total gNB
+                  </span>
+                </div>
               </div>
             </div>
           </div>
