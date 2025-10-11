@@ -10,6 +10,7 @@ import RootHandler from "./pages/RootHandler";
 import UserManagement from "./pages/UserManagement";
 import UserGroupManagement from "./pages/UserGroupManagement";
 import AlarmDetails  from "./pages/AlarmDetails";
+import PerformanceDetails from "./pages/PerformanceDetails";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
     <Routes>
       <Route path="/" element={<RootHandler />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/performance-details" element={<PerformanceDetails />} />
       <Route path="/register" element={<h1>Register Page</h1>} />
       <Route
         path="/dashboard"
