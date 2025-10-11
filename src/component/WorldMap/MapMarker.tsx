@@ -7,6 +7,7 @@ import type { WorldMapProps } from "./WorldMap";
 import { useEffect, useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { viewTypes } from "../../pages/ServiceAssurance";
+import { Link } from "react-router";
 
 const getStatusColor = (status: string) => {
   switch (status) {
@@ -191,12 +192,14 @@ const MapMarker = ({ enterprise, type, onUpdateAddress }: MapMarkerProps) => {
               </>
             )}
             <div className="w-56 h-[1px] bg-slate-500 my-2"></div>
-            <button className="pr-3 cursor-pointer flex items-center gap-x-2 bg-[#355493]">
-              <span className="bg-[#4a659e] p-2">
-                <BsGraphUp color="white" />
-              </span>
-              Service Assurance
-            </button>
+            <Link to={"/service-assurance/dashboard"}>
+              <button className="pr-3 cursor-pointer flex items-center gap-x-2 bg-[#355493] text-white">
+                <span className="bg-[#4a659e] p-2">
+                  <BsGraphUp color="white" />
+                </span>
+                Service Assurance
+              </button>
+            </Link>
           </Popup>
         )}
       </Marker>
