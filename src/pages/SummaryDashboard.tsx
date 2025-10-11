@@ -1,15 +1,48 @@
 import Header from "../component/header";
-import DynamicBreadcrumb from "../component/DynamicBreadCrumbs";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Breadcrumbs, Grid, Link, Typography } from "@mui/material";
 import LeftGrid from "../component/SummaryDashboard/LeftGrid";
 import RightGrid from "../component/SummaryDashboard/RightGrid";
 import CenterGrid from "../component/SummaryDashboard/CenterGrid";
+import { useNavigate } from "react-router-dom";
 
 /**
  * TODO :
- * - Alarms Chart
  * - Small CSS like text styling
  */
+
+const CustomBreadCrumbs = () => {
+    const navigate = useNavigate();
+
+    const linkStyles = {
+        cursor: 'pointer',
+        color: 'white',
+        textDecoration: 'none',
+        '&:hover': {
+            textDecoration: 'underline',
+        },
+        fontSize: '10px',
+    };
+
+    return (
+        <Breadcrumbs>
+            <Link
+                sx={linkStyles}
+                onClick={() => navigate('/dashboard')}
+            >
+                Dashboard
+            </Link>
+            <Link
+                sx={linkStyles}
+                onClick={() => navigate('/service-assurance')}
+            >
+                Service Assurance
+            </Link>
+            <Typography sx={{ color: 'orange', fontSize: '10px' }}>
+                Summary
+            </Typography>
+        </Breadcrumbs>
+    );
+}
 
 const SummaryDashboard = () => {
 
@@ -18,7 +51,7 @@ const SummaryDashboard = () => {
             <Header/>
 
             <main className="container mx-auto p-8">
-                <DynamicBreadcrumb />
+                <CustomBreadCrumbs />
                 {/* page title */}
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 1}}>
                     <Typography variant="h5" component="h1" sx={{ fontWeight: 'bold'}}>
