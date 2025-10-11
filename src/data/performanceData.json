@@ -1,0 +1,13 @@
+{
+  "uplinkDownlink": {
+    "uplink": 22.31,
+    "downlink": 62.96,
+    "max": 100,
+    "unit": "Mbps"
+  },
+  "pduSessions": {
+    "active": 2,
+    "max": 3,
+    "label": "Active PDU Sessions"
+  }
+}
