@@ -118,7 +118,11 @@ const ConditionalTable = ({ activeTab, agreementData, registrationData, onAgree,
                                 <Link 
                                     href="https://www.topcoder.com/challenges/61fc66fe-80ad-4ead-9717-78bdbf55f009?tab=details" 
                                     underline="always"
-                                    target="_blank"><HiOutlineClipboardDocumentCheck/> {row.viewAgreementDocs}</Link>
+                                    target="_blank"
+                                    sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}    
+                                >
+                                        <HiOutlineClipboardDocumentCheck/> {row.viewAgreementDocs}
+                                </Link>
                             </TableCell>
                             <TableCell sx={lastCellStyle}>
                                 <Button variant="contained" size="small" onClick={() => onAgree(row.email)} sx={{ textTransform: 'none', fontSize: '0.7rem' }}>
