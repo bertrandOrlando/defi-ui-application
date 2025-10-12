@@ -325,7 +325,7 @@ const LegendItem: React.FC<{ color: string; label: string }> = ({ color, label }
       >
         <button
           onClick={handleZoomIn}
-          className="text-white text-xl mb-2 hover:bg-[#4a4a4a] rounded w-8 h-8 flex items-center justify-center transition-colors"
+          className="text-white text-xl mb-2 hover:bg-[#4a4a4a] rounded w-8 h-8 flex items-center justify-center transition-colors cursor-pointer"
         >
           +
         </button>
@@ -367,7 +367,7 @@ const LegendItem: React.FC<{ color: string; label: string }> = ({ color, label }
         />
         <button
           onClick={handleZoomOut}
-          className="text-white text-xl mt-2 hover:bg-[#4a4a4a] rounded w-8 h-8 flex items-center justify-center transition-colors"
+          className="text-white text-xl mt-2 hover:bg-[#4a4a4a] rounded w-8 h-8 flex items-center justify-center transition-colors cursor-pointer"
         >
           −
         </button>
