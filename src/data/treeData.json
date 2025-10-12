@@ -1,25 +1,115 @@
 {
   "nodes": [
-    { "id": "entA", "position": { "x": 45, "y": 513 }, "data": { "label": "Enterprise A" } },
-    { "id": "site1", "position": { "x": 230, "y": 408 }, "data": { "label": "Sites 1" } },
-    { "id": "site2", "position": { "x": 230, "y": 639 }, "data": { "label": "Sites 2" } },
-    { "id": "entB", "position": { "x": 85, "y": 823 }, "data": { "label": "Enterprise B" } },
-    { "id": "site3", "position": { "x": 248, "y": 823 }, "data": { "label": "Sites 3" } },
-    { "id": "core1", "position": { "x": 365, "y": 290 }, "data": { "label": "5G Core 1" } },
-    { "id": "core2", "position": { "x": 365, "y": 644 }, "data": { "label": "5G Core 2" } },
-    { "id": "ran1", "position": { "x": 538, "y": 209 }, "data": { "label": "RAN Alpha 1" } },
-    { "id": "ran2", "position": { "x": 538, "y": 290 }, "data": { "label": "RAN Alpha 2" } },
-    { "id": "ran3", "position": { "x": 538, "y": 406 }, "data": { "label": "RAN Alpha 3" } },
-    { "id": "ran4", "position": { "x": 538, "y": 644 }, "data": { "label": "RAN Alpha 4" } },
-    { "id": "cpe1", "position": { "x": 725, "y": 209 }, "data": { "label": "gNB-Bir-1" } },
-    { "id": "cpe2", "position": { "x": 733, "y": 290 }, "data": { "label": "gNB-Texas-1" } },
-    { "id": "cpe3", "position": { "x": 690, "y": 350 }, "data": { "label": "gNB-Ohio-1" } },
-    { "id": "cpe4", "position": { "x": 690, "y": 465 }, "data": { "label": "gNB-Ohio-2" } },
-    { "id": "cpe5", "position": { "x": 742, "y": 547 }, "data": { "label": "HOBETA-AP-02" } },
-    { "id": "cpe6", "position": { "x": 743, "y": 608 }, "data": { "label": "HOBETA-AP-01" } },
-    { "id": "cpe7", "position": { "x": 757, "y": 669 }, "data": { "label": "HOBETA-AP22" } },
-    { "id": "cpe8", "position": { "x": 727, "y": 720 }, "data": { "label": "Demo AP1" } },
-    { "id": "cpe9", "position": { "x": 727, "y": 771 }, "data": { "label": "Demo AP2" } }
+    { "id": "entA", "position": { "x": 45, "y": 513 }, "data": {
+      "label": "Enterprise A",
+      "alarms": [],
+      "locations": ["1200 Market St, San Francisco, CA 94102"]
+    }},
+    { "id": "site1", "position": { "x": 230, "y": 408 }, "data": {
+      "label": "Sites 1",
+      "alarms": [{ "severity": "Warning", "message": "High latency observed" }],
+      "locations": ["4100 Sunset Blvd, Los Angeles, CA 90029"]
+    }},
+    { "id": "site2", "position": { "x": 230, "y": 639 }, "data": {
+      "label": "Sites 2",
+      "alarms": [],
+      "locations": ["7 South Dr. Huntington Beach, CA 92345"]
+    }},
+    { "id": "entB", "position": { "x": 85, "y": 823 }, "data": {
+      "label": "Enterprise B",
+      "alarms": [{ "severity": "Minor", "message": "License warning (30 days)" }],
+      "locations": ["200 Broadway, New York, NY 10038"]
+    }},
+    { "id": "site3", "position": { "x": 248, "y": 823 }, "data": {
+      "label": "Sites 3",
+      "alarms": [{ "severity": "Critical", "message": "Power supply failure" }],
+      "locations": ["350 Boylston St, Boston, MA 02116"]
+    }},
+    { "id": "core1", "position": { "x": 365, "y": 290 }, "data": {
+      "label": "5G Core 1",
+      "alarms": [
+        { "severity": "Warning", "message": "Database connection retries increased" }
+      ],
+      "locations": []
+    }},
+    { "id": "core2", "position": { "x": 365, "y": 644 }, "data": {
+      "label": "5G Core 2",
+      "alarms": [
+        { "severity": "Minor", "message": "CPU usage near threshold" }
+      ],
+      "locations": []
+    }},
+    { "id": "ran1", "position": { "x": 538, "y": 209 }, "data": {
+      "label": "RAN Alpha 1",
+      "alarms": [],
+      "locations": []
+    }},
+    { "id": "ran2", "position": { "x": 538, "y": 290 }, "data": {
+      "label": "RAN Alpha 2",
+      "alarms": [{ "severity": "Warning", "message": "Backhaul jitter detected" }],
+      "locations": []
+    }},
+    { "id": "ran3", "position": { "x": 538, "y": 406 }, "data": {
+      "label": "RAN Alpha 3",
+      "alarms": [
+        { "severity": "Minor", "message": "Neighbor relation missing" },
+        { "severity": "Warning", "message": "PRACH collisions elevated" }
+      ],
+      "locations": []
+    }},
+    { "id": "ran4", "position": { "x": 538, "y": 644 }, "data": {
+      "label": "RAN Alpha 4",
+      "alarms": [{ "severity": "Critical", "message": "Sector down" }],
+      "locations": []
+    }},
+    { "id": "cpe1", "position": { "x": 725, "y": 209 }, "data": {
+      "label": "gNB-Bir-1",
+      "alarms": [{ "severity": "Critical", "message": "gNB offline" }],
+      "locations": ["1021 N 1st St, San Jose, CA 95112"]
+    }},
+    { "id": "cpe2", "position": { "x": 733, "y": 290 }, "data": {
+      "label": "gNB-Texas-1",
+      "alarms": [{ "severity": "Warning", "message": "SSH login failures" }],
+      "locations": ["500 E 4th St, Austin, TX 78701"]
+    }},
+    { "id": "cpe3", "position": { "x": 690, "y": 350 }, "data": {
+      "label": "gNB-Ohio-1",
+      "alarms": [
+        { "severity": "Minor", "message": "Disk usage 75%" },
+        { "severity": "Warning", "message": "Packet loss 2%" }
+      ],
+      "locations": ["123 Lakeview Ave, Columbus, OH 43004"]
+    }},
+    { "id": "cpe4", "position": { "x": 690, "y": 465 }, "data": {
+      "label": "gNB-Ohio-2",
+      "alarms": [],
+      "locations": ["88 River Rd, Cincinnati, OH 45202"]
+    }},
+    { "id": "cpe5", "position": { "x": 742, "y": 547 }, "data": {
+      "label": "HOBETA-AP-02",
+      "alarms": [{ "severity": "Critical", "message": "Radio overheating" }],
+      "locations": ["2400 W Adams Blvd, Los Angeles, CA 90018"]
+    }},
+    { "id": "cpe6", "position": { "x": 743, "y": 608 }, "data": {
+      "label": "HOBETA-AP-01",
+      "alarms": [{ "severity": "Warning", "message": "High retransmissions" }],
+      "locations": ["7600 Balboa Blvd, Van Nuys, CA 91406"]
+    }},
+    { "id": "cpe7", "position": { "x": 757, "y": 669 }, "data": {
+      "label": "HOBETA-AP22",
+      "alarms": [{ "severity": "Minor", "message": "Fan speed anomaly" }],
+      "locations": ["15 Ocean Ave, Long Beach, CA 90802"]
+    }},
+    { "id": "cpe8", "position": { "x": 727, "y": 720 }, "data": {
+      "label": "Demo AP1",
+      "alarms": [{ "severity": "Minor", "message": "Time sync drift" }],
+      "locations": ["701 Mission St, San Francisco, CA 94103"]
+    }},
+    { "id": "cpe9", "position": { "x": 727, "y": 771 }, "data": {
+      "label": "Demo AP2",
+      "alarms": [{ "severity": "Critical", "message": "PoE failure" }],
+      "locations": ["400 Broad St, Seattle, WA 98109"]
+    }}
   ],
   "edges": [
     { "id": "e-entA-site1", "source": "entA", "target": "site1" },
