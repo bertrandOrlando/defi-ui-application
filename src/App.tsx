@@ -100,6 +100,14 @@ function App() {
         }
       />
       <Route
+        path="/system"
+        element={
+          <ProtectedRoute>
+            <OutOfScope pageName="system"/>
+          </ProtectedRoute>
+        }
+      />
+      <Route
         path="/inventory"
         element={
           <ProtectedRoute>
