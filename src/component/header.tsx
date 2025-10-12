@@ -54,8 +54,8 @@ const Header = ({ className }: { className?: string }) => {
         <img
           src="/logo-transparent.png"
           alt="hero logo"
-          width={75}
-          height={75}
+          width={60}
+          height={60}
         />
         <span className="text-xl">
           <span className="font-semibold">5G</span> Def-i
