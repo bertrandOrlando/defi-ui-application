@@ -16,12 +16,23 @@ import { PieChart } from "@mui/x-charts/PieChart";
 
 import Header from "../component/header";
 import DynamicBreadcrumb from "../component/DynamicBreadCrumbs";
+import { viewTypes, type ViewType } from "./ServiceAssurance";
+import { BiWorld } from "react-icons/bi";
+import { MdCellTower } from "react-icons/md";
+import { TbHierarchy } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
 
 /* TODO :
  * - all working!!!
  */
 
-const ServiceAssuranceTreeView = () => {
+const ServiceAssuranceTreeView = ({
+  view,
+  setView,
+}: {
+  view: ViewType;
+  setView: (view: ViewType) => void;
+}) => {
   const [focusedMode, setFocusedMode] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [zoom, setZoom] = useState(1);
@@ -32,6 +43,9 @@ const ServiceAssuranceTreeView = () => {
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   
   
+
+  const navigate = useNavigate();
+
   //debugging
   // React.useEffect(() => {
   //   console.log("selectedId:", selectedId);
@@ -391,6 +405,41 @@ const LegendItem: React.FC<{ color: string; label: string }> = ({ color, label }
                 ${focusedMode ? "translate-x-4" : "translate-x-0.5"}`}
             />
           </div>
+        </div>
+      </div>
+
+      <div className="fixed right-7 top-24 z-50 flex flex-col space-y-4">
+        <div></div>
+        <div
+          id="view-type"
+          className="bg-[#747282] h-7 p-[2px] flex flex-row rounded-sm"
+        >
+          <button
+            className={`${
+              view === viewTypes.Map ? `bg-[#355493]` : `cursor-pointer`
+            } p-1 w-7 flex justify-center items-center rounded-sm`}
+            onClick={() => setView(viewTypes.Map)}
+          >
+            <BiWorld color="white" />
+          </button>
+
+          <button
+            className={`${
+              view === viewTypes.Satelite ? `bg-[#355493]` : `cursor-pointer`
+            } p-1 w-7 flex justify-center items-center rounded-sm`}
+            onClick={() => setView(viewTypes.Satelite)}
+          >
+            <MdCellTower color="white" />
+          </button>
+
+          <button
+            className={`${
+              view === viewTypes.Tree ? `bg-[#355493]` : `cursor-pointer`
+            } p-1 w-7 flex justify-center items-center rounded-sm`}
+            onClick={() => setView(viewTypes.Tree)}
+          >
+            <TbHierarchy color="white" />
+          </button>
         </div>
       </div>
 
@@ -772,7 +821,7 @@ const LegendItem: React.FC<{ color: string; label: string }> = ({ color, label }
               <div className="px-4 pb-3 pt-2 flex items-center gap-3">
                 <button
                   className="flex-1 flex items-center justify-center gap-2 rounded-sm bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-2 py-2 transition-colors text-sm"
-                  onClick={() => console.log("Service Assurance")}
+                  onClick={() => navigate('/service-assurance/dashboard')}
                 >
                   <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current">
                     <path d="M3 3h2v18H3V3Zm4 10h2v8H7v-8Zm4-6h2v14h-2V7Zm4 4h2v10h-2V11Zm4-8h2v18h-2V3Z" />

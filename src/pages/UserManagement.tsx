@@ -24,7 +24,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { useNavigate } from "react-router-dom";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
-import Header from "../component/header"
+import Header from "../component/header";
 import DynamicBreadcrumb from "../component/DynamicBreadCrumbs";
 
 // data
@@ -56,7 +56,7 @@ interface Role {
   roleName: string;
 }
 
-const roles: Role[] = (roleData as any).roles || [];
+const roles: Role[] = roleData.roles || [];
 
 const parsedDate = (dateInput?: string) => {
   if (!dateInput) return new Date();
@@ -66,7 +66,7 @@ const parsedDate = (dateInput?: string) => {
   return new Date(year, month - 1, day);
 };
 
-const loadedUsers = ((userData as any).users || []) as RawUser[];
+const loadedUsers = (userData.users || []) as RawUser[];
 
 const finalUsers: User[] = loadedUsers
   .filter((u) => {
@@ -82,7 +82,6 @@ const finalUsers: User[] = loadedUsers
     updatedAt: parsedDate(u.lastSignIn).toISOString(),
   }));
 
-
 export default function UserManagement() {
   const [tab, setTab] = useState<number>(0);
   const [users, setUsers] = useState<User[]>(finalUsers);
@@ -93,9 +92,10 @@ export default function UserManagement() {
   const [roleId, setRoleId] = useState("");
 
   const [successOpen, setSuccessOpen] = useState(false);
-  const [addedUser, setAddedUser] = useState<{ email: string; roleId: string } | null>(
-    null
-  );
+  const [addedUser, setAddedUser] = useState<{
+    email: string;
+    roleId: string;
+  } | null>(null);
 
   const navigate = useNavigate();
 
@@ -104,7 +104,8 @@ export default function UserManagement() {
   };
 
   const handleAddUser = () => {
-    if (email && roleId) {//Kalau salah satunya kosong, user tidak ditambahkan.
+    if (email && roleId) {
+      //Kalau salah satunya kosong, user tidak ditambahkan.
       const nextId = (users.length + 1).toString().padStart(3, "0");
       const newUser: User = {
         id: nextId,
@@ -124,8 +125,6 @@ export default function UserManagement() {
       setRoleId("");
       setSearch("");
     }
-
-
   };
 
   const handleClose = () => {
@@ -153,56 +152,53 @@ export default function UserManagement() {
         overflowX: "hidden",
       }}
     >
-
-       <Header />
-       <Box sx={{ display: "flex", justifyContent: "flex-start", ml: 5, mt: 1 }}>
-  <DynamicBreadcrumb />
-</Box>
+      <Header />
+      <Box sx={{ display: "flex", justifyContent: "flex-start", ml: 5, mt: 1 }}>
+        <DynamicBreadcrumb />
+      </Box>
       {/* Content container */}
-      <Box sx={{ flex: 1, p: 3, overflow: "auto" }}>
-
+      <Box sx={{ flex: 1, p: 3, overflow: "auto", color: "#fff" }}>
         {/* Page Title */}
         <Typography variant="h5" sx={{ mt: 1, fontWeight: "bold" }}>
           User Management <span style={{ color: "limegreen" }}>●</span>
         </Typography>
-        
 
         {/* Tabs */}
         <Tabs
           value={tab}
-          onChange={(_event: React.SyntheticEvent, newValue: number) => {//_event: _ artinya parameter itu tidak dipakai.
+          onChange={(_event: React.SyntheticEvent, newValue: number) => {
+            //_event: _ artinya parameter itu tidak dipakai.
             setTab(newValue);
             if (newValue === 1) {
-              navigate("/user-group-management");
-            }else{
-                 setTab(newValue); 
+              navigate("/user-group-management", { replace: true });
+            } else {
+              setTab(newValue);
             }
           }}
-          sx={{ mt: 2 }}//margin-top.
+          sx={{ mt: 2 }} //margin-top.
         >
           <Tab
-  label="User Management"
-  sx={{
-    color: "white",
-    "&.Mui-selected": {
-      color: "white",
-      bgcolor: "#1976d2", 
-      borderRadius: "6px 6px 0 0",
-    },
-  }}
-/>
-<Tab
-  label="User Group Management"
-  sx={{
-    color: "white",
-    "&.Mui-selected": {
-      color: "white",
-      bgcolor: "#1976d2", 
-      borderRadius: "6px 6px 0 0",
-    },
-  }}
-/>
-
+            label="User Management"
+            sx={{
+              color: "white",
+              "&.Mui-selected": {
+                color: "white",
+                bgcolor: "#1976d2",
+                borderRadius: "6px 6px 0 0",
+              },
+            }}
+          />
+          <Tab
+            label="User Group Management"
+            sx={{
+              color: "white",
+              "&.Mui-selected": {
+                color: "white",
+                bgcolor: "#1976d2",
+                borderRadius: "6px 6px 0 0",
+              },
+            }}
+          />
         </Tabs>
 
         {/* User Management */}
@@ -210,77 +206,106 @@ export default function UserManagement() {
           <Box
             sx={{
               mt: 2,
-              bgcolor: "#1e1e1e",
+              bgcolor: "#2d2d2e",
               borderRadius: 2,
               p: 2,
             }}
           >
-           <Box
-  display="flex"
-  justifyContent="space-between"
-  alignItems="center"
-  mb={2}
->
-  {/* Label kiri */}
-  <Typography variant="h6" sx={{ fontWeight: "bold", color: "white" }}>
-    User Management
-  </Typography>
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              mb={2}
+            >
+              {/* Label kiri */}
+              <Typography
+                variant="h6"
+                sx={{ fontWeight: "bold", color: "white" }}
+              >
+                User Management
+              </Typography>
 
-  {/* Bagian kanan (Search + Button) */}
-  <Box display="flex" alignItems="center" gap={2}>
-    <TextField
-      size="small"
-      placeholder="Search by Email"
-      variant="outlined"
-      value={search}
-      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-        setSearch(e.target.value)
-      }
-      sx={{
-        input: { color: "white" },
-        bgcolor: "#2a2a2a",
-        borderRadius: 1,
-        width: 300,
-      }}
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">
-            <SearchIcon sx={{ color: "gray" }} />
-          </InputAdornment>
-        ),
-      }}
-    />
-    <Button
-      variant="contained"
-      sx={{ bgcolor: "#1976d2", textTransform: "none" }}
-      onClick={() => setOpen(true)}
-    >
-      Add New User
-    </Button>
-  </Box>
-</Box>
-
+              {/* Bagian kanan (Search + Button) */}
+              <Box display="flex" alignItems="center" gap={2}>
+                <TextField
+                  size="small"
+                  placeholder="Search by Email"
+                  variant="outlined"
+                  value={search}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setSearch(e.target.value)
+                  }
+                  sx={{
+                    input: { color: "white" },
+                    bgcolor: "#2a2a2a",
+                    borderRadius: 1,
+                    width: 300,
+                  }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon sx={{ color: "gray" }} />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+                <Button
+                  variant="contained"
+                  sx={{ bgcolor: "#1976d2", textTransform: "none" }}
+                  onClick={() => setOpen(true)}
+                >
+                  Add New User
+                </Button>
+              </Box>
+            </Box>
 
             {/* Table */}
             <TableContainer
               sx={{
                 bgcolor: "#1e1e1e",
                 border: "1px solid #333",
+                borderRadius: "10px",
               }}
             >
               <Table>
                 <TableHead>
-                  <TableRow sx={{ bgcolor: "#7b1fa2" }}>
-                    <TableCell sx={{ color: "white", fontWeight: "bold" }}>
+                  <TableRow sx={{ bgcolor: "#8a5480" }}>
+                    <TableCell
+                      sx={{
+                        color: "white",
+                        fontWeight: "bold",
+                        borderBottom: "none",
+                      }}
+                    >
                       USER EMAIL
                     </TableCell>
-                    <TableCell sx={{ color: "white", fontWeight: "bold" }}>
+                    <TableCell
+                      sx={{
+                        color: "white",
+                        fontWeight: "bold",
+                        borderBottom: "none",
+                      }}
+                    >
                       ROLE
                     </TableCell>
-                    <TableCell sx={{ color: "white", fontWeight: "bold" }}>
+                    <TableCell
+                      sx={{
+                        color: "white",
+                        fontWeight: "bold",
+                        borderBottom: "none",
+                      }}
+                    >
                       UPDATE BY
                     </TableCell>
-                    <TableCell sx={{ color: "white", fontWeight: "bold" }}>
+                    <TableCell
+                      sx={{
+                        color: "white",
+                        fontWeight: "bold",
+                        display: "flex",
+                        justifyContent: "center",
+                        borderBottom: "none",
+                      }}
+                    >
                       DELETE USER
                     </TableCell>
                   </TableRow>
@@ -290,25 +315,37 @@ export default function UserManagement() {
                     .filter((u) =>
                       u.email.toLowerCase().includes(search.toLowerCase())
                     )
-                    .map((user) => (
+                    .map((user, index) => (
                       <TableRow
                         key={user.id}
                         sx={{
-                          bgcolor: "#2a2a2a",
-                          "&:nth-of-type(even)": { bgcolor: "#252525" },
+                          bgcolor: index % 2 === 0 ? "#343536" : "transparent",
+                          borderRadius: "10px",
                         }}
                       >
-                        <TableCell sx={{ color: "white" }}>
+                        <TableCell
+                          sx={{ color: "white", borderBottom: "none" }}
+                        >
                           {user.email}
                         </TableCell>
-                        <TableCell sx={{ color: "white" }}>
+                        <TableCell
+                          sx={{ color: "white", borderBottom: "none" }}
+                        >
                           {getRoleName(user.roleId)}
                         </TableCell>
-                        <TableCell sx={{ color: "white" }}>
+                        <TableCell
+                          sx={{ color: "white", borderBottom: "none" }}
+                        >
                           {user.updatedBy} on{" "}
                           {new Date(user.updatedAt).toLocaleString()}
                         </TableCell>
-                        <TableCell>
+                        <TableCell
+                          sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            borderBottom: "none",
+                          }}
+                        >
                           <IconButton
                             color="error"
                             onClick={() => handleDeleteUser(user.id)}
@@ -377,17 +414,17 @@ export default function UserManagement() {
           </TextField>
         </DialogContent>
         <DialogActions>
-            <Button
-    onClick={handleClose}
-    variant="contained"
-    sx={{
-      bgcolor: "#1e1e1e", 
-      color: "white",
-      "&:hover": { bgcolor: "#2a2a2a" }, 
-    }}
-  >
-    Close
-  </Button>
+          <Button
+            onClick={handleClose}
+            variant="contained"
+            sx={{
+              bgcolor: "#1e1e1e",
+              color: "white",
+              "&:hover": { bgcolor: "#2a2a2a" },
+            }}
+          >
+            Close
+          </Button>
           <Button onClick={handleAddUser} variant="contained" color="primary">
             Add New User
           </Button>

@@ -15,7 +15,6 @@ import {
   MenuItem,
   Select,
   Slider,
-  Stack,
   TextField,
 } from "@mui/material";
 import { BiWorld } from "react-icons/bi";
@@ -40,7 +39,7 @@ export type WorldMapProps = {
   cpe: string[];
 };
 
-const MIN_ZOOM = 2;
+const MIN_ZOOM = 3;
 const MAX_ZOOM = 9;
 
 export const WorldMap = ({
@@ -53,7 +52,7 @@ export const WorldMap = ({
   setView: (view: ViewType) => void;
 }) => {
   // Map
-  const [zoom, setZoom] = useState<number>(4);
+  const [zoom, setZoom] = useState<number>(5);
   const mapRef = useRef(null);
 
   // enterprise filter
@@ -224,8 +223,8 @@ export const WorldMap = ({
           id="zoom-control"
           className="absolute flex flex-col items-center justify-center gap-y-2 z-[1000] bottom-0 left-0 translate-x-4 -translate-y-6 bg-[#343434] py-2 px-1 rounded-xl "
         >
-          <button
-            onClick={() => setZoom(zoom + 1)}
+          {/* <button
+            onClick={() => setZoom((prev) => prev + 1)}
             className="text-white text-2xl cursor-pointer"
           >
             +
@@ -263,17 +262,67 @@ export const WorldMap = ({
             className="text-white text-2xl cursor-pointer"
           >
             -
+          </button> */}
+          <button
+            onClick={() => setZoom((prev) => prev + 1)}
+            className="text-white text-xl mb-2 hover:bg-[#4a4a4a] rounded w-8 h-8 flex items-center justify-center transition-colors"
+          >
+            +
+          </button>
+          <Slider
+            aria-label="zoom-control"
+            orientation="vertical"
+            defaultValue={zoom}
+            onChange={(_, value) => setZoom(value as number)}
+            valueLabelDisplay="auto"
+            value={zoom}
+            step={1}
+            marks
+            min={MIN_ZOOM}
+            max={MAX_ZOOM}
+            sx={{
+              height: 120,
+              color: "#fff",
+              "& .MuiSlider-track": {
+                width: 3,
+                background: "#4a7c9e",
+                border: "none",
+              },
+              "& .MuiSlider-rail": {
+                width: 3,
+                backgroundColor: "#acacacff",
+                opacity: 1,
+              },
+              "& .MuiSlider-thumb": {
+                width: 24,
+                height: 12,
+                borderRadius: "6px",
+                backgroundColor: "#fff",
+                "&:hover, &.Mui-focusVisible": {
+                  boxShadow: "0 0 0 8px rgba(255, 255, 255, 0.16)",
+                },
+                "&.Mui-active": {
+                  boxShadow: "0 0 0 14px rgba(255, 255, 255, 0.16)",
+                },
+              },
+            }}
+          />
+          <button
+            onClick={() => setZoom((prev) => prev - 1)}
+            className="text-white text-xl mt-2 hover:bg-[#4a4a4a] rounded w-8 h-8 flex items-center justify-center transition-colors"
+          >
+            −
           </button>
         </div>
 
         <div
           id="service-navigation"
-          className="absolute z-[1000] p-6 text-sm w-full top-12"
+          className="absolute z-[1000] p-6 text-sm w-full top-12 pointer-events-none"
         >
-          <div className="grid grid-cols-2">
+          <div className="grid grid-cols-2 ">
             <Breadcrumbs
               aria-label="breadcrumb"
-              className="col-span-2"
+              className="col-span-2 pointer-events-auto"
               separator="/"
             >
               <Link
@@ -298,7 +347,7 @@ export const WorldMap = ({
                 <>
                   <div
                     id="view-type"
-                    className="bg-[#747282] h-7 p-[2px] flex flex-row rounded-sm"
+                    className="bg-[#747282] h-7 p-[2px] flex flex-row rounded-sm pointer-events-auto"
                   >
                     <button
                       className={`${
@@ -333,7 +382,7 @@ export const WorldMap = ({
                       <TbHierarchy color="white" />
                     </button>
                   </div>
-                  <div className="bg-[#747282] h-7 p-[2px] flex flex-row rounded-md ml-6">
+                  <div className="bg-[#747282] h-7 p-[2px] flex flex-row rounded-md ml-6 pointer-events-auto">
                     <button
                       className="cursor-pointer p-1 w-7 flex justify-center items-center rounded-sm"
                       onClick={() => setIsSearch(true)}
@@ -343,7 +392,7 @@ export const WorldMap = ({
                   </div>
                 </>
               ) : (
-                <div className="bg-white flex rounded-md">
+                <div className="bg-white flex rounded-md pointer-events-auto">
                   <Autocomplete
                     disablePortal
                     value={value}
@@ -369,7 +418,7 @@ export const WorldMap = ({
                   </button>
                 </div>
               )}
-              <div className="bg-[#747282] h-7 p-[2px] flex flex-row rounded-md ml-2">
+              <div className="bg-[#747282] h-7 p-[2px] flex flex-row rounded-md ml-2 pointer-events-auto">
                 {!isFilter ? (
                   <button
                     className="cursor-pointer p-1 w-7 flex justify-center items-center rounded-sm"
@@ -389,7 +438,7 @@ export const WorldMap = ({
             </div>
           </div>
           {isFilter && (
-            <div className="absolute w-80 p-6 bg-[#2d2d2d] text-white rounded-md shadow-lg z-50 -bottom-[575px] right-4 transition ">
+            <div className="absolute w-80 p-6 bg-[#2d2d2d] text-white rounded-md shadow-lg z-50 -bottom-[575px] right-4 transition pointer-events-auto">
               <h3 className="font-medium text-xl">Filter</h3>
               <div className="w-full h-[1px] bg-slate-500 my-2"></div>
 

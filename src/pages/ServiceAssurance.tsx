@@ -13,7 +13,7 @@ export const viewTypes = {
 export type ViewType = keyof typeof viewTypes;
 
 const ServiceAssurance = () => {
-  const [view, setView] = useState<ViewType>(viewTypes.Map);
+  const [view, setView] = useState<ViewType>(viewTypes.Satelite);
 
   return (
     <>
@@ -23,7 +23,9 @@ const ServiceAssurance = () => {
       {view === viewTypes.Satelite && (
         <WorldMap data={enterpriseData} view={view} setView={setView} />
       )}
-      {view === viewTypes.Tree && <ServiceAssuranceTreeView />}
+      {view === viewTypes.Tree && (
+        <ServiceAssuranceTreeView view={view} setView={setView} />
+      )}
     </>
   );
 };
