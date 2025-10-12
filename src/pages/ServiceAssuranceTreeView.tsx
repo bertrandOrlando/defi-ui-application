@@ -548,10 +548,11 @@ const LegendItem: React.FC<{ color: string; label: string }> = ({ color, label }
             >
               {/* HEADER */}
               <div className="flex items-start justify-between px-4 pt-3">
-                <div className="font-semibold">
-                  {panelData.rootEnterprise
-                    ? panelData.rootEnterprise.data.label
-                    : "Enterprise"}
+                <div className="flex items-center space-x-2 font-semibold">
+                  <svg className="w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M3 3h9v18H3V3zm2 2v2h2V5H5zm4 0v2h2V5H9zm-4 4v2h2V9H5zm4 0v2h2V9H9zm-4 4v2h2v-2H5zm4 0v2h2v-2H9zm6-4h6v12h-6V9zm2 2v2h2v-2h-2zm0 4v2h2v-2h-2z"/>
+                  </svg>
+                  <span>{panelData.rootEnterprise ? panelData.rootEnterprise.data.label : "Enterprise"}</span>
                 </div>
               </div>
               <div className="mx-4 h-px bg-white/15 my-3"></div>
