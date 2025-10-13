@@ -325,7 +325,7 @@ const LegendItem: React.FC<{ color: string; label: string }> = ({ color, label }
       >
         <button
           onClick={handleZoomIn}
-          className="text-white text-xl mb-2 hover:bg-[#4a4a4a] rounded w-8 h-8 flex items-center justify-center transition-colors"
+          className="text-white text-xl mb-2 hover:bg-[#4a4a4a] rounded w-8 h-8 flex items-center justify-center transition-colors cursor-pointer"
         >
           +
         </button>
@@ -367,7 +367,7 @@ const LegendItem: React.FC<{ color: string; label: string }> = ({ color, label }
         />
         <button
           onClick={handleZoomOut}
-          className="text-white text-xl mt-2 hover:bg-[#4a4a4a] rounded w-8 h-8 flex items-center justify-center transition-colors"
+          className="text-white text-xl mt-2 hover:bg-[#4a4a4a] rounded w-8 h-8 flex items-center justify-center transition-colors cursor-pointer"
         >
           −
         </button>
@@ -548,10 +548,11 @@ const LegendItem: React.FC<{ color: string; label: string }> = ({ color, label }
             >
               {/* HEADER */}
               <div className="flex items-start justify-between px-4 pt-3">
-                <div className="font-semibold">
-                  {panelData.rootEnterprise
-                    ? panelData.rootEnterprise.data.label
-                    : "Enterprise"}
+                <div className="flex items-center space-x-2 font-semibold">
+                  <svg className="w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M3 3h9v18H3V3zm2 2v2h2V5H5zm4 0v2h2V5H9zm-4 4v2h2V9H5zm4 0v2h2V9H9zm-4 4v2h2v-2H5zm4 0v2h2v-2H9zm6-4h6v12h-6V9zm2 2v2h2v-2h-2zm0 4v2h2v-2h-2z"/>
+                  </svg>
+                  <span>{panelData.rootEnterprise ? panelData.rootEnterprise.data.label : "Enterprise"}</span>
                 </div>
               </div>
               <div className="mx-4 h-px bg-white/15 my-3"></div>
@@ -646,7 +647,7 @@ const LegendItem: React.FC<{ color: string; label: string }> = ({ color, label }
                     {/* Alarms Card  */}
                     <div className="rounded-xl bg-white/5 overflow-hidden mb-3">
                       <button
-                        className="w-full flex items-center justify-between hover:bg-white/10 transition-colors px-2 py-2"
+                        className="w-full flex items-center justify-between hover:bg-white/10 transition-colors px-2 py-2 cursor-pointer"
                         onClick={() => setIsAlarmsExpanded(!isAlarmsExpanded)}
                       >
                         <div className="flex items-center gap-3">
@@ -715,7 +716,7 @@ const LegendItem: React.FC<{ color: string; label: string }> = ({ color, label }
                   {/* Locations Card */}
                   <div className="rounded-xl bg-white/5 overflow-hidden">
                     <button
-                      className="w-full flex items-center justify-between hover:bg-white/10 transition-colors px-2 py-2"
+                      className="w-full flex items-center justify-between hover:bg-white/10 transition-colors px-2 py-2 cursor-pointer"
                       onClick={() => setIsLocationsExpanded(!isLocationsExpanded)}
                     >
                       <div className="flex items-center gap-3">
@@ -750,7 +751,7 @@ const LegendItem: React.FC<{ color: string; label: string }> = ({ color, label }
                             {editingIndex === index ? (
                               <>
                                 {/* Editable input */}
-                              <textarea
+                                <textarea
                                   value={currentValue}
                                   onChange={(e) => {
                                     const next = [...editedLocations];
@@ -789,17 +790,14 @@ const LegendItem: React.FC<{ color: string; label: string }> = ({ color, label }
                                 <p>{currentValue}</p>
                                 <div className="mt-2 flex gap-4 text-[11px] underline font-semibold">
                                   <button
-                                    className="text-white hover:opacity-80 transition-opacity"
-                                    onClick={() =>
-                                      window.open(
-                                      )
-                                    }
+                                    className="text-white hover:opacity-80 transition-opacity cursor-pointer"
+                                    onClick={() => setView(viewTypes.Map)}
                                   >
                                     View Map
                                   </button>
                                   <button
                                     onClick={() => setEditingIndex(index)}
-                                    className="text-white hover:opacity-80 transition-opacity"
+                                    className="text-white hover:opacity-80 transition-opacity cursor-pointer"
                                   >
                                     Edit
                                   </button>
@@ -820,7 +818,7 @@ const LegendItem: React.FC<{ color: string; label: string }> = ({ color, label }
               {/* FOOTER */}
               <div className="px-4 pb-3 pt-2 flex items-center gap-3">
                 <button
-                  className="flex-1 flex items-center justify-center gap-2 rounded-sm bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-2 py-2 transition-colors text-sm"
+                  className="flex-1 flex items-center justify-center gap-2 rounded-sm bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-2 py-2 transition-colors text-sm cursor-pointer"
                   onClick={() => navigate('/service-assurance/dashboard')}
                 >
                   <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current">
@@ -831,7 +829,7 @@ const LegendItem: React.FC<{ color: string; label: string }> = ({ color, label }
 
                 <button
                   onClick={() => setSelectedId(null)}
-                  className="rounded-sm bg-white/10 hover:bg-white/15 text-white px-2 py-2 transition-colors text-sm"
+                  className="rounded-sm bg-white/10 hover:bg-white/15 text-white px-2 py-2 transition-colors text-sm cursor-pointer"
                 >
                   Close
                 </button>
