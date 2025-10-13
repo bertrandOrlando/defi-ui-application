@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import Header from "../component/header";
 import { LineChart } from '@mui/x-charts/LineChart';
 import { ChartsTooltip,  } from '@mui/x-charts/ChartsTooltip';
-import mockThroughputData from "../data/ThroughputData.json";
+import throughputData from "../data/ThroughputData.json";
 import { axisClasses } from '@mui/x-charts/ChartsAxis';
 import { chartsGridClasses } from '@mui/x-charts/ChartsGrid';
 
@@ -261,7 +261,7 @@ const PerformanceDetails = () => {
         
         const rangeEndDate = activeRange === 'custom' ? new Date(new Date(endDate).setHours(23, 59, 59, 999)) : now;
 
-        const filteredData = mockThroughputData.ThroughputData.filter(item => {
+        const filteredData = throughputData.throughputData.filter(item => {
             const itemDate = new Date(`${item.date}T${item.time}:00`);
             return itemDate >= rangeStartDate && itemDate <= rangeEndDate;
         });
