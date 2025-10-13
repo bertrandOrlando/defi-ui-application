@@ -6,7 +6,7 @@ import systemData from '../../data/systemUsage.json';
 import { useNavigate } from 'react-router-dom';
 
 const GaugeBackground = () => {
-    const ticks = Array.from({ length: 60 }); // Create 60 ticks
+    const ticks = Array.from({ length: 60 }); 
     const radius = 50;
     const center = 60;
 
@@ -37,7 +37,7 @@ const GaugeChart = ({ data, icon }: { data: any, icon: React.ReactNode }) => (
                 series={[{
                     data: [
                         { id: 0, value: data.percent, color: data.color },
-                        { id: 1, value: 100 - data.percent, color: 'transparent' } // The rest of the chart is transparent
+                        { id: 1, value: 100 - data.percent, color: 'transparent' }
                     ],
                     innerRadius: 40,
                 }]}
@@ -86,7 +86,15 @@ const SystemWidget = () => {
                 <IconButton
                     onClick={() => navigate('/system')}
                     size="small"
-                    sx={{ color: 'white', backgroundColor: '#2d2d2e' }}
+                    sx={{
+                        color: '#2D2D2E',
+                        backgroundColor: '#e5e7eb',
+                        '&:hover': {
+                            backgroundColor: '#e5e7eb',
+                            border: '1px solid',
+                            borderColor: '#355393',
+                        },
+                    }}
                 >
                     <ArrowForwardIos sx={{ fontSize: '0.9rem' }} />
                 </IconButton>

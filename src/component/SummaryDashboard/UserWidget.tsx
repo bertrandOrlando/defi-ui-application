@@ -60,7 +60,15 @@ const UserWidget = () => {
                 <IconButton
                     onClick={() => navigate('/user-management')}
                     size="small"
-                    sx={{ color: 'white', backgroundColor: '#2d2d2e' }}
+                    sx={{
+                        color: '#2D2D2E',
+                        backgroundColor: '#e5e7eb',
+                        '&:hover': {
+                            backgroundColor: '#e5e7eb',
+                            border: '1px solid',
+                            borderColor: '#355393',
+                        },
+                    }}
                 >
                     <ArrowForwardIos sx={{ fontSize: '0.9rem' }} />
                 </IconButton>
