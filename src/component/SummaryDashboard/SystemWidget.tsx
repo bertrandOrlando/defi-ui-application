@@ -1,10 +1,12 @@
-import { Box, Typography, Select, MenuItem } from '@mui/material';
+import { Box, Typography, Select, MenuItem, IconButton } from '@mui/material';
 import { PieChart } from '@mui/x-charts/PieChart';
 import { FaHdd, FaMicrochip, FaMemory } from 'react-icons/fa';
+import ArrowForwardIos from '@mui/icons-material/ArrowForwardIos';
 import systemData from '../../data/systemUsage.json';
+import { useNavigate } from 'react-router-dom';
 
 const GaugeBackground = () => {
-    const ticks = Array.from({ length: 60 }); // Create 60 ticks
+    const ticks = Array.from({ length: 60 }); 
     const radius = 50;
     const center = 60;
 
@@ -35,7 +37,7 @@ const GaugeChart = ({ data, icon }: { data: any, icon: React.ReactNode }) => (
                 series={[{
                     data: [
                         { id: 0, value: data.percent, color: data.color },
-                        { id: 1, value: 100 - data.percent, color: 'transparent' } // The rest of the chart is transparent
+                        { id: 1, value: 100 - data.percent, color: 'transparent' }
                     ],
                     innerRadius: 40,
                 }]}
@@ -72,12 +74,31 @@ const GaugeChart = ({ data, icon }: { data: any, icon: React.ReactNode }) => (
 );
 
 const SystemWidget = () => {
+    const navigate = useNavigate();
+
     return (
         <Box sx={{ bgcolor: '#3c3c3c', p: 3, borderRadius: 2, height: '100%' }}>
             {/* title */}
-            <Typography variant="h6" sx={{ fontSize: '1rem', fontWeight: 'bold', mb: 1 }}>
-                System (5GCore1)
-            </Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                <Typography variant="h6" sx={{ fontSize: '1rem', fontWeight: 'bold' }}>
+                    System (5GCore1)
+                </Typography>
+                <IconButton
+                    onClick={() => navigate('/system')}
+                    size="small"
+                    sx={{
+                        color: '#2D2D2E',
+                        backgroundColor: '#e5e7eb',
+                        '&:hover': {
+                            backgroundColor: '#e5e7eb',
+                            border: '1px solid',
+                            borderColor: '#355393',
+                        },
+                    }}
+                >
+                    <ArrowForwardIos sx={{ fontSize: '0.9rem' }} />
+                </IconButton>
+            </Box>
 
             {/* dropdown */}
             <Select

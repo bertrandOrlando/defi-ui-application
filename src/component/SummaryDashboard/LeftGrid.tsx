@@ -1,30 +1,60 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box, List,  ListItem,  ListItemText,  Typography } from "@mui/material";
 import { useMemo, useState } from "react";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import alarms from '../../data/alarm.json'
+import enterprises from '../../data/enterprise.json';
+
+type LocationInfo = {
+    city: string;
+    cpes: string[];
+};
 
 type NestedStructure = {
     [enterprise: string]: {
-        [core: string]: {
-            locationName: string, nodeName: string 
-        }[];
+        [core: string]: LocationInfo[];
     }
 }
 
+interface Enterprise {
+    id: number;
+    address: string;
+    lat: number;
+    long: number;
+    enterprise: string;
+    status: string;
+    core: string;
+    ran: string[];
+    cpe: string[];
+}
+
+
+const COLOR_MAP = {
+  cpe: "#079487",
+};
+
 const LeftGrid = () => {
+
+    // ambil kota
+    const getCityFromAddress = (address: string): string => {
+        const parts = address.split(',');
+        return parts.length > 1 ? parts[1].trim() : 'Unknown Location';
+    };
+
     const groupedData = useMemo(() => {
         const structure: NestedStructure = {};
-        alarms.forEach(alarm => {
-            if(!structure[alarm.enterpriseName]){
-                structure[alarm.enterpriseName] = {};
+        enterprises.forEach((item: Enterprise) => {
+            if(!structure[item.enterprise]){
+                structure[item.enterprise] = {};
             }
-            if(!structure[alarm.enterpriseName][alarm.coreName]) {
-                structure[alarm.enterpriseName][alarm.coreName] = [];
+
+            if(!structure[item.enterprise][item.core]) {
+                structure[item.enterprise][item.core] = [];
             }
-            const coreLocations = structure[alarm.enterpriseName][alarm.coreName];
-            if (!coreLocations.some(loc => loc.nodeName === alarm.nodeName)) {
-                coreLocations.push({ locationName: alarm.locationName, nodeName: alarm.nodeName });
-            }
+
+            const city = getCityFromAddress(item.address)
+            structure[item.enterprise][item.core].push({
+                city: city,
+                cpes: item.cpe,
+            });
         });
         return structure;
     }, []);
@@ -90,19 +120,45 @@ const LeftGrid = () => {
                                 </AccordionSummary>
                                 <AccordionDetails sx={{ p: 0}}>
                                     <List component="div" disablePadding>
-                                        {groupedData[enterpriseName][coreName].map((location) => (
-                                            <ListItem key={location.nodeName} sx={{ pl: 4, backgroundColor: '#2d2d2e', mb: 0.5, borderRadius: 1}}>
+                                        {groupedData[enterpriseName][coreName].map((location, index) => (
+                                            <ListItem 
+                                                key={`${location.city}-${index}`} 
+                                                alignItems="flex-start" 
+                                                sx={{ 
+                                                    pl: 4, 
+                                                    backgroundColor: '#2d2d2e', 
+                                                    mb: 0.5, 
+                                                    borderRadius: 1 
+                                                }}>
                                                 <ListItemText
-                                                    primary={location.locationName}
-                                                    secondary={location.nodeName}
+                                                    primary={location.city}
+                                                    secondary={
+                                                        <Box component="span" sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mt: 1 }}>
+                                                            {location.cpes.map(cpeName => (
+                                                                <Box
+                                                                    key={cpeName}
+                                                                    component="span"
+                                                                    sx={{
+                                                                        fontWeight: 500,
+                                                                        color: '#bdbdbd',
+                                                                        fontSize: '0.75rem',
+                                                                        px: 1.5,
+                                                                        py: 0.5,
+                                                                        borderRadius: '9999px',
+                                                                        border: `1px solid ${COLOR_MAP.cpe}`,
+                                                                    }}
+                                                                >
+                                                                    {cpeName}
+                                                                </Box>
+                                                            ))}
+                                                        </Box>
+                                                    }
                                                     sx={{
+                                                        alignItems: 'flex-start',
                                                         '& .MuiListItemText-primary': {
                                                             fontSize: '0.8rem',
                                                             fontWeight: 'bold',
-                                                        },
-                                                        '& .MuiListItemText-secondary': {
-                                                            fontSize: '0.7rem',
-                                                            color: '#bdbdbd'
+                                                            mb: 0.75,
                                                         },
                                                     }}
                                                 />

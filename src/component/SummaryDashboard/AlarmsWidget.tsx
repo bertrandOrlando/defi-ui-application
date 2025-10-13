@@ -1,6 +1,8 @@
-import { Box, MenuItem, Select, Typography } from "@mui/material";
+import { Box, IconButton, MenuItem, Select, Typography } from "@mui/material";
 import { PieChart } from "@mui/x-charts";
+import ArrowForwardIos from '@mui/icons-material/ArrowForwardIos';
 import alarms from '../../data/alarm.json';
+import { useNavigate } from "react-router-dom";
 
 const CustomChart = () => {
     type Severity = 'Minor' | 'Warning' | 'Critical' | 'Major';
@@ -144,6 +146,8 @@ const CustomChart = () => {
 }
 
 const AlarmsWidget = () => {
+    const navigate = useNavigate();
+
     const selectStyles = {
         backgroundColor: '#2D2D2E',
         color: 'white',
@@ -164,9 +168,27 @@ const AlarmsWidget = () => {
             gap: 2,
         }}>
             {/* title */}
-            <Typography variant="h6" sx={{ fontSize: '1rem', fontWeight: 'bold', color: '#e5e7eb' }}>
-                Alarms
-            </Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                <Typography variant="h6" sx={{ fontSize: '1rem', fontWeight: 'bold', color: '#e5e7eb' }}>
+                    Alarms
+                </Typography>
+                <IconButton
+                    onClick={() => navigate('/alarm-graph')}
+                    size="small"
+                    sx={{
+                        color: '#2D2D2E',
+                        backgroundColor: '#e5e7eb',
+                        '&:hover': {
+                            backgroundColor: '#e5e7eb',
+                            border: '1px solid',
+                            borderColor: '#355393',
+                        },
+                    }}
+                >
+                    <ArrowForwardIos sx={{ fontSize: '0.9rem' }} />
+                </IconButton>
+            </Box>
+            
 
             {/* dropdown */}
             <Box sx={{ 

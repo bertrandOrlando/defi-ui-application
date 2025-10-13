@@ -1,8 +1,11 @@
-import { Box, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import { BarChart } from "@mui/x-charts";
 import performanceData from '../../data/performanceData.json';
+import ArrowForwardIos from '@mui/icons-material/ArrowForwardIos';
+import { useNavigate } from "react-router-dom";
 
 const PerformanceWidget = () => {
+    const navigate = useNavigate();
     const { uplinkDownlink, pduSessions } = performanceData;
 
     return (
@@ -20,6 +23,21 @@ const PerformanceWidget = () => {
                 <Typography variant="h6" sx={{ fontSize: '1rem', fontWeight: 'bold' }}>
                     Performance
                 </Typography>
+                <IconButton
+                    onClick={() => navigate('/performance-details')}
+                    size="small"
+                    sx={{
+                        color: '#2D2D2E',
+                        backgroundColor: '#e5e7eb',
+                        '&:hover': {
+                            backgroundColor: '#e5e7eb',
+                            border: '1px solid',
+                            borderColor: '#355393',
+                        },
+                    }}
+                >
+                    <ArrowForwardIos sx={{ fontSize: '0.9rem' }} />
+                </IconButton>
             </Box>
 
             {/* chart */}
