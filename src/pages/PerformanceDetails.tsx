@@ -7,49 +7,6 @@ import { axisClasses } from '@mui/x-charts/ChartsAxis';
 import { chartsGridClasses } from '@mui/x-charts/ChartsGrid';
 import DynamicBreadcrumb from "../component/DynamicBreadCrumbs";
 
-
-//custom tool tip for chart
-const CustomTooltipContent = ({ axisData, dataset }: any) => {
-
-    if (!axisData?.x || axisData.x.index === undefined || !dataset) {
-        return null;
-    }
-
-    const dataIndex = axisData.x.index;
-    const data = dataset[dataIndex];
-    if (!data) return null;
-    
-    const date = new Date(data.fullDate);
-    const formattedDate = date.toLocaleDateString('en-US', {
-        month: 'short', day: 'numeric', year: 'numeric',
-    });
-    const formattedTime = date.toLocaleTimeString('en-US', {
-        hour: 'numeric', minute: 'numeric', hour12: true,
-    });
-
-    return (
-        <div className="bg-[#282828] p-3 rounded-md border border-[#555] shadow-lg text-white">
-            <p className="text-sm text-gray-300 mb-2">{`${formattedDate} ${formattedTime}`}</p>
-            <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                    <svg width="24" height="18" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 13L7 7L13 13L23 3" stroke="#34D399" strokeWidth="2" /></svg>
-                    <div>
-                        <p className="font-bold text-lg">{data.Uplink.toLocaleString()}</p>
-                        <p className="text-xs text-gray-400">Uplink</p>
-                    </div>
-                </div>
-                <div className="flex items-center gap-2">
-                    <svg width="24" height="18" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 13L7 7L13 13L23 3" stroke="#60A5FA" strokeWidth="2" /></svg>
-                    <div>
-                        <p className="font-bold text-lg">{data.Downlink.toLocaleString()}</p>
-                        <p className="text-xs text-gray-400">Downlink</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
-
 //throughput chart component
 const ThroughputChart = ({ chartData }: any) => {
   return (
