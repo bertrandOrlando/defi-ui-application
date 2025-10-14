@@ -11,17 +11,19 @@ import {
   Position,
 } from "@xyflow/react";
 
+import { PieChart } from "@mui/x-charts/PieChart";
+
+
 import Header from "../component/header";
 import DynamicBreadcrumb from "../component/DynamicBreadCrumbs";
 import { viewTypes, type ViewType } from "./ServiceAssurance";
 import { BiWorld } from "react-icons/bi";
 import { MdCellTower } from "react-icons/md";
 import { TbHierarchy } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
 
 /* TODO :
- * - Buat Alarm, konek dengan data, tampilan pake MUI
- * - Buat Location, konek dengan data juga.
- * - Selain itu all working
+ * - all working!!!
  */
 
 const ServiceAssuranceTreeView = ({
@@ -35,6 +37,14 @@ const ServiceAssuranceTreeView = ({
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [zoom, setZoom] = useState(1);
   const [highlightedIds, setHighlightedIds] = useState<string[]>([]);
+  const [isAlarmsExpanded, setIsAlarmsExpanded] = useState(false);
+  const [isLocationsExpanded, setIsLocationsExpanded] = useState(false);
+  const [editedLocations, setEditedLocations] = useState<string[]>([]);
+  const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  
+  
+
+  const navigate = useNavigate();
 
   //debugging
   // React.useEffect(() => {
@@ -60,6 +70,24 @@ const ServiceAssuranceTreeView = ({
   type BoxNodeProps = {
     data: { label: string; bg: string; isHighlighted?: boolean };
   };
+
+ const COLORS = {
+  text: '#e5e7eb',
+  critical: '#c4515d',
+  warning: '#e3b347',
+  minor: '#079487',
+  bg: '#1e1e1e',
+  divider: '#333',
+};
+
+const LegendItem: React.FC<{ color: string; label: string }> = ({ color, label }) => (
+  <div className="flex flex-col items-center min-w-[70px]">
+    <div className="inline-flex items-center gap-1 text-xs" style={{ color: COLORS.text }}>
+      <span className="inline-block w-2.5 h-2.5 rounded-full" style={{ background: color }} />
+      <span>{label}</span>
+    </div>
+  </div>
+);
 
   const BoxNode = ({ data }: BoxNodeProps) => {
     const isHighlighted = !!data.isHighlighted;
@@ -136,7 +164,6 @@ const ServiceAssuranceTreeView = ({
     const kind = getKindFromId(e.target);
     return {
       ...e,
-      type: "bezier",
       style: { stroke: COLOR_MAP[kind], strokeWidth: 2 },
     };
   });
@@ -216,6 +243,29 @@ const ServiceAssuranceTreeView = ({
     };
   }, [selectedId, nodes]);
 
+  const reportData = React.useMemo(() => {
+    if (!selectedId) return null;
+    const subtreeIds = [selectedId, ...getDescendants(selectedId)];
+    const relevantNodes = nodes.filter((n) => subtreeIds.includes(n.id));
+    const allAlarms = relevantNodes.flatMap((n) => n.data.alarms || []);
+
+    const alarmCounts = allAlarms.reduce(
+      (acc, alarm) => {
+        acc[alarm.severity] = (acc[alarm.severity] || 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>
+    );
+    const allLocations = relevantNodes.flatMap((n) => n.data.locations || []);
+    const uniqueLocations = [...new Set(allLocations)];
+
+    return {
+      totalAlarms: allAlarms.length,
+      alarmCounts,
+      locations: uniqueLocations,
+    };
+  }, [selectedId, nodes]); 
+
   // id untuk focus on
   const visibleIds = React.useMemo(() => {
     if (!focusedMode || !selectedId) return null;
@@ -266,6 +316,8 @@ const ServiceAssuranceTreeView = ({
       zoomTo(newZoom);
     };
 
+
+
     return (
       <div
         className="fixed left-7 bottom-7 z-50 flex flex-col items-center bg-[#3a3a3a] rounded-lg "
@@ -273,7 +325,7 @@ const ServiceAssuranceTreeView = ({
       >
         <button
           onClick={handleZoomIn}
-          className="text-white text-xl mb-2 hover:bg-[#4a4a4a] rounded w-8 h-8 flex items-center justify-center transition-colors"
+          className="text-white text-xl mb-2 hover:bg-[#4a4a4a] rounded w-8 h-8 flex items-center justify-center transition-colors cursor-pointer"
         >
           +
         </button>
@@ -315,7 +367,7 @@ const ServiceAssuranceTreeView = ({
         />
         <button
           onClick={handleZoomOut}
-          className="text-white text-xl mt-2 hover:bg-[#4a4a4a] rounded w-8 h-8 flex items-center justify-center transition-colors"
+          className="text-white text-xl mt-2 hover:bg-[#4a4a4a] rounded w-8 h-8 flex items-center justify-center transition-colors cursor-pointer"
         >
           −
         </button>
@@ -327,7 +379,7 @@ const ServiceAssuranceTreeView = ({
 
   return (
     <div className="min-h-screen bg-[#282828] text-white flex flex-col">
-      {/* <FloatingHeader /> */}
+      {/* Header floating*/}
 
       <div className="fixed top-0 left-0 right-0 z-50 p-4">
         <Header />
@@ -398,9 +450,20 @@ const ServiceAssuranceTreeView = ({
             edges={filteredEdges}
             fitView
             onNodeClick={(_, node) => {
-              setSelectedId((prev) => (prev === node.id ? null : node.id));
+              setSelectedId((prev) => {
+                const newId = prev === node.id ? null : node.id;
+                if (prev !== node.id) {
+                  setIsAlarmsExpanded(false);
+                  setIsLocationsExpanded(false);
+                }
+                return newId;
+              });
             }}
-            onPaneClick={() => setSelectedId(null)}
+            onPaneClick={() => {
+              setSelectedId(null);
+              setIsAlarmsExpanded(false);
+              setIsLocationsExpanded(false);
+            }}
             onMove={(_, viewport) => setZoom(viewport.zoom)}
             nodeTypes={nodeTypes}
             fitViewOptions={{ padding: 0.2 }}
@@ -485,10 +548,11 @@ const ServiceAssuranceTreeView = ({
             >
               {/* HEADER */}
               <div className="flex items-start justify-between px-4 pt-3">
-                <div className="font-semibold">
-                  {panelData.rootEnterprise
-                    ? panelData.rootEnterprise.data.label
-                    : "Enterprise"}
+                <div className="flex items-center space-x-2 font-semibold">
+                  <svg className="w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M3 3h9v18H3V3zm2 2v2h2V5H5zm4 0v2h2V5H9zm-4 4v2h2V9H5zm4 0v2h2V9H9zm-4 4v2h2v-2H5zm4 0v2h2v-2H9zm6-4h6v12h-6V9zm2 2v2h2v-2h-2zm0 4v2h2v-2h-2z"/>
+                  </svg>
+                  <span>{panelData.rootEnterprise ? panelData.rootEnterprise.data.label : "Enterprise"}</span>
                 </div>
               </div>
               <div className="mx-4 h-px bg-white/15 my-3"></div>
@@ -576,64 +640,186 @@ const ServiceAssuranceTreeView = ({
                 )}
 
                 {/* REPORTS */}
-                <div>
-                  <div className="text-white/60 mb-2">Reports</div>
+                {reportData && (
+                  <div>
+                    <div className="text-white/60 mb-2">Reports</div>
 
-                  {/* Alarms card ,MASIH BUAT TAMPILAN DOANG*/}
-                  <button
-                    className="w-full flex items-center justify-between rounded-xl bg-white/5 hover:bg-white/10 transition-colors px-2 py-2 mb-3"
-                    onClick={() => console.log("open alarms")}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-purple-600/25 flex items-center justify-center">
+                    {/* Alarms Card  */}
+                    <div className="rounded-xl bg-white/5 overflow-hidden mb-3">
+                      <button
+                        className="w-full flex items-center justify-between hover:bg-white/10 transition-colors px-2 py-2 cursor-pointer"
+                        onClick={() => setIsAlarmsExpanded(!isAlarmsExpanded)}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-purple-600/25 flex items-center justify-center">
+                            {/* Bell Icon */}
+                            <svg viewBox="0 0 24 24" className="w-5 h-5 text-purple-300 fill-current">
+                              <path d="M12 22a2 2 0 0 0 2-2H10a2 2 0 0 0 2 2Zm6-6V11a6 6 0 1 0-12 0v5L4 18v1h16v-1l-2-2Z" />
+                            </svg>
+                          </div>
+                          <span className="text-white">
+                            {reportData.totalAlarms} Alarm{reportData.totalAlarms !== 1 ? "s" : ""}
+                          </span>
+                        </div>
+                        {/* Location Icon */}
                         <svg
-                          viewBox="0 0 24 24"
-                          className="w-5 h-5 text-purple-300 fill-current"
+                          viewBox="0 0 20 20"
+                          className={`w-5 h-5 text-white/70 fill-current transition-transform duration-300 ${isAlarmsExpanded ? "rotate-90" : ""}`}
                         >
-                          <path d="M12 22a2 2 0 0 0 2-2H10a2 2 0 0 0 2 2Zm6-6V11a6 6 0 1 0-12 0v5L4 18v1h16v-1l-2-2Z" />
+                          <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
                         </svg>
-                      </div>
-                      <span className="text-white">2 Alarms</span>
-                    </div>
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="w-5 h-5 text-white/70 fill-current"
-                    >
-                      <path d="M9 6l6 6-6 6" />
-                    </svg>
-                  </button>
+                      </button>
 
-                  {/* Locations card, MASIH BUAT TAMPILAN DOANG */}
-                  <button
-                    className="w-full flex items-center justify-between rounded-xl bg-white/5 hover:bg-white/10 transition-colors px-2 py-2"
-                    onClick={() => console.log("open locations")}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-pink-600/25 flex items-center justify-center">
-                        <svg
-                          viewBox="0 0 24 24"
-                          className="w-5 h-5 text-pink-300 fill-current"
-                        >
-                          <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z" />
-                        </svg>
+                      {/*Alarm Content yang extended - PIE CHART */}
+                  {isAlarmsExpanded && reportData.totalAlarms > 0 && (
+                    <div className="mx-2 mb-2 p-2 rounded-lg bg-[#2b2b2b] border border-white/10">
+                      {/* Title */}
+                      <div className="text-center text-white text-sm ">
+                        Open Alarms Severity (%)
                       </div>
-                      <span className="text-white">2 Locations</span>
+
+                      {/* Pie Chart */}
+                      <div className="flex justify-center">
+                        <PieChart
+                          width={240}
+                          height={200}
+                          series={[
+                            {
+                              data: [
+                                { id: 0, value: reportData.alarmCounts.Minor || 0, label: 'Minor' },
+                                { id: 1, value: reportData.alarmCounts.Warning || 0, label: 'Warning' },
+                                { id: 2, value: reportData.alarmCounts.Critical || 0, label: 'Critical' },
+                              ],
+                              innerRadius: 0,
+                              outerRadius: 80,
+                            },
+                          ]}
+                          colors={[COLORS.minor, COLORS.warning, COLORS.critical]}
+                          sx={{
+                            '& .MuiChartsLegend-root': { display: 'none' },
+                            '& text': { fill: COLORS.text },
+                            '& path': { stroke: '#2b2b2b', strokeWidth:2 },
+                          }}
+                        />
+                      </div>
+
+                      {/* Custom Legend */}
+                      <div className="grid grid-cols-3 gap-2 text-xs">
+                        <LegendItem color={COLORS.minor} label="Minor" />
+                        <LegendItem color={COLORS.warning} label="Warning" />
+                        <LegendItem color={COLORS.critical} label="Critical" />
+                      </div>
                     </div>
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="w-5 h-5 text-white/70 fill-current"
+                  )}
+                  </div>
+
+                  {/* Locations Card */}
+                  <div className="rounded-xl bg-white/5 overflow-hidden">
+                    <button
+                      className="w-full flex items-center justify-between hover:bg-white/10 transition-colors px-2 py-2 cursor-pointer"
+                      onClick={() => setIsLocationsExpanded(!isLocationsExpanded)}
                     >
-                      <path d="M9 6l6 6-6 6" />
-                    </svg>
-                  </button>
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-pink-600/25 flex items-center justify-center">
+                          {/* Location Icon */}
+                          <svg viewBox="0 0 24 24" className="w-5 h-5 text-pink-300 fill-current">
+                            <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z" />
+                          </svg>
+                        </div>
+                        <span className="text-white">
+                          {reportData.locations.length} Location{reportData.locations.length !== 1 ? "s" : ""}
+                        </span>
+                      </div>
+                      {/* Chevron Icon */}
+                      <svg
+                        viewBox="0 0 20 20"
+                        className={`w-5 h-5 text-white/70 fill-current transition-transform duration-300 ${isLocationsExpanded ? "rotate-90" : ""}`}
+                      >
+                        <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
+                      </svg>
+                    </button>
+
+                    {/* Location Content Yang udah dibuka */}
+                    {isLocationsExpanded && reportData.locations.length > 0 && (
+                    <div className="p-4 pt-2 space-y-3 text-xs text-white/80">
+                      {reportData.locations.map((loc, index) => {
+                        const currentValue =
+                          editedLocations[index] ?? loc;
+
+                        return (
+                          <div key={index}>
+                            {editingIndex === index ? (
+                              <>
+                                {/* Editable input */}
+                                <textarea
+                                  value={currentValue}
+                                  onChange={(e) => {
+                                    const next = [...editedLocations];
+                                    next[index] = e.target.value;
+                                    setEditedLocations(next);
+                                  }}
+                                  rows={2}
+                                  className="w-full rounded-md bg-[#2b2b2b] text-white/90 px-2 py-1 text-xs resize-none 
+                                            focus:outline-none focus:bg-[#333333] transition-colors break-words"
+                                  placeholder="Edit location..."
+                                />
+
+                                {/* Save / Cancel */}
+                                <div className="mt-2 flex justify-end gap-4 text-[11px] underline font-semibold">
+                                  <button
+                                    onClick={() => setEditingIndex(null)}
+                                    className="text-white hover:opacity-80 transition-opacity"
+                                  >
+                                    Cancel
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      const updated = [...reportData.locations];
+                                      updated[index] = editedLocations[index];
+                                      setEditedLocations(updated);
+                                      setEditingIndex(null);
+                                    }}
+                                    className="text-white hover:opacity-80 transition-opacity"
+                                  >
+                                    Save
+                                  </button>
+                                </div>
+                              </>
+                            ) : (
+                              <>
+                                <p>{currentValue}</p>
+                                <div className="mt-2 flex gap-4 text-[11px] underline font-semibold">
+                                  <button
+                                    className="text-white hover:opacity-80 transition-opacity cursor-pointer"
+                                    onClick={() => setView(viewTypes.Map)}
+                                  >
+                                    View Map
+                                  </button>
+                                  <button
+                                    onClick={() => setEditingIndex(index)}
+                                    className="text-white hover:opacity-80 transition-opacity cursor-pointer"
+                                  >
+                                    Edit
+                                  </button>
+                                </div>
+                              </>
+                            )}
+                            <div className="my-3 border-b border-white/10" />
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                  </div>
                 </div>
+              )}
               </div>
 
               {/* FOOTER */}
               <div className="px-4 pb-3 pt-2 flex items-center gap-3">
                 <button
-                  className="flex-1 flex items-center justify-center gap-2 rounded-sm bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-2 py-2 transition-colors text-sm"
-                  onClick={() => console.log("Service Assurance")}
+                  className="flex-1 flex items-center justify-center gap-2 rounded-sm bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-2 py-2 transition-colors text-sm cursor-pointer"
+                  onClick={() => navigate('/service-assurance/dashboard')}
                 >
                   <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current">
                     <path d="M3 3h2v18H3V3Zm4 10h2v8H7v-8Zm4-6h2v14h-2V7Zm4 4h2v10h-2V11Zm4-8h2v18h-2V3Z" />
@@ -643,7 +829,7 @@ const ServiceAssuranceTreeView = ({
 
                 <button
                   onClick={() => setSelectedId(null)}
-                  className="rounded-sm bg-white/10 hover:bg-white/15 text-white px-2 py-2 transition-colors text-sm"
+                  className="rounded-sm bg-white/10 hover:bg-white/15 text-white px-2 py-2 transition-colors text-sm cursor-pointer"
                 >
                   Close
                 </button>

@@ -1,0 +1,29 @@
+{
+  "memory": {
+    "label": "Memory Used",
+    "percent": 7,
+    "used": 1.31,
+    "total": 15.57,
+    "unit": "GB",
+    "bottomLabel": "GB Total",
+    "color": "#00bfa5"
+  },
+  "cpu": {
+    "label": "CPU Used",
+    "percent": 2,
+    "used": 2,
+    "total": 100,
+    "unit": "%",
+    "bottomLabel": "Utilization",
+    "color": "#ffc107"
+  },
+  "storage": {
+    "label": "Storage Used",
+    "percent": 17,
+    "used": 4.95,
+    "total": 28.89,
+    "unit": "GB",
+    "bottomLabel": "GB Total",
+    "color": "#d500f9"
+  }
+}

@@ -5,6 +5,7 @@ import { ChartsTooltip,  } from '@mui/x-charts/ChartsTooltip';
 import throughputData from "../data/ThroughputData.json";
 import { axisClasses } from '@mui/x-charts/ChartsAxis';
 import { chartsGridClasses } from '@mui/x-charts/ChartsGrid';
+import DynamicBreadcrumb from "../component/DynamicBreadCrumbs";
 
 
 //custom tool tip for chart
@@ -290,7 +291,7 @@ const PerformanceDetails = () => {
             <Header />
             <main className="p-6">
                 <div className="text-sm text-gray-400 mb-2">
-                    <span>Dashboard / Service Assurance / Enterprise A (5G Core 1) / </span>
+                    <DynamicBreadcrumb />
                     <span className="text-white font-semibold">Performance Details</span>
                 </div>
                 <h1 className="text-3xl font-bold mb-6">Performance Details</h1>
