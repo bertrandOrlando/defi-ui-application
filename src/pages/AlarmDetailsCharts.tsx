@@ -1,8 +1,8 @@
-import * as React from "react";
-import { useState } from "react";
-import alarms from "../data/alarm.json";
-import { PieChart } from "@mui/x-charts/PieChart";
-import { BarChart } from "@mui/x-charts/BarChart";
+import * as React from 'react';
+import { useState } from 'react';
+import alarms from '../data/alarm.json';
+import { PieChart } from '@mui/x-charts/PieChart';
+import { BarChart } from '@mui/x-charts/BarChart';
 import {
   Box,
   Button,
@@ -28,8 +28,8 @@ import { Dayjs } from "dayjs";
 import Header from "../component/header";
 import DynamicBreadcrumb from "../component/DynamicBreadCrumbs";
 
-type Severity = "Minor" | "Warning" | "Critical" | "Major";
-type Status = "Active" | "Open" | "Closed";
+type Severity = 'Minor' | 'Warning' | 'Critical' | 'Major';
+type Status = 'Active' | 'Open' | 'Closed';
 
 type AlarmRec = {
   id: number;
@@ -62,7 +62,7 @@ interface RawAlarm {
   node?: number | string;
   noteType?: string;
   note_type?: string;
-  // [key: string]: any;
+  [key: string]: any;
 }
 
 interface Alarm {
@@ -78,18 +78,20 @@ interface Alarm {
 }
 
 const COLORS = {
-  bg: "#1f1f1f",
-  card: "#2f3035",
-  divider: "rgba(0, 0, 0, 0.12)",
-  text: "#e5e7eb",
-  subtext: "rgba(255,255,255,0.7)",
-  major: "#e68029",
-  critical: "#c4515d",
-  warning: "#079487",
-  minor: "#edb127",
+  bg: '#1f1f1f',
+  card: '#2f3035',
+  divider: 'rgba(0, 0, 0, 0.12)',
+  text: '#e5e7eb',
+  subtext: 'rgba(255,255,255,0.7)',
+  major: '#e68029',
+  critical: '#c4515d',
+  warning: '#079487',
+  minor: '#edb127',
 };
 
-const isOpenStatus = (s: Status) => s === "Open" || s === "Active";
+const LIGHT_GREY = '#cccccc';
+
+const isOpenStatus = (s: Status) => s === 'Open' || s === 'Active';
 
 function countBySeverity(rows: AlarmRec[]) {
   return rows.reduce(
@@ -101,26 +103,13 @@ function countBySeverity(rows: AlarmRec[]) {
   );
 }
 
-const pct = (n: number, total: number) =>
-  total ? Math.round((n / total) * 100) : 0;
+const pct = (n: number, total: number) => (total ? Math.round((n / total) * 100) : 0);
 
-const LegendItem: React.FC<{
-  color: string;
-  label: string;
-  valuePct: number;
-}> = ({ color, label, valuePct }) => (
+const LegendItem: React.FC<{ color: string; label: string; valuePct: number }> = ({ color, label, valuePct }) => (
   <div className="flex flex-col items-center min-w-[62px]">
-    <div className="text-xs font-semibold" style={{ color: COLORS.text }}>
-      {valuePct}%
-    </div>
-    <div
-      className="inline-flex items-center gap-1 text-xs"
-      style={{ color: COLORS.text }}
-    >
-      <span
-        className="inline-block w-2.5 h-2.5 rounded-full"
-        style={{ background: color }}
-      />
+    <div className="text-xs font-semibold" style={{ color: COLORS.text }}>{valuePct}%</div>
+    <div className="inline-flex items-center gap-1 text-xs" style={{ color: COLORS.text }}>
+      <span className="inline-block w-2.5 h-2.5 rounded-full" style={{ background: color }} />
       <span>{label}</span>
     </div>
   </div>
@@ -131,7 +120,7 @@ const parseDate = (dateStr?: string) => {
   if (!dateStr) return new Date().toISOString();
   const d1 = new Date(dateStr);
   if (!isNaN(d1.getTime())) return d1.toISOString();
-  const parts = dateStr.split(/[-/]/);
+  const parts = dateStr.split(/[-\/]/);
   if (parts.length === 3) {
     let day = Number(parts[0]);
     let month = Number(parts[1]);
@@ -149,7 +138,9 @@ const parseDate = (dateStr?: string) => {
 };
 
 // load alarms
-const rawAlarms = alarms as RawAlarm[];
+const rawAlarms = Array.isArray(alarms)
+  ? (alarms as RawAlarm[])
+  : ((alarms as any).alarms || []) as RawAlarm[];
 
 const initialAlarms: Alarm[] = (rawAlarms || []).map((a) => {
   const ack =
@@ -174,22 +165,21 @@ const initialAlarms: Alarm[] = (rawAlarms || []).map((a) => {
   };
 });
 
+const NullComponent = () => null;
+
 const AlarmDetailsCharts: React.FC = () => {
   const [selectedView, setSelectedView] = useState<"chart" | "grid">("chart");
-
+  
   // Filter states for table view
   const [severity, setSeverity] = useState("");
   const [status, setStatus] = useState("");
   const [acknowledged, setAcknowledged] = useState("");
   const [cpeType, setCpeType] = useState("");
-  const [dateRange, setDateRange] = useState<[Dayjs | null, Dayjs | null]>([
-    null,
-    null,
-  ]);
+  const [dateRange, setDateRange] = useState<[Dayjs | null, Dayjs | null]>([null, null]);
 
   const rows = alarms as AlarmRec[];
   const openRows = rows.filter((r) => isOpenStatus(r.status));
-  const closedRows = rows.filter((r) => r.status === "Closed");
+  const closedRows = rows.filter((r) => r.status === 'Closed');
 
   const openCounts = countBySeverity(openRows);
   const closedCounts = countBySeverity(closedRows);
@@ -199,20 +189,20 @@ const AlarmDetailsCharts: React.FC = () => {
   const total = rows.length;
 
   const openPie = [
-    { id: 0, value: openCounts.Critical, label: "Critical" },
-    { id: 1, value: openCounts.Major, label: "Major" },
-    { id: 2, value: openCounts.Warning, label: "Warning" },
-    { id: 3, value: openCounts.Minor, label: "Minor" },
+    { id: 0, value: openCounts.Critical, label: 'Critical' },
+    { id: 1, value: openCounts.Major, label: 'Major' },
+    { id: 2, value: openCounts.Warning, label: 'Warning' },
+    { id: 3, value: openCounts.Minor, label: 'Minor' },
   ];
 
   const closedPie = [
-    { id: 0, value: closedCounts.Critical, label: "Critical" },
-    { id: 1, value: closedCounts.Major, label: "Major" },
-    { id: 2, value: closedCounts.Warning, label: "Warning" },
-    { id: 3, value: closedCounts.Minor, label: "Minor" },
+    { id: 0, value: closedCounts.Critical, label: 'Critical' },
+    { id: 1, value: closedCounts.Major, label: 'Major' },
+    { id: 2, value: closedCounts.Warning, label: 'Warning' },
+    { id: 3, value: closedCounts.Minor, label: 'Minor' },
   ];
 
-  const barCategories = ["Critical", "Major", "Warning", "Minor"];
+  const barCategories = ['Critical', 'Major', 'Warning', 'Minor'];
   const barDataOpen = [
     openCounts.Critical,
     openCounts.Major,
@@ -250,10 +240,7 @@ const AlarmDetailsCharts: React.FC = () => {
   });
 
   return (
-    <div
-      className="min-h-screen px-4"
-      style={{ background: COLORS.bg, color: COLORS.text }}
-    >
+    <div className="min-h-screen" style={{ background: COLORS.bg, color: COLORS.text }} >
       <Header />
 
       {/* Breadcrumb + Title */}
@@ -261,10 +248,10 @@ const AlarmDetailsCharts: React.FC = () => {
         <div className="flex flex-col gap-1">
           <DynamicBreadcrumb />
           <div className="flex justify-between items-center mt-1">
-            <h1 className="text-2xl font-semibold">
-              Alarms Details <span style={{ color: "limegreen" }}>●</span>{" "}
+            <h1 className="text-2xl font-semibold" style={{ color: 'white' }}>
+              Alarms Details <span style={{ color: "limegreen" }}>●</span>
             </h1>
-
+            
             {/* View Toggle Buttons */}
             <Box display="flex" gap={1}>
               <Button
@@ -319,128 +306,65 @@ const AlarmDetailsCharts: React.FC = () => {
           >
             {/* Total */}
             <div className="mb-4">
-              <div className="text-3xl font-extrabold leading-tight">
-                {total}
-              </div>
-              <div className="text-sm" style={{ color: COLORS.subtext }}>
-                Total alarms
-              </div>
+              <div className="text-3xl font-extrabold leading-tight">{total}</div>
+              <div className="text-sm" style={{ color: COLORS.subtext }}>Total alarms</div>
             </div>
 
             {/* Charts Container */}
             <div className="flex flex-col lg:flex-row gap-4">
               {/* Open Pie (1fr) */}
-              <div
-                className="rounded-xl p-4 border min-w-[300px] lg:flex-1"
-                style={{ background: COLORS.bg, borderColor: COLORS.divider }}
-              >
+              <div className="rounded-xl p-4 border min-w-[300px] lg:flex-1"
+                style={{ background: COLORS.bg, borderColor: COLORS.divider }}>
                 <div className="mb-2 text-center">Open Alarms Severity (%)</div>
                 <div className="flex justify-center">
                   <PieChart
                     width={240}
                     height={200}
-                    series={[
-                      { data: openPie, innerRadius: 0, outerRadius: 80 },
-                    ]}
-                    colors={[
-                      COLORS.critical,
-                      COLORS.major,
-                      COLORS.warning,
-                      COLORS.minor,
-                    ]}
+                    series={[{ data: openPie, innerRadius: 0, outerRadius: 80 }]}
+                    colors={[COLORS.critical, COLORS.major, COLORS.warning, COLORS.minor]}
                     sx={{
-                      "& .MuiChartsLegend-root": { display: "none" },
-                      "& text": { fill: COLORS.text },
-                      "& path": { stroke: "#000", strokeWidth: 1 },
+                      '& .MuiChartsLegend-root': { display: 'none' },
+                      '& text': { fill: COLORS.text },
+                      '& path': { stroke: '#000', strokeWidth: 1 },
                     }}
                   />
                 </div>
 
                 <div className="mt-2 grid grid-cols-4 gap-2 text-xs">
-                  <LegendItem
-                    color={COLORS.critical}
-                    label="Critical"
-                    valuePct={pct(openCounts.Critical, totalOpen)}
-                  />
-                  <LegendItem
-                    color={COLORS.major}
-                    label="Major"
-                    valuePct={pct(openCounts.Major, totalOpen)}
-                  />
-                  <LegendItem
-                    color={COLORS.warning}
-                    label="Warning"
-                    valuePct={pct(openCounts.Warning, totalOpen)}
-                  />
-                  <LegendItem
-                    color={COLORS.minor}
-                    label="Minor"
-                    valuePct={pct(openCounts.Minor, totalOpen)}
-                  />
+                  <LegendItem color={COLORS.critical} label="Critical" valuePct={pct(openCounts.Critical, totalOpen)} />
+                  <LegendItem color={COLORS.major} label="Major" valuePct={pct(openCounts.Major, totalOpen)} />
+                  <LegendItem color={COLORS.warning} label="Warning" valuePct={pct(openCounts.Warning, totalOpen)} />
+                  <LegendItem color={COLORS.minor} label="Minor" valuePct={pct(openCounts.Minor, totalOpen)} />
                 </div>
               </div>
 
               {/* Closed Pie (1fr) */}
-              <div
-                className="rounded-xl p-4 border min-w-[300px] lg:flex-1"
-                style={{ background: COLORS.bg, borderColor: COLORS.divider }}
-              >
-                <div className="mb-2 text-center">
-                  Closed Alarms Severity (%)
-                </div>
+              <div className="rounded-xl p-4 border min-w-[300px] lg:flex-1"
+                style={{ background: COLORS.bg, borderColor: COLORS.divider }}>
+                <div className="mb-2 text-center">Closed Alarms Severity (%)</div>
                 <div className="relative flex items-center justify-center">
                   <PieChart
                     width={240}
                     height={200}
-                    series={[
-                      {
-                        data: closedPie,
-                        innerRadius: 60,
-                        outerRadius: 80,
-                        paddingAngle: 0,
-                      },
-                    ]}
-                    colors={[
-                      COLORS.critical,
-                      COLORS.major,
-                      COLORS.warning,
-                      COLORS.minor,
-                    ]}
+                    series={[{ data: closedPie, innerRadius: 60, outerRadius: 80, paddingAngle: 0 }]}
+                    colors={[COLORS.critical, COLORS.major, COLORS.warning, COLORS.minor]}
                     sx={{
-                      "& .MuiChartsLegend-root": { display: "none" },
-                      "& text": { fill: COLORS.text },
-                      "& path": { stroke: "#000", strokeWidth: 0 },
+                      '& .MuiChartsLegend-root': { display: 'none' },
+                      '& text': { fill: COLORS.text },
+                      '& path': { stroke: '#000', strokeWidth: 0 },
                     }}
                   />
                   <div className="absolute text-center pointer-events-none">
                     <div className="text-2xl font-extrabold">{totalClosed}</div>
-                    <div className="text-xs" style={{ color: COLORS.subtext }}>
-                      Total
-                    </div>
+                    <div className="text-xs" style={{ color: COLORS.subtext }}>Total</div>
                   </div>
                 </div>
 
                 <div className="mt-2 grid grid-cols-4 gap-2 text-xs">
-                  <LegendItem
-                    color={COLORS.critical}
-                    label="Critical"
-                    valuePct={pct(closedCounts.Critical, totalClosed)}
-                  />
-                  <LegendItem
-                    color={COLORS.major}
-                    label="Major"
-                    valuePct={pct(closedCounts.Major, totalClosed)}
-                  />
-                  <LegendItem
-                    color={COLORS.warning}
-                    label="Warning"
-                    valuePct={pct(closedCounts.Warning, totalClosed)}
-                  />
-                  <LegendItem
-                    color={COLORS.minor}
-                    label="Minor"
-                    valuePct={pct(closedCounts.Minor, totalClosed)}
-                  />
+                  <LegendItem color={COLORS.critical} label="Critical" valuePct={pct(closedCounts.Critical, totalClosed)} />
+                  <LegendItem color={COLORS.major} label="Major" valuePct={pct(closedCounts.Major, totalClosed)} />
+                  <LegendItem color={COLORS.warning} label="Warning" valuePct={pct(closedCounts.Warning, totalClosed)} />
+                  <LegendItem color={COLORS.minor} label="Minor" valuePct={pct(closedCounts.Minor, totalClosed)} />
                 </div>
               </div>
 
@@ -449,67 +373,27 @@ const AlarmDetailsCharts: React.FC = () => {
                 className="rounded-xl p-4 pb-0 border min-w-0 lg:flex-[2] flex flex-col items-start justify-start"
                 style={{ background: COLORS.bg, borderColor: COLORS.divider }}
               >
-                <div className="mb-2 text-left w-full">
-                  Open Alarms Severity (Quantity)
-                </div>
+                <div className="mb-2 text-left w-full">Open Alarms Severity (Quantity)</div>
                 <div className="flex-1 w-full h-[240px]">
                   <BarChart
-                    height={260}
-                    xAxis={[
-                      {
-                        scaleType: "band",
-                        data: barCategories,
-                        tickLabelStyle: { fill: COLORS.text },
-                      },
-                    ]}
-                    yAxis={[
-                      {
-                        tickLabelStyle: { fill: COLORS.text },
-                        tickMinStep: 2,
-                        width: 20,
-                      },
-                    ]}
+                    height={(260)}
+                    xAxis={[{ scaleType: 'band', data: barCategories, tickLabelStyle: { fill: COLORS.text } }]}
+                    yAxis={[{ tickLabelStyle: { fill: COLORS.text }, tickMinStep: 2, width: 20 }]}
                     grid={{ vertical: false, horizontal: true }}
                     series={[
-                      {
-                        id: "Critical",
-                        data: [barDataOpen[0], 0, 0, 0],
-                        color: COLORS.critical,
-                        stack: "qty",
-                      },
-                      {
-                        id: "Major",
-                        data: [0, barDataOpen[1], 0, 0],
-                        color: COLORS.major,
-                        stack: "qty",
-                      },
-                      {
-                        id: "Warning",
-                        data: [0, 0, barDataOpen[2], 0],
-                        color: COLORS.warning,
-                        stack: "qty",
-                      },
-                      {
-                        id: "Minor",
-                        data: [0, 0, 0, barDataOpen[3]],
-                        color: COLORS.minor,
-                        stack: "qty",
-                      },
+                      { id: 'Critical', data: [barDataOpen[0], 0, 0, 0], color: COLORS.critical, stack: 'qty' },
+                      { id: 'Major', data: [0, barDataOpen[1], 0, 0], color: COLORS.major, stack: 'qty' },
+                      { id: 'Warning', data: [0, 0, barDataOpen[2], 0], color: COLORS.warning, stack: 'qty' },
+                      { id: 'Minor', data: [0, 0, 0, barDataOpen[3]], color: COLORS.minor, stack: 'qty' },
                     ]}
                     margin={{ left: 0, right: 0, top: 8, bottom: 22 }}
                     sx={{
-                      "& .MuiChartsLegend-root": { display: "none" },
-                      "& .MuiChartsAxis-left .MuiChartsAxis-line": {
-                        stroke: "transparent",
-                      },
-                      "& .MuiChartsAxis-bottom .MuiChartsAxis-line": {
-                        stroke: "#fff",
-                      },
-                      "& .MuiChartsGrid-line": {
-                        stroke: "rgba(255,255,255,0.25)",
-                      },
-                      "& .MuiBarElement-root": { rx: 8, ry: 8 },
-                      "& text": { fill: COLORS.text },
+                      '& .MuiChartsLegend-root': { display: 'none' },
+                      '& .MuiChartsAxis-left .MuiChartsAxis-line': { stroke: 'transparent' },
+                      '& .MuiChartsAxis-bottom .MuiChartsAxis-line': { stroke: '#fff' },
+                      '& .MuiChartsGrid-line': { stroke: 'rgba(255,255,255,0.25)' },
+                      '& .MuiBarElement-root': { rx: 8, ry: 8 },
+                      '& text': { fill: COLORS.text },
                     }}
                   />
                 </div>
@@ -520,395 +404,276 @@ const AlarmDetailsCharts: React.FC = () => {
                 className="rounded-xl p-4 border min-w-[280px] lg:flex-1"
                 style={{ background: COLORS.bg, borderColor: COLORS.divider }}
               >
-                <div className="mb-2 text-center">
-                  Closed Alarms Severity (Quantity)
-                </div>
+                <div className="mb-2 text-center">Closed Alarms Severity (Quantity)</div>
 
                 <div className="relative flex items-center justify-center">
                   <PieChart
                     width={265}
                     height={200}
                     series={[
-                      // Critical
+          
                       ((p) => ({
                         data: [
-                          {
-                            id: "crit-rem",
-                            value: Math.max(100 - p, 0.0001),
-                            color: "#2a2b2f",
-                          },
-                          {
-                            id: "crit",
-                            value: Math.max(p, 0.0001),
-                            color: COLORS.critical,
-                          },
+                          { id: 'crit-rem', value: Math.max(100 - p, 0.0001), color: '#2a2b2f' },
+                          { id: 'crit',      value: Math.max(p, 0.0001),      color: COLORS.critical },
                         ],
-                        innerRadius: 86,
-                        outerRadius: 104,
-                        startAngle: 110,
-                        endAngle: -110,
-                        paddingAngle: 0,
+                        innerRadius: 86, outerRadius: 104,    
+                        startAngle: 110, endAngle: -110,
+                        paddingAngle: 0,                   
                         cornerRadius: 6,
-                        cx: 130,
-                        cy: 120,
+                        cx: 130, cy: 120,
                       }))(pct(closedCounts.Critical, totalClosed)),
 
                       // Major
                       ((p) => ({
                         data: [
-                          {
-                            id: "maj-rem",
-                            value: Math.max(100 - p, 0.0001),
-                            color: "#2a2b2f",
-                          },
-                          {
-                            id: "maj",
-                            value: Math.max(p, 0.0001),
-                            color: COLORS.major,
-                          },
+                          { id: 'maj-rem', value: Math.max(100 - p, 0.0001), color: '#2a2b2f' },
+                          { id: 'maj',      value: Math.max(p, 0.0001),      color: COLORS.major },
                         ],
-                        innerRadius: 68,
-                        outerRadius: 82,
-                        startAngle: 110,
-                        endAngle: -110,
+                        innerRadius: 68, outerRadius: 82,      
+                        startAngle: 110, endAngle: -110,
                         paddingAngle: 0,
                         cornerRadius: 6,
-                        cx: 130,
-                        cy: 120,
+                        cx: 130, cy: 120,
                       }))(pct(closedCounts.Major, totalClosed)),
 
                       // Minor
                       ((p) => ({
                         data: [
-                          {
-                            id: "min-rem",
-                            value: Math.max(100 - p, 0.0001),
-                            color: "#2a2b2f",
-                          },
-                          {
-                            id: "min",
-                            value: Math.max(p, 0.0001),
-                            color: COLORS.minor,
-                          },
+                          { id: 'min-rem', value: Math.max(100 - p, 0.0001), color: '#2a2b2f' },
+                          { id: 'min',      value: Math.max(p, 0.0001),      color: COLORS.minor },
                         ],
-                        innerRadius: 50,
-                        outerRadius: 64,
-                        startAngle: 110,
-                        endAngle: -110,
+                        innerRadius: 50, outerRadius: 64,
+                        startAngle: 110, endAngle: -110,
                         paddingAngle: 0,
                         cornerRadius: 6,
-                        cx: 130,
-                        cy: 120,
+                        cx: 130, cy: 120,
                       }))(pct(closedCounts.Minor, totalClosed)),
 
                       // Warning (paling dalam)
                       ((p) => ({
                         data: [
-                          {
-                            id: "warn-rem",
-                            value: Math.max(100 - p, 0.0001),
-                            color: "#2a2b2f",
-                          },
-                          {
-                            id: "warn",
-                            value: Math.max(p, 0.0001),
-                            color: COLORS.warning,
-                          },
+                          { id: 'warn-rem', value: Math.max(100 - p, 0.0001), color: '#2a2b2f' },
+                          { id: 'warn',      value: Math.max(p, 0.0001),      color: COLORS.warning },
                         ],
-                        innerRadius: 32,
-                        outerRadius: 46,
-                        startAngle: 110,
-                        endAngle: -110,
+                        innerRadius: 32, outerRadius: 46,
+                        startAngle: 110, endAngle: -110,
                         paddingAngle: 0,
                         cornerRadius: 6,
-                        cx: 130,
-                        cy: 120,
+                        cx: 130, cy: 120,
                       }))(pct(closedCounts.Warning, totalClosed)),
                     ]}
                     sx={{
-                      "& .MuiChartsLegend-root": { display: "none" },
-                      "& text": { fill: COLORS.text },
-                      "& path": { stroke: "#000", strokeWidth: 1 },
+                      '& .MuiChartsLegend-root': { display: 'none' },
+                      '& text': { fill: COLORS.text },
+                      '& path': { stroke: '#000', strokeWidth: 1 },
                     }}
-                  />
+                    />
                   {/* Center total */}
                   <div className="absolute text-center pointer-events-none translate-y-6">
                     <div className="text-2xl font-extrabold">{totalClosed}</div>
-                    <div className="text-xs" style={{ color: COLORS.subtext }}>
-                      Total
-                    </div>
+                    <div className="text-xs" style={{ color: COLORS.subtext }}>Total</div>
                   </div>
                 </div>
 
                 {/* Legend */}
                 <div className="mt-3 grid grid-cols-4 gap-2 text-xs">
-                  <LegendItem
-                    color={COLORS.critical}
-                    label="Critical"
-                    valuePct={pct(closedCounts.Critical, totalClosed)}
-                  />
-                  <LegendItem
-                    color={COLORS.major}
-                    label="Major"
-                    valuePct={pct(closedCounts.Major, totalClosed)}
-                  />
-                  <LegendItem
-                    color={COLORS.minor}
-                    label="Minor"
-                    valuePct={pct(closedCounts.Minor, totalClosed)}
-                  />
-                  <LegendItem
-                    color={COLORS.warning}
-                    label="Warning"
-                    valuePct={pct(closedCounts.Warning, totalClosed)}
-                  />
+                  <LegendItem color={COLORS.critical} label="Critical" valuePct={pct(closedCounts.Critical, totalClosed)} />
+                  <LegendItem color={COLORS.major}    label="Major"    valuePct={pct(closedCounts.Major, totalClosed)} />
+                  <LegendItem color={COLORS.minor}    label="Minor"    valuePct={pct(closedCounts.Minor, totalClosed)} />
+                  <LegendItem color={COLORS.warning}  label="Warning"  valuePct={pct(closedCounts.Warning, totalClosed)} />
                 </div>
               </div>
             </div>
           </div>
         ) : (
-          // Table View
           <Box
-            sx={{
-              backgroundColor: "#343536",
-              p: 3,
-              borderRadius: "8px",
-            }}
+            className="relative p-6 border"
+            style={{ background: "#343536", borderColor: COLORS.divider,borderRadius: "8px" }}
+            
           >
-            {/* Filter Section */}
+            {/* Box Lapisan Dalam - TANPA BORDER RADIUS */}
             <Box
               sx={{
-                backgroundColor: "#2d2d2e",
-                p: 4,
+                bgcolor: "#2D2D2E",
+                p: 3,
                 borderRadius: "8px",
                 mb: 3,
               }}
             >
-              <Typography
-                variant="subtitle1"
-                sx={{ mb: 1, fontWeight: "bold", color: "white" }}
-              >
-                Alarms
-              </Typography>
-              <Box
-                display="grid"
-                gridTemplateColumns="repeat(6, 1fr)" // 6 kolom dengan lebar sama
-                alignItems="center"
-                justifyContent="center"
-                gap={2} // jarak antar elemen
-              >
-                <FormControl size="small" sx={{ width: "100%" }}>
-                  <Select
-                    value={severity}
-                    onChange={(e) => setSeverity(e.target.value)}
-                    displayEmpty
-                    sx={{
-                      color: "#999",
-                      bgcolor: "#282828",
-                      "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                      "& .MuiSelect-icon": { color: "#999" },
-                    }}
-                  >
-                    <MenuItem value="">- Select Severity -</MenuItem>
-                    <MenuItem value="Minor">Minor</MenuItem>
-                    <MenuItem value="Warning">Warning</MenuItem>
-                    <MenuItem value="Critical">Critical</MenuItem>
-                    <MenuItem value="Major">Major</MenuItem>
-                  </Select>
-                </FormControl>
+              {/* Filter Section */}
+              <Box sx={{ mb: 3 }}>
+                <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: "bold", color: "white" }}>
+                  Alarms
+                </Typography>
 
-                <FormControl size="small" sx={{ width: "100%" }}>
-                  <Select
-                    value={acknowledged}
-                    onChange={(e) => setAcknowledged(e.target.value)}
-                    displayEmpty
-                    sx={{
-                      color: "#999",
-                      bgcolor: "#282828",
-                      "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                      "& .MuiSelect-icon": { color: "#999" },
-                    }}
-                  >
-                    <MenuItem value="">- Select Acknowledged -</MenuItem>
-                    <MenuItem value="0">Not Acknowledged</MenuItem>
-                    <MenuItem value="1">Acknowledged</MenuItem>
-                  </Select>
-                </FormControl>
-
-                <FormControl size="small" sx={{ width: "100%" }}>
-                  <Select
-                    value={status}
-                    onChange={(e) => setStatus(e.target.value)}
-                    displayEmpty
-                    sx={{
-                      color: "#999",
-                      bgcolor: "#282828",
-                      "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                      "& .MuiSelect-icon": { color: "#999" },
-                    }}
-                  >
-                    <MenuItem value="">- Select Alarm Status -</MenuItem>
-                    <MenuItem value="Closed">Closed</MenuItem>
-                    <MenuItem value="Open">Open</MenuItem>
-                    <MenuItem value="Active">Active</MenuItem>
-                    <MenuItem value="Resolved">Resolved</MenuItem>
-                  </Select>
-                </FormControl>
-
-                <FormControl size="small" sx={{ width: "100%" }}>
-                  <Select
-                    value={cpeType}
-                    onChange={(e) => setCpeType(e.target.value)}
-                    displayEmpty
-                    sx={{
-                      color: "#999",
-                      bgcolor: "#282828",
-                      "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                      "& .MuiSelect-icon": { color: "#999" },
-                    }}
-                  >
-                    <MenuItem value="">- Select CPE Type -</MenuItem>
-                    <MenuItem value="5GCore">5GCore</MenuItem>
-                  </Select>
-                </FormControl>
-
-                {/* Date Range Picker */}
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DateRangePicker
-                    label="- Start - End Date -"
-                    value={dateRange}
-                    onChange={(newValue) => setDateRange(newValue)}
-                    slotProps={{
-                      textField: {
-                        InputLabelProps: {
-                          style: { color: "#999" },
-                        },
-                      },
-                    }}
-                  />
-                </LocalizationProvider>
-
-                <Button
-                  variant="text"
-                  onClick={handleReset}
-                  sx={{
-                    color: "white",
-                    textTransform: "none",
-                    textDecoration: "underline",
-                    width: "fit-content",
-                    justifySelf: "end",
-                    borderRadius: 4,
-                    "&:hover": {
-                      backgroundColor: "transparent",
-                      textDecoration: "underline",
-                    },
-                  }}
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  flexWrap="wrap"
+                  gap={2}
                 >
-                  Reset
-                </Button>
+                  <FormControl size="small" sx={{ minWidth: 160 }}>
+                    <Select
+                      value={severity}
+                      onChange={(e) => setSeverity(e.target.value)}
+                      displayEmpty
+                      sx={{
+                        color: "#999",
+                        bgcolor: "#282828", 
+                        "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                        "& .MuiSelect-icon": { color: "white" },
+                      }}
+                    >
+                      <MenuItem value="">- Select Severity -</MenuItem>
+                      <MenuItem value="Minor">Minor</MenuItem>
+                      <MenuItem value="Warning">Warning</MenuItem>
+                      <MenuItem value="Critical">Critical</MenuItem>
+                      <MenuItem value="Major">Major</MenuItem>
+                    </Select>
+                  </FormControl>
+
+                  <FormControl size="small" sx={{ minWidth: 160 }}>
+                    <Select
+                      value={acknowledged}
+                      onChange={(e) => setAcknowledged(e.target.value)}
+                      displayEmpty
+                      sx={{
+                        color: "#999",
+                        bgcolor: "#282828", 
+                        "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                        "& .MuiSelect-icon": { color: "white" },
+                      }}
+                    >
+                      <MenuItem value="">- Select Acknowledged -</MenuItem>
+                      <MenuItem value="0">Not Acknowledged</MenuItem>
+                      <MenuItem value="1">Acknowledged</MenuItem>
+                    </Select>
+                  </FormControl>
+
+                  <FormControl size="small" sx={{ minWidth: 160 }}>
+                    <Select
+                      value={status}
+                      onChange={(e) => setStatus(e.target.value)}
+                      displayEmpty
+                      sx={{
+                        color: "#999",
+                        bgcolor: "#282828", 
+                        "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                        "& .MuiSelect-icon": { color: "white" },
+                      }}
+                    >
+                      <MenuItem value="">- Select Alarm Status -</MenuItem>
+                      <MenuItem value="Closed">Closed</MenuItem>
+                      <MenuItem value="Open">Open</MenuItem>
+                      <MenuItem value="Active">Active</MenuItem>
+                      <MenuItem value="Resolved">Resolved</MenuItem>
+                    </Select>
+                  </FormControl>
+
+                  <FormControl size="small" sx={{ minWidth: 160 }}>
+                    <Select
+                      value={cpeType}
+                      onChange={(e) => setCpeType(e.target.value)}
+                      displayEmpty
+                      sx={{
+                        color: "#999",
+                        bgcolor: "#282828", 
+                        "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                        "& .MuiSelect-icon": { color: "white" },
+                      }}
+                    >
+                      <MenuItem value="">- Select CPE Type -</MenuItem>
+                      <MenuItem value="5GCore">5GCore</MenuItem>
+                    </Select>
+                  </FormControl>
+
+                  {/* Date Range Picker */}
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DateRangePicker
+                      value={dateRange}
+                      onChange={(newValue) => setDateRange(newValue)}
+                      slots={{ 
+                          openPickerIcon: NullComponent, 
+                         
+                      }}
+                      slotProps={{
+                        textField: {
+                          size: "small", 
+                          label: "-Start - End Date -", 
+                          sx: {
+                            minWidth: 160, 
+                            "& .MuiInputBase-root": {
+                             
+                              bgcolor: "#282828", 
+                              "& .MuiOutlinedInput-notchedOutline": { border: "none" }, 
+                            },
+                            
+                            "& .MuiInputLabel-root": {
+                              color: "#999", 
+                              transform: 'translate(14px, 10px) scale(1)', 
+                              '&.Mui-focused': { color: '#999' }, 
+                              '&.MuiInputLabel-shrink': { transform: 'translate(14px, 10px) scale(1)', color: '#999' }, 
+                            },
+
+                            "& .MuiSvgIcon-root": { color: "white" }, 
+                          },
+                        },
+                      }}
+                    />
+                  </LocalizationProvider>
+
+                  <Button
+                    variant="text"
+                    onClick={handleReset}
+                    sx={{
+                      color: "white",
+                      textTransform: "none",
+                      textDecoration: "underline",
+                    }}
+                  >
+                    Reset
+                  </Button>
+                </Box>
               </Box>
 
               {/* Table */}
               <TableContainer
                 sx={{
-                  bgcolor: "#2a2a2a",
+                  bgcolor: "#2D2D2E",
                   border: "none",
-                  borderRadius: "8px",
-                  mt: 1,
                 }}
-                component={Paper}
+                component={Paper} 
               >
                 <Table>
                   <TableHead>
-                    <TableRow sx={{ bgcolor: "#d1664f" }}>
-                      <TableCell
-                        sx={{
-                          color: "white",
-                          py: 2,
-                          fontSize: 16,
-                          border: 0,
-                        }}
-                      >
+                    <TableRow sx={{ bgcolor: "#D1664F" }}>
+                      <TableCell sx={{ color: "white", fontWeight: "bold", py: 2, whiteSpace: 'nowrap', borderBottom: 'none' }}>
                         ALARM ID
                       </TableCell>
-                      <TableCell
-                        sx={{
-                          color: "white",
-                          py: 2,
-                          fontSize: 16,
-                          border: 0,
-                        }}
-                      >
+                      <TableCell sx={{ color: "white", fontWeight: "bold", py: 2, whiteSpace: 'nowrap', borderBottom: 'none' }}>
                         DATE
                       </TableCell>
-                      <TableCell
-                        sx={{
-                          color: "white",
-                          py: 2,
-                          fontSize: 16,
-                          border: 0,
-                        }}
-                      >
+                      <TableCell sx={{ color: "white", fontWeight: "bold", py: 2, whiteSpace: 'nowrap', borderBottom: 'none' }}>
                         SEVERITY
                       </TableCell>
-                      <TableCell
-                        sx={{
-                          color: "white",
-                          py: 2,
-                          fontSize: 16,
-                          border: 0,
-                        }}
-                      >
+                      <TableCell sx={{ color: "white", fontWeight: "bold", py: 2, whiteSpace: 'nowrap', borderBottom: 'none' }}>
                         ALARM CAUSE
                       </TableCell>
-                      <TableCell
-                        sx={{
-                          color: "white",
-                          py: 2,
-                          fontSize: 16,
-                          border: 0,
-                        }}
-                      >
+                      <TableCell sx={{ color: "white", fontWeight: "bold", py: 2, whiteSpace: 'nowrap', borderBottom: 'none' }}>
                         ALARM STATUS
                       </TableCell>
-                      <TableCell
-                        sx={{
-                          color: "white",
-                          py: 2,
-                          fontSize: 16,
-                          border: 0,
-                        }}
-                      >
+                      <TableCell sx={{ color: "white", fontWeight: "bold", py: 2, whiteSpace: 'nowrap', borderBottom: 'none' }}>
                         ACKNOWLEDGED
                       </TableCell>
-                      <TableCell
-                        sx={{
-                          color: "white",
-                          py: 2,
-                          fontSize: 16,
-                          border: 0,
-                        }}
-                      >
+                      <TableCell sx={{ color: "white", fontWeight: "bold", py: 2, whiteSpace: 'nowrap', borderBottom: 'none' }}>
                         NODE NAME
                       </TableCell>
-                      <TableCell
-                        sx={{
-                          color: "white",
-                          py: 2,
-                          fontSize: 16,
-                          border: 0,
-                        }}
-                      >
+                      <TableCell sx={{ color: "white", fontWeight: "bold", py: 2, whiteSpace: 'nowrap', borderBottom: 'none' }}>
                         NODE ID
                       </TableCell>
-                      <TableCell
-                        sx={{
-                          color: "white",
-                          py: 2,
-                          fontSize: 16,
-                          border: 0,
-                        }}
-                      >
+                      <TableCell sx={{ color: "white", fontWeight: "bold", py: 2, whiteSpace: 'nowrap', borderBottom: 'none' }}>
                         NOTE TYPE
                       </TableCell>
                     </TableRow>
@@ -918,128 +683,44 @@ const AlarmDetailsCharts: React.FC = () => {
                       <TableRow
                         key={index}
                         sx={{
-                          bgcolor: "#282828",
-                          "&:hover": { bgcolor: "#252525" },
+                     
+                          bgcolor: index % 2 === 0 ? "#373839" : "#2D2D2E", 
+                          "&:hover": { 
+                            bgcolor: index % 2 === 0 ? "#414243" : "#373839",
+                          }, 
                         }}
                       >
-                        <TableCell
-                          sx={{
-                            color: "#b6b7b7",
-                            backgroundColor:
-                              index % 2 == 0 ? "#343536" : "#2d2d2e",
-                            fontSize: 16,
-                            py: 1.5,
-                            border: 0,
-                            // textAlign: "center",
-                          }}
-                        >
-                          {alarm.id}
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            color: "#b6b7b7",
-                            backgroundColor:
-                              index % 2 == 0 ? "#343536" : "#2d2d2e",
-                            fontSize: 16,
-                            py: 1.5,
-                            border: 0,
-                          }}
-                        >
+                        {/* MODIFIKASI: Mengubah warna teks dari "#fff" menjadi LIGHT_GREY (#cccccc) */}
+                        <TableCell sx={{ color: LIGHT_GREY, py: 1.5, borderBottom: 'none' }}>{alarm.id}</TableCell>
+                        <TableCell sx={{ color: LIGHT_GREY, py: 1.5, borderBottom: 'none' }}>
                           {new Date(alarm.date).toLocaleString()}
                         </TableCell>
-                        <TableCell
-                          sx={{
-                            color: "#b6b7b7",
-                            backgroundColor:
-                              index % 2 == 0 ? "#343536" : "#2d2d2e",
-                            fontSize: 16,
-                            py: 1.5,
-                            border: 0,
-                          }}
-                        >
+                        <TableCell sx={{ color: LIGHT_GREY, py: 1.5, borderBottom: 'none' }}>
                           {alarm.severity}
                         </TableCell>
-                        <TableCell
-                          sx={{
-                            color: "#b6b7b7",
-                            backgroundColor:
-                              index % 2 == 0 ? "#343536" : "#2d2d2e",
-                            fontSize: 16,
-                            py: 1.5,
-                            border: 0,
-                          }}
-                        >
+                        <TableCell sx={{ color: LIGHT_GREY, py: 1.5, borderBottom: 'none' }}>
                           {alarm.cause}
                         </TableCell>
-                        <TableCell
-                          sx={{
-                            color: "#b6b7b7",
-                            backgroundColor:
-                              index % 2 == 0 ? "#343536" : "#2d2d2e",
-                            fontSize: 16,
-                            py: 1.5,
-                            border: 0,
-                          }}
-                        >
+                        <TableCell sx={{ color: LIGHT_GREY, py: 1.5, borderBottom: 'none' }}>
                           {alarm.status}
                         </TableCell>
-                        <TableCell
-                          sx={{
-                            color: "#b6b7b7",
-                            backgroundColor:
-                              index % 2 == 0 ? "#343536" : "#2d2d2e",
-                            fontSize: 16,
-                            py: 1.5,
-                            border: 0,
-                          }}
-                        >
+                        <TableCell sx={{ color: LIGHT_GREY, py: 1.5, borderBottom: 'none' }}>
                           {alarm.acknowledged}
                         </TableCell>
-                        <TableCell
-                          sx={{
-                            color: "#b6b7b7",
-                            backgroundColor:
-                              index % 2 == 0 ? "#343536" : "#2d2d2e",
-                            fontSize: 16,
-                            py: 1.5,
-                            border: 0,
-                          }}
-                        >
+                        <TableCell sx={{ color: LIGHT_GREY, py: 1.5, borderBottom: 'none' }}>
                           {alarm.nodeName}
                         </TableCell>
-                        <TableCell
-                          sx={{
-                            color: "#b6b7b7",
-                            backgroundColor:
-                              index % 2 == 0 ? "#343536" : "#2d2d2e",
-                            fontSize: 16,
-                            py: 1.5,
-                            border: 0,
-                          }}
-                        >
+                        <TableCell sx={{ color: LIGHT_GREY, py: 1.5, borderBottom: 'none' }}>
                           {alarm.nodeId}
                         </TableCell>
-                        <TableCell
-                          sx={{
-                            color: "#b6b7b7",
-                            backgroundColor:
-                              index % 2 == 0 ? "#343536" : "#2d2d2e",
-                            fontSize: 16,
-                            py: 1.5,
-                            border: 0,
-                          }}
-                        >
+                        <TableCell sx={{ color: LIGHT_GREY, py: 1.5, borderBottom: 'none' }}>
                           {alarm.noteType}
                         </TableCell>
                       </TableRow>
                     ))}
                     {filteredAlarms.length === 0 && (
                       <TableRow>
-                        <TableCell
-                          colSpan={9}
-                          align="center"
-                          sx={{ color: "#fff", py: 3 }}
-                        >
+                        <TableCell colSpan={9} align="center" sx={{ color: LIGHT_GREY, py: 3, borderBottom: 'none' }}>
                           No alarms found
                         </TableCell>
                       </TableRow>
