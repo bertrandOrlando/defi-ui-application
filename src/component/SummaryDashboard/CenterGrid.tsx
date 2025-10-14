@@ -36,10 +36,10 @@ const CenterGrid = () => {
                     gap: 3,
                 }}
             >
-                <Box sx={{ flexGrow: 1, minWidth: '300px', flexBasis: '30%' }}>
+                <Box sx={{ flexGrow: 1, minWidth: '300px', flexBasis: {xs: '100%', md: '30%' } }}>
                     <UserWidget />
                 </Box>
-                <Box sx={{ flexGrow: 1, minWidth: '300px', flexBasis: '60%' }}>
+                <Box sx={{ flexGrow: 1, minWidth: '300px', flexBasis: {xs: '100%', md: '60%' } }}>
                     <SystemWidget />
                 </Box>
             </Box>
@@ -51,10 +51,10 @@ const CenterGrid = () => {
                     gap: 3,    
                 }}
             >
-                <Box sx={{ flexGrow: 1, minWidth: '300px', flexBasis: '50%'}}>
+                <Box sx={{ flexGrow: 1, minWidth: '300px', flexBasis: {xs: '100%', md: '50%' } }}>
                     <PerformanceWidget />
                 </Box>
-                <Box sx={{ flexGrow: 1, minWidth: '300px', flexBasis: '40%'}}>
+                <Box sx={{ flexGrow: 1, minWidth: '300px', flexBasis: {xs: '100%', md: '40%' } }}>
                     <AlarmsWidget />
                 </Box>
             </Box>

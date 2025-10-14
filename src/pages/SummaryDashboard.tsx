@@ -1,14 +1,12 @@
 import Header from "../component/header";
-import { Box, Breadcrumbs, Grid, Link, Typography } from "@mui/material";
+import { Box, Breadcrumbs, Drawer, IconButton, Link, Typography, useMediaQuery, useTheme } from "@mui/material";
 import LeftGrid from "../component/SummaryDashboard/LeftGrid";
 import RightGrid from "../component/SummaryDashboard/RightGrid";
 import CenterGrid from "../component/SummaryDashboard/CenterGrid";
 import { useNavigate } from "react-router-dom";
-
-/**
- * TODO :
- * - Small CSS like text styling
- */
+import { useState } from "react";
+import MenuIcon from '@mui/icons-material/Menu';
+import TuneIcon from '@mui/icons-material/Tune';
 
 const CustomBreadCrumbs = () => {
     const navigate = useNavigate();
@@ -45,6 +43,11 @@ const CustomBreadCrumbs = () => {
 }
 
 const SummaryDashboard = () => {
+    const [isLeftDrawerOpen, setLeftDrawerOpen] = useState(false);
+    const [isRightDrawerOpen, setRightDrawerOpen] = useState(false);
+
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
     return (
         <div className="min-h-screen bg-[#282828] text-white">
@@ -61,30 +64,62 @@ const SummaryDashboard = () => {
                 </Box>
 
                 {/* main dashboard */}
-                <Grid
-                    sx={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(12, 1fr)',
-                        gap: 2,
-                        p: 1,
-                        alignItems: 'start'
-                    }}
-                >
-                    {/* left grid column */}
-                    <Grid sx={{ gridColumn: 'span 2'}}>
-                        <LeftGrid />
-                    </Grid>
+                {isMobile ? (
+                    <Box sx={{ position: 'relative', pt: 2 }}>
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2}}>
+                            <IconButton onClick={() => setLeftDrawerOpen(true)} sx={{ color: 'white'}}>
+                                <MenuIcon />
+                                <Typography sx={{ ml: 1, fontSize: '0.9rem'}}>Menu</Typography>
+                            </IconButton>
+                            <IconButton onClick={() => setRightDrawerOpen(true)} sx={{ color: 'white'}}>
+                                <TuneIcon />
+                                <Typography sx={{ ml: 1, fontSize: '0.9rem'}}>Alarm</Typography>
+                            </IconButton>
+                        </Box>
 
-                    {/* Center grid column */}
-                    <Grid sx={{ gridColumn: 'span 8'}}>
+                        {/* left grid drawer */}
+                        <Drawer anchor="left" open={isLeftDrawerOpen} onClose={() => setLeftDrawerOpen(false)}>
+                            <Box sx={{ width: 250, height: '100%', bgcolor: '#282828' }}>
+                                <LeftGrid />
+                            </Box>
+                        </Drawer>
+
+                        {/* right grid drawer */}
+                        <Drawer anchor="right" open={isRightDrawerOpen} onClose={() => setRightDrawerOpen(false)}>
+                            <Box sx={{ width: 280, height: '100%', bgcolor: '#343536' }}>
+                                <RightGrid />
+                            </Box>
+                        </Drawer>
+
+                        {/* center grid */}
                         <CenterGrid />
-                    </Grid>
+                    </Box>
+                ) : (
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            gap: 2,
+                            p: 1,
+                            alignItems: 'start'
+                        }}
+                    >
+                        {/* left grid column */}
+                        <Box sx={{ width: '16.66%' }}>
+                            <LeftGrid />
+                        </Box>
 
-                    {/* right grid colum */}
-                    <Grid sx={{ gridColumn: 'span 2'}}>
-                        <RightGrid />
-                    </Grid>
-                </Grid>
+                        {/* Center grid column */}
+                        <Box sx={{ width: '66.67%' }}>
+                            <CenterGrid />
+                        </Box>
+
+                        {/* right grid colum */}
+                        <Box sx={{ width: '16.66%' }}>
+                            <RightGrid />
+                        </Box>
+                    </Box>
+                )}
+                
             </main>
         </div>
     );
