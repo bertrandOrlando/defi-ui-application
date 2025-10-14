@@ -21,19 +21,11 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route
           path="/register"
-          element={
-            <ProtectedRoute>
-              <OutOfScope pageName="Register Page" />
-            </ProtectedRoute>
-          }
+          element={<OutOfScope pageName="Register Page" />}
         />
         <Route
           path="/forgot-password"
-          element={
-            <ProtectedRoute>
-              <OutOfScope pageName="Forgot Password Page" />
-            </ProtectedRoute>
-          }
+          element={<OutOfScope pageName="Forgot Password Page" />}
         />
         <Route
           path="/dashboard"
