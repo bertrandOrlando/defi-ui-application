@@ -808,7 +808,7 @@ const AlarmDetailsCharts: React.FC = () => {
             >
               <Table>
                 <TableHead>
-                  <TableRow sx={{ bgcolor: "#d84315" }}>
+                  <TableRow sx={{ bgcolor: "#D1664F" }}>
                     <TableCell
                       sx={{ color: "white", fontWeight: "bold", py: 2 }}
                     >
