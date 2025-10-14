@@ -11,6 +11,7 @@ import RootHandler from "./pages/RootHandler";
 import UserManagement from "./pages/UserManagement";
 import OutOfScope from "./pages/OutOfScope";
 import { ToastContainer } from "react-toastify";
+import PerformanceDetails from "./pages/PerformanceDetails";
 
 function App() {
   return (
@@ -88,6 +89,14 @@ function App() {
           element={
             <ProtectedRoute>
               <SummaryDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/performance-details"
+          element={
+            <ProtectedRoute>
+              <PerformanceDetails />
             </ProtectedRoute>
           }
         />
