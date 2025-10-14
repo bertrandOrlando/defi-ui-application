@@ -298,23 +298,30 @@ return (
         position: "relative",
       }}
     >
-       <Box sx={{ ml: -2 }}>
          <Header />
-       </Box>
-   <main className="container mx-auto p-1">
-                {/* breadcrumbs */}
-                <DynamicBreadcrumb />
-             
-    </main>
+      
+  <main className="container mx-auto p-1">
+  {/* Breadcrumbs */}
+  <Box sx={{ display: "flex", alignItems: "center", mb: 2, ml: -5 }}>
+    <DynamicBreadcrumb />
+  </Box>
+</main>
+ {/* Breadcrumb + Title */}
+      <div className="px-4">
+        <div className="flex flex-col gap-1">
+          <DynamicBreadcrumb />
+            <Typography variant="h5" sx={{ mt: 1, mb: 3, fontWeight: "bold" }}>
+          User Management <span style={{ color: "limegreen" }}>●</span>
+        </Typography>
+
+        </div>
+      </div>
+
 
 
       
       <Box sx={{ flex: 1, p: 3, overflow: "auto", color: "#fff" }}>
-    
-        <Typography variant="h5" sx={{ mt: 1, mb: 3, fontWeight: "bold" }}>
-          User Management <span style={{ color: "limegreen" }}>●</span>
-        </Typography>
-
+  
        
         <Tabs
           value={tab}
