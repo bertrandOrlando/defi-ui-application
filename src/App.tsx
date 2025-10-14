@@ -16,7 +16,6 @@ function App() {
     <Routes>
       <Route path="/" element={<RootHandler />} />
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/performance-details" element={<PerformanceDetails />} />
       <Route path="/register" element={<h1>Register Page</h1>} />
       <Route
         path="/dashboard"
