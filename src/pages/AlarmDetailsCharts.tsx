@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useState } from 'react';
 import alarms from '../data/alarm.json';
 import { PieChart } from '@mui/x-charts/PieChart';
