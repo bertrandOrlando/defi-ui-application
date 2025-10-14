@@ -251,7 +251,7 @@ const AlarmDetailsCharts: React.FC = () => {
 
   return (
     <div
-      className="min-h-screen"
+      className="min-h-screen px-4"
       style={{ background: COLORS.bg, color: COLORS.text }}
     >
       <Header />
@@ -668,38 +668,43 @@ const AlarmDetailsCharts: React.FC = () => {
           </div>
         ) : (
           // Table View
-          <Box>
+          <Box
+            sx={{
+              backgroundColor: "#343536",
+              p: 3,
+              borderRadius: "8px",
+            }}
+          >
             {/* Filter Section */}
             <Box
               sx={{
-                bgcolor: "#2a2a2a",
-                p: 3,
+                backgroundColor: "#2d2d2e",
+                p: 4,
                 borderRadius: "8px",
                 mb: 3,
               }}
             >
               <Typography
                 variant="subtitle1"
-                sx={{ mb: 2, fontWeight: "bold", color: "white" }}
+                sx={{ mb: 1, fontWeight: "bold", color: "white" }}
               >
                 Alarms
               </Typography>
-
               <Box
-                display="flex"
-                justifyContent="space-between"
+                display="grid"
+                gridTemplateColumns="repeat(6, 1fr)" // 6 kolom dengan lebar sama
                 alignItems="center"
-                flexWrap="wrap"
-                gap={2}
+                justifyContent="center"
+                gap={2} // jarak antar elemen
               >
-                <FormControl size="small" sx={{ minWidth: 160 }}>
+                <FormControl size="small" sx={{ width: "100%" }}>
                   <Select
                     value={severity}
                     onChange={(e) => setSeverity(e.target.value)}
                     displayEmpty
                     sx={{
                       color: "#999",
-                      bgcolor: "#1a1a1a",
+                      bgcolor: "#282828",
                       "& .MuiOutlinedInput-notchedOutline": { border: "none" },
                       "& .MuiSelect-icon": { color: "#999" },
                     }}
@@ -712,14 +717,14 @@ const AlarmDetailsCharts: React.FC = () => {
                   </Select>
                 </FormControl>
 
-                <FormControl size="small" sx={{ minWidth: 160 }}>
+                <FormControl size="small" sx={{ width: "100%" }}>
                   <Select
                     value={acknowledged}
                     onChange={(e) => setAcknowledged(e.target.value)}
                     displayEmpty
                     sx={{
                       color: "#999",
-                      bgcolor: "#1a1a1a",
+                      bgcolor: "#282828",
                       "& .MuiOutlinedInput-notchedOutline": { border: "none" },
                       "& .MuiSelect-icon": { color: "#999" },
                     }}
@@ -730,14 +735,14 @@ const AlarmDetailsCharts: React.FC = () => {
                   </Select>
                 </FormControl>
 
-                <FormControl size="small" sx={{ minWidth: 160 }}>
+                <FormControl size="small" sx={{ width: "100%" }}>
                   <Select
                     value={status}
                     onChange={(e) => setStatus(e.target.value)}
                     displayEmpty
                     sx={{
                       color: "#999",
-                      bgcolor: "#1a1a1a",
+                      bgcolor: "#282828",
                       "& .MuiOutlinedInput-notchedOutline": { border: "none" },
                       "& .MuiSelect-icon": { color: "#999" },
                     }}
@@ -750,14 +755,14 @@ const AlarmDetailsCharts: React.FC = () => {
                   </Select>
                 </FormControl>
 
-                <FormControl size="small" sx={{ minWidth: 160 }}>
+                <FormControl size="small" sx={{ width: "100%" }}>
                   <Select
                     value={cpeType}
                     onChange={(e) => setCpeType(e.target.value)}
                     displayEmpty
                     sx={{
                       color: "#999",
-                      bgcolor: "#1a1a1a",
+                      bgcolor: "#282828",
                       "& .MuiOutlinedInput-notchedOutline": { border: "none" },
                       "& .MuiSelect-icon": { color: "#999" },
                     }}
@@ -770,13 +775,13 @@ const AlarmDetailsCharts: React.FC = () => {
                 {/* Date Range Picker */}
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DateRangePicker
-                    label="-Start End Date-"
+                    label="- Start - End Date -"
                     value={dateRange}
                     onChange={(newValue) => setDateRange(newValue)}
                     slotProps={{
                       textField: {
                         InputLabelProps: {
-                          style: { color: "#999", backgroundColor: "#1a1a1a" },
+                          style: { color: "#999" },
                         },
                       },
                     }}
@@ -790,124 +795,259 @@ const AlarmDetailsCharts: React.FC = () => {
                     color: "white",
                     textTransform: "none",
                     textDecoration: "underline",
+                    width: "fit-content",
+                    justifySelf: "end",
+                    borderRadius: 4,
+                    "&:hover": {
+                      backgroundColor: "transparent",
+                      textDecoration: "underline",
+                    },
                   }}
                 >
                   Reset
                 </Button>
               </Box>
-            </Box>
 
-            {/* Table */}
-            <TableContainer
-              sx={{
-                bgcolor: "#2a2a2a",
-                border: "none",
-                borderRadius: "8px",
-              }}
-              component={Paper}
-            >
-              <Table>
-                <TableHead>
-                  <TableRow sx={{ bgcolor: "#d84315" }}>
-                    <TableCell
-                      sx={{ color: "white", fontWeight: "bold", py: 2 }}
-                    >
-                      ALARM ID
-                    </TableCell>
-                    <TableCell
-                      sx={{ color: "white", fontWeight: "bold", py: 2 }}
-                    >
-                      DATE
-                    </TableCell>
-                    <TableCell
-                      sx={{ color: "white", fontWeight: "bold", py: 2 }}
-                    >
-                      SEVERITY
-                    </TableCell>
-                    <TableCell
-                      sx={{ color: "white", fontWeight: "bold", py: 2 }}
-                    >
-                      ALARM CAUSE
-                    </TableCell>
-                    <TableCell
-                      sx={{ color: "white", fontWeight: "bold", py: 2 }}
-                    >
-                      ALARM STATUS
-                    </TableCell>
-                    <TableCell
-                      sx={{ color: "white", fontWeight: "bold", py: 2 }}
-                    >
-                      ACKNOWLEDGED
-                    </TableCell>
-                    <TableCell
-                      sx={{ color: "white", fontWeight: "bold", py: 2 }}
-                    >
-                      NODE NAME
-                    </TableCell>
-                    <TableCell
-                      sx={{ color: "white", fontWeight: "bold", py: 2 }}
-                    >
-                      NODE ID
-                    </TableCell>
-                    <TableCell
-                      sx={{ color: "white", fontWeight: "bold", py: 2 }}
-                    >
-                      NOTE TYPE
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {filteredAlarms.map((alarm, index) => (
-                    <TableRow
-                      key={index}
-                      sx={{
-                        bgcolor: "#1a1a1a",
-                        "&:hover": { bgcolor: "#252525" },
-                      }}
-                    >
-                      <TableCell sx={{ color: "#fff", py: 1.5 }}>
-                        {alarm.id}
-                      </TableCell>
-                      <TableCell sx={{ color: "#fff", py: 1.5 }}>
-                        {new Date(alarm.date).toLocaleString()}
-                      </TableCell>
-                      <TableCell sx={{ color: "#fff", py: 1.5 }}>
-                        {alarm.severity}
-                      </TableCell>
-                      <TableCell sx={{ color: "#fff", py: 1.5 }}>
-                        {alarm.cause}
-                      </TableCell>
-                      <TableCell sx={{ color: "#fff", py: 1.5 }}>
-                        {alarm.status}
-                      </TableCell>
-                      <TableCell sx={{ color: "#fff", py: 1.5 }}>
-                        {alarm.acknowledged}
-                      </TableCell>
-                      <TableCell sx={{ color: "#fff", py: 1.5 }}>
-                        {alarm.nodeName}
-                      </TableCell>
-                      <TableCell sx={{ color: "#fff", py: 1.5 }}>
-                        {alarm.nodeId}
-                      </TableCell>
-                      <TableCell sx={{ color: "#fff", py: 1.5 }}>
-                        {alarm.noteType}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                  {filteredAlarms.length === 0 && (
-                    <TableRow>
+              {/* Table */}
+              <TableContainer
+                sx={{
+                  bgcolor: "#2a2a2a",
+                  border: "none",
+                  borderRadius: "8px",
+                  mt: 1,
+                }}
+                component={Paper}
+              >
+                <Table>
+                  <TableHead>
+                    <TableRow sx={{ bgcolor: "#d1664f" }}>
                       <TableCell
-                        colSpan={9}
-                        align="center"
-                        sx={{ color: "#fff", py: 3 }}
+                        sx={{
+                          color: "white",
+                          py: 2,
+                          fontSize: 16,
+                          border: 0,
+                        }}
                       >
-                        No alarms found
+                        ALARM ID
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          py: 2,
+                          fontSize: 16,
+                          border: 0,
+                        }}
+                      >
+                        DATE
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          py: 2,
+                          fontSize: 16,
+                          border: 0,
+                        }}
+                      >
+                        SEVERITY
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          py: 2,
+                          fontSize: 16,
+                          border: 0,
+                        }}
+                      >
+                        ALARM CAUSE
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          py: 2,
+                          fontSize: 16,
+                          border: 0,
+                        }}
+                      >
+                        ALARM STATUS
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          py: 2,
+                          fontSize: 16,
+                          border: 0,
+                        }}
+                      >
+                        ACKNOWLEDGED
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          py: 2,
+                          fontSize: 16,
+                          border: 0,
+                        }}
+                      >
+                        NODE NAME
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          py: 2,
+                          fontSize: 16,
+                          border: 0,
+                        }}
+                      >
+                        NODE ID
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          py: 2,
+                          fontSize: 16,
+                          border: 0,
+                        }}
+                      >
+                        NOTE TYPE
                       </TableCell>
                     </TableRow>
-                  )}
-                </TableBody>
-              </Table>
-            </TableContainer>
+                  </TableHead>
+                  <TableBody>
+                    {filteredAlarms.map((alarm, index) => (
+                      <TableRow
+                        key={index}
+                        sx={{
+                          bgcolor: "#282828",
+                          "&:hover": { bgcolor: "#252525" },
+                        }}
+                      >
+                        <TableCell
+                          sx={{
+                            color: "#b6b7b7",
+                            backgroundColor:
+                              index % 2 == 0 ? "#343536" : "#2d2d2e",
+                            fontSize: 16,
+                            py: 1.5,
+                            border: 0,
+                            // textAlign: "center",
+                          }}
+                        >
+                          {alarm.id}
+                        </TableCell>
+                        <TableCell
+                          sx={{
+                            color: "#b6b7b7",
+                            backgroundColor:
+                              index % 2 == 0 ? "#343536" : "#2d2d2e",
+                            fontSize: 16,
+                            py: 1.5,
+                            border: 0,
+                          }}
+                        >
+                          {new Date(alarm.date).toLocaleString()}
+                        </TableCell>
+                        <TableCell
+                          sx={{
+                            color: "#b6b7b7",
+                            backgroundColor:
+                              index % 2 == 0 ? "#343536" : "#2d2d2e",
+                            fontSize: 16,
+                            py: 1.5,
+                            border: 0,
+                          }}
+                        >
+                          {alarm.severity}
+                        </TableCell>
+                        <TableCell
+                          sx={{
+                            color: "#b6b7b7",
+                            backgroundColor:
+                              index % 2 == 0 ? "#343536" : "#2d2d2e",
+                            fontSize: 16,
+                            py: 1.5,
+                            border: 0,
+                          }}
+                        >
+                          {alarm.cause}
+                        </TableCell>
+                        <TableCell
+                          sx={{
+                            color: "#b6b7b7",
+                            backgroundColor:
+                              index % 2 == 0 ? "#343536" : "#2d2d2e",
+                            fontSize: 16,
+                            py: 1.5,
+                            border: 0,
+                          }}
+                        >
+                          {alarm.status}
+                        </TableCell>
+                        <TableCell
+                          sx={{
+                            color: "#b6b7b7",
+                            backgroundColor:
+                              index % 2 == 0 ? "#343536" : "#2d2d2e",
+                            fontSize: 16,
+                            py: 1.5,
+                            border: 0,
+                          }}
+                        >
+                          {alarm.acknowledged}
+                        </TableCell>
+                        <TableCell
+                          sx={{
+                            color: "#b6b7b7",
+                            backgroundColor:
+                              index % 2 == 0 ? "#343536" : "#2d2d2e",
+                            fontSize: 16,
+                            py: 1.5,
+                            border: 0,
+                          }}
+                        >
+                          {alarm.nodeName}
+                        </TableCell>
+                        <TableCell
+                          sx={{
+                            color: "#b6b7b7",
+                            backgroundColor:
+                              index % 2 == 0 ? "#343536" : "#2d2d2e",
+                            fontSize: 16,
+                            py: 1.5,
+                            border: 0,
+                          }}
+                        >
+                          {alarm.nodeId}
+                        </TableCell>
+                        <TableCell
+                          sx={{
+                            color: "#b6b7b7",
+                            backgroundColor:
+                              index % 2 == 0 ? "#343536" : "#2d2d2e",
+                            fontSize: 16,
+                            py: 1.5,
+                            border: 0,
+                          }}
+                        >
+                          {alarm.noteType}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                    {filteredAlarms.length === 0 && (
+                      <TableRow>
+                        <TableCell
+                          colSpan={9}
+                          align="center"
+                          sx={{ color: "#fff", py: 3 }}
+                        >
+                          No alarms found
+                        </TableCell>
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Box>
           </Box>
         )}
       </div>
