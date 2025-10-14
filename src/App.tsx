@@ -9,7 +9,6 @@ import ProtectedRoute from "./component/ProtectedRoute";
 import NotFoundPage from "./pages/NotFoundPage";
 import RootHandler from "./pages/RootHandler";
 import UserManagement from "./pages/UserManagement";
-import UserGroupManagement from "./pages/UserGroupManagement";
 import OutOfScope from "./pages/OutOfScope";
 
 function App() {
@@ -66,14 +65,7 @@ function App() {
           </ProtectedRoute>
         }
       />
-      <Route
-        path="/user-group-management"
-        element={
-          <ProtectedRoute>
-            <UserGroupManagement />
-          </ProtectedRoute>
-        }
-      />
+     
 
       <Route
         path="/network-planning"
