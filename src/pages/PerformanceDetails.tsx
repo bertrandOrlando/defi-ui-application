@@ -99,24 +99,21 @@ const ThroughputChart = ({ chartData }: any) => {
             }}
             slots={{ tooltip: ChartsTooltip }}
             slotProps={{
-              tooltip: {
-                trigger: 'axis',
-                content: (props: any) => (
-                  <CustomTooltipContent {...props} dataset={chartData} />
-                ),
-                sx: {
-                  '& .MuiChartsTooltip-root': {
-                    backgroundColor: 'transparent',
-                    padding: 0,
-                    border: 'none',
-                  },
-                  '& .MuiChartsTooltip-axisLine': {
-                    stroke: '#999',
-                    strokeWidth: 1,
-                    strokeDasharray: '3 3',
-                  },
+                tooltip: {
+                    trigger: 'axis',
+                    sx: {
+                    '& .MuiChartsTooltip-root': {
+                        backgroundColor: 'transparent',
+                        padding: 0,
+                        border: 'none',
+                    },
+                    '& .MuiChartsTooltip-axisLine': {
+                        stroke: '#999',
+                        strokeWidth: 1,
+                        strokeDasharray: '3 3',
+                    },
+                    },
                 },
-              },
             }}
             margin={{ top: 5, right: 30, left: 30, bottom: 25 }}
           />
