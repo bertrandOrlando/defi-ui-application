@@ -301,11 +301,13 @@ return (
        <Box sx={{ ml: -2 }}>
          <Header />
        </Box>
-   <main className="container mx-auto p-1">
-                {/* breadcrumbs */}
-                <DynamicBreadcrumb />
-             
-    </main>
+  <main className="container mx-auto p-1">
+  {/* Breadcrumbs */}
+  <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+    <DynamicBreadcrumb />
+  </Box>
+</main>
+
 
 
       
