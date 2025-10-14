@@ -31,7 +31,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import ArticleIcon from "@mui/icons-material/Article";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import Header from "../component/header"
+import Header from "../component/header";
 import DynamicBreadcrumb from "../component/DynamicBreadCrumbs";
 
 import userData from "../data/users.json";
@@ -112,7 +112,7 @@ const finalUsers: User[] = loadedUsers
 
 export default function UserManagement() {
   const [tab, setTab] = useState<number>(0);
-  
+
   // User Management States
   const [users, setUsers] = useState<User[]>(finalUsers);
   const [userSearch, setUserSearch] = useState<string>("");
@@ -156,7 +156,9 @@ export default function UserManagement() {
       );
 
       if (emailExists) {
-        setUserErrorMessage(`Email "${email}" sudah terdaftar. Gunakan email yang berbeda.`);
+        setUserErrorMessage(
+          `Email "${email}" sudah terdaftar. Gunakan email yang berbeda.`
+        );
         setUserErrorOpen(true);
         return;
       }
@@ -206,11 +208,14 @@ export default function UserManagement() {
   const handleSaveEdit = (index: number) => {
     // Check if new name already exists (excluding current group)
     const nameExists = groups.some(
-      (g, i) => i !== index && g.roleName.toLowerCase() === editValue.toLowerCase()
+      (g, i) =>
+        i !== index && g.roleName.toLowerCase() === editValue.toLowerCase()
     );
 
     if (nameExists) {
-      setGroupErrorMessage(`User Group "${editValue}" sudah ada. Gunakan nama yang berbeda.`);
+      setGroupErrorMessage(
+        `User Group "${editValue}" sudah ada. Gunakan nama yang berbeda.`
+      );
       setGroupErrorOpen(true);
       return;
     }
@@ -230,14 +235,18 @@ export default function UserManagement() {
   const handleToggle = (group: string, name: string) => {
     const exists = selected.some((p) => p.group === group && p.name === name);
     if (exists) {
-      setSelected(selected.filter((p) => !(p.group === group && p.name === name)));
+      setSelected(
+        selected.filter((p) => !(p.group === group && p.name === name))
+      );
     } else {
       setSelected([...selected, { group, name }]);
     }
   };
 
   const handleRemove = (group: string, name: string) => {
-    setSelected(selected.filter((p) => !(p.group === group && p.name === name)));
+    setSelected(
+      selected.filter((p) => !(p.group === group && p.name === name))
+    );
   };
 
   const handleClearAll = () => setSelected([]);
@@ -256,7 +265,9 @@ export default function UserManagement() {
     );
 
     if (nameExists) {
-      setGroupErrorMessage(`User Group "${groupName}" sudah ada. Gunakan nama yang berbeda.`);
+      setGroupErrorMessage(
+        `User Group "${groupName}" sudah ada. Gunakan nama yang berbeda.`
+      );
       setGroupErrorOpen(true);
       return;
     }
@@ -282,10 +293,10 @@ export default function UserManagement() {
     g.roleName.toLowerCase().includes(groupSearch.toLowerCase())
   );
 
-return (
+  return (
     <Box
       sx={{
-        bgcolor: "#121212",
+        bgcolor: "#1f1f1f",
         width: "100%",
         maxWidth: "100vw",
         minHeight: "100vh",
@@ -296,35 +307,58 @@ return (
         p: 0,
         overflowX: "hidden",
         position: "relative",
+        pb: 6,
       }}
     >
-         <Header />
-      
-  <main className="container mx-auto p-1">
-</main>
- {/* Breadcrumb + Title */}
+      <Header />
+
+      <main className="container mx-auto p-1"></main>
+      {/* Breadcrumb + Title */}
       <div className="px-4">
         <div className="flex flex-col gap-1">
           <DynamicBreadcrumb />
-            <Typography variant="h5" sx={{ mt: 1, mb: 3, fontWeight: "bold" }}>
-          User Management <span style={{ color: "limegreen" }}>●</span>
-        </Typography>
-
+          <Typography variant="h5" sx={{ mt: 1, mb: 3, fontWeight: "bold" }}>
+            User Management <span style={{ color: "limegreen" }}>●</span>
+          </Typography>
         </div>
       </div>
 
-
-
-      
-      <Box sx={{ flex: 1, p: 3, overflow: "auto", color: "#fff" }}>
-  
-       
+      <Box
+        sx={{
+          flex: 1,
+          p: 3,
+          overflow: "auto",
+          color: "#fff",
+          backgroundColor: "#343536",
+          mx: 2,
+          borderRadius: 4,
+        }}
+      >
         <Tabs
           value={tab}
           onChange={(_event: React.SyntheticEvent, newValue: number) => {
             setTab(newValue);
           }}
-          sx={{ mb: 2 }}
+          sx={{
+            minHeight: "auto",
+            "& .MuiTabs-indicator": {
+              display: "none",
+            },
+            "& .MuiTab-root": {
+              backgroundColor: "#5a5a5a",
+              color: "#a0a0a0",
+              textTransform: "none",
+              fontSize: "0.8rem",
+              padding: "8px 10px",
+              minHeight: "auto",
+              marginRight: "-5px",
+              borderRadius: "4px",
+              "&.Mui-selected": {
+                backgroundColor: "#355493",
+                color: "white",
+              },
+            },
+          }}
         >
           <Tab
             label="User Management"
@@ -368,7 +402,7 @@ return (
             >
               <Typography
                 variant="h6"
-                sx={{ fontWeight: "bold", color: "white" }}
+                sx={{ fontWeight: "bold", color: "white", fontSize: 16 }}
               >
                 User Management
               </Typography>
@@ -465,22 +499,41 @@ return (
                       <TableRow
                         key={user.id}
                         sx={{
-                          bgcolor: index % 2 === 0 ? "#343536" : "transparent",
+                          bgcolor: index % 2 === 0 ? "#343536" : "#2d2d2e",
                           borderRadius: "10px",
+                          py: 1,
                         }}
                       >
                         <TableCell
-                          sx={{ color: "white", borderBottom: "none" }}
+                          sx={{
+                            color: "white",
+                            borderBottom: "none",
+                            py: 1,
+                            backgroundColor:
+                              index % 2 == 0 ? "#343536" : "#2d2d2e",
+                          }}
                         >
                           {user.email}
                         </TableCell>
                         <TableCell
-                          sx={{ color: "white", borderBottom: "none" }}
+                          sx={{
+                            color: "white",
+                            borderBottom: "none",
+                            py: 1,
+                            backgroundColor:
+                              index % 2 == 0 ? "#343536" : "#2d2d2e",
+                          }}
                         >
                           {getRoleName(user.roleId)}
                         </TableCell>
                         <TableCell
-                          sx={{ color: "white", borderBottom: "none" }}
+                          sx={{
+                            color: "white",
+                            borderBottom: "none",
+                            py: 1,
+                            backgroundColor:
+                              index % 2 == 0 ? "#343536" : "#2d2d2e",
+                          }}
                         >
                           {user.updatedBy} on{" "}
                           {new Date(user.updatedAt).toLocaleString()}
@@ -490,6 +543,9 @@ return (
                             display: "flex",
                             justifyContent: "center",
                             borderBottom: "none",
+                            py: 1,
+                            backgroundColor:
+                              index % 2 == 0 ? "#343536" : "#2d2d2e",
                           }}
                         >
                           <IconButton
@@ -509,17 +565,28 @@ return (
 
         {/* User Group Management Tab */}
         {tab === 1 && (
-          <Box sx={{ bgcolor: "#1e1e1e", borderRadius: "12px", p: 3 }}>
+          <Box
+            sx={{
+              mt: 2,
+              bgcolor: "#2d2d2e",
+              borderRadius: 2,
+              p: 2,
+            }}
+          >
             <Box
               sx={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                mb: 3,
-                mt: 3,
+                mb: 2,
               }}
             >
-              <Typography variant="h6">User Group Management</Typography>
+              <Typography
+                variant="h6"
+                sx={{ fontWeight: "bold", color: "white", fontSize: 16 }}
+              >
+                User Group Management
+              </Typography>
 
               <Box sx={{ display: "flex", gap: 2 }}>
                 <TextField
@@ -555,15 +622,31 @@ return (
               </Box>
             </Box>
 
-            <TableContainer>
+            <TableContainer
+              sx={{
+                bgcolor: "#1e1e1e",
+                border: "1px solid #333",
+                borderRadius: "10px",
+              }}
+            >
               <Table>
                 <TableHead>
-                  <TableRow sx={{ bgcolor: "#8e44ad" }}>
-                    <TableCell sx={{ color: "white", fontWeight: "bold" }}>
+                  <TableRow sx={{ bgcolor: "#8a5480" }}>
+                    <TableCell
+                      sx={{
+                        color: "white",
+                        fontWeight: "bold",
+                        borderBottom: "none",
+                      }}
+                    >
                       USER GROUP
                     </TableCell>
                     <TableCell
-                      sx={{ color: "white", fontWeight: "bold" }}
+                      sx={{
+                        color: "white",
+                        fontWeight: "bold",
+                        borderBottom: "none",
+                      }}
                       align="right"
                     >
                       ACTIONS
@@ -574,21 +657,43 @@ return (
                   {filteredGroups.map((g, i) => (
                     <TableRow
                       key={i}
-                      sx={{ bgcolor: i % 2 === 0 ? "#2d2d2d" : "#1e1e1e" }}
+                      sx={{
+                        bgcolor: i % 2 === 0 ? "#343536" : "#2d2d2e",
+                        borderRadius: "10px",
+                        py: 1,
+                      }}
                     >
-                      <TableCell sx={{ color: "white" }}>
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          borderBottom: "none",
+                          py: 1,
+                          backgroundColor: i % 2 == 0 ? "#343536" : "#2d2d2e",
+                        }}
+                      >
                         {editIndex === i ? (
                           <TextField
                             value={editValue}
                             onChange={(e) => setEditValue(e.target.value)}
                             size="small"
-                            sx={{ bgcolor: "#2d2d2d", input: { color: "white" } }}
+                            sx={{
+                              bgcolor: "#2d2d2d",
+                              input: { color: "white" },
+                            }}
                           />
                         ) : (
                           g.roleName
                         )}
                       </TableCell>
-                      <TableCell align="right">
+                      <TableCell
+                        align="right"
+                        sx={{
+                          color: "white",
+                          borderBottom: "none",
+                          py: 1,
+                          backgroundColor: i % 2 == 0 ? "#343536" : "#2d2d2e",
+                        }}
+                      >
                         <IconButton
                           sx={{ color: "gray" }}
                           onClick={() => handleViewDetail(g)}
@@ -780,7 +885,7 @@ return (
         </DialogActions>
       </Dialog>
 
-     {/* Create Group Dialog */}
+      {/* Create Group Dialog */}
       <Dialog
         open={createOpen}
         onClose={() => setCreateOpen(false)}
@@ -796,19 +901,23 @@ return (
       >
         <DialogContent>
           <Box sx={{ ml: -2 }}>
-         <Header />
-        </Box>
-        <main className="container mx-auto p-1">
-                 <Typography variant="body2" color="white" sx={{ mt: 2, mb: 1 }}>
-            Dashboard / User Management <span style={{ color: "#f39c12" }}>/ Create New User Group</span>
-          </Typography>
-         <Typography variant="h5" sx={{ mt: 1, mb: 3, fontWeight: "bold" }}>           
-         Create New User Group 
-          </Typography>
-             
-        </main>
+            <Header />
+          </Box>
+          <main className="container mx-auto p-1">
+            <Typography variant="body2" color="white" sx={{ mt: 2, mb: 1 }}>
+              Dashboard / User Management{" "}
+              <span style={{ color: "#f39c12" }}>/ Create New User Group</span>
+            </Typography>
+            <Typography variant="h5" sx={{ mt: 1, mb: 3, fontWeight: "bold" }}>
+              Create New User Group
+            </Typography>
+          </main>
 
-          <Box display="flex" flexDirection={{ xs: "column", md: "row" }} gap={3}>
+          <Box
+            display="flex"
+            flexDirection={{ xs: "column", md: "row" }}
+            gap={3}
+          >
             <Box flex={1}>
               <Card sx={{ bgcolor: "#1e1e1e", p: 2, color: "white" }}>
                 <Typography variant="subtitle1" mb={2} color="white">
@@ -858,12 +967,18 @@ return (
                 </Box>
 
                 <Box display="flex" justifyContent="flex-end" mt={3}>
-                  <Button sx={{ color: "#fff", mr: 2 }} onClick={() => setCreateOpen(false)}>
+                  <Button
+                    sx={{ color: "#fff", mr: 2 }}
+                    onClick={() => setCreateOpen(false)}
+                  >
                     Cancel
                   </Button>
                   <Button
                     variant="contained"
-                    sx={{ bgcolor: "#1976d2", "&:hover": { bgcolor: "#1565c0" } }}
+                    sx={{
+                      bgcolor: "#1976d2",
+                      "&:hover": { bgcolor: "#1565c0" },
+                    }}
                     onClick={handleSubmit}
                   >
                     Submit
@@ -873,84 +988,91 @@ return (
             </Box>
 
             <Box flex={1}>
-             <Card sx={{ bgcolor: "#1e1e1e", p: 2, color: "white" }}>
-  <Box
-    sx={{
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      mb: 2,
-    }}
-  >
-    <Typography variant="subtitle1" color="white">
-      Permissions Group & Name
-    </Typography>
+              <Card sx={{ bgcolor: "#1e1e1e", p: 2, color: "white" }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    mb: 2,
+                  }}
+                >
+                  <Typography variant="subtitle1" color="white">
+                    Permissions Group & Name
+                  </Typography>
 
-    {/* Search Field */}
-    <TextField
-      size="small"
-      placeholder="Search by Group Name"
-      value={groupSearch}
-      onChange={(e) => setGroupSearch(e.target.value)}
-      sx={{
-        bgcolor: "#2d2d2d",
-        borderRadius: 1,
-        width: 250,
-        input: { color: "white" },
-      }}
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">
-            <SearchIcon sx={{ color: "gray" }} />
-          </InputAdornment>
-        ),
-      }}
-    />
-  </Box>
+                  {/* Search Field */}
+                  <TextField
+                    size="small"
+                    placeholder="Search by Group Name"
+                    value={groupSearch}
+                    onChange={(e) => setGroupSearch(e.target.value)}
+                    sx={{
+                      bgcolor: "#2d2d2d",
+                      borderRadius: 1,
+                      width: 250,
+                      input: { color: "white" },
+                    }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <SearchIcon sx={{ color: "gray" }} />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Box>
 
-  <List>
-    {permissionsData
-      .filter((group) =>
-        group.group.toLowerCase().includes(groupSearch.toLowerCase())
-      )
-      .map((group, i) => (
-        <Box key={i} sx={{ bgcolor: "#2a2a2a", mb: 2, borderRadius: 1 }}>
-          <Typography
-            variant="subtitle1"
-            sx={{
-              bgcolor: "#1976d2",
-              p: 1,
-              borderRadius: "4px 4px 0 0",
-              color: "white",
-            }}
-          >
-            {group.group}
-          </Typography>
-          {group.items.map((item, idx) => (
-            <ListItem
-              key={idx}
-              secondaryAction={
-                <Checkbox
-                  edge="end"
-                  checked={selected.some(
-                    (p) => p.group === group.group && p.name === item
-                  )}
-                  onChange={() => handleToggle(group.group, item)}
-                  sx={{ color: "white" }}
-                />
-              }
-            >
-              <ListItemText
-                primary={item}
-                primaryTypographyProps={{ style: { color: "white" } }}
-              />
-            </ListItem>
-          ))}
-        </Box>
-      ))}
-  </List>
-</Card>
-
+                <List>
+                  {permissionsData
+                    .filter((group) =>
+                      group.group
+                        .toLowerCase()
+                        .includes(groupSearch.toLowerCase())
+                    )
+                    .map((group, i) => (
+                      <Box
+                        key={i}
+                        sx={{ bgcolor: "#2a2a2a", mb: 2, borderRadius: 1 }}
+                      >
+                        <Typography
+                          variant="subtitle1"
+                          sx={{
+                            bgcolor: "#1976d2",
+                            p: 1,
+                            borderRadius: "4px 4px 0 0",
+                            color: "white",
+                          }}
+                        >
+                          {group.group}
+                        </Typography>
+                        {group.items.map((item, idx) => (
+                          <ListItem
+                            key={idx}
+                            secondaryAction={
+                              <Checkbox
+                                edge="end"
+                                checked={selected.some(
+                                  (p) =>
+                                    p.group === group.group && p.name === item
+                                )}
+                                onChange={() => handleToggle(group.group, item)}
+                                sx={{ color: "white" }}
+                              />
+                            }
+                          >
+                            <ListItemText
+                              primary={item}
+                              primaryTypographyProps={{
+                                style: { color: "white" },
+                              }}
+                            />
+                          </ListItem>
+                        ))}
+                      </Box>
+                    ))}
+                </List>
+              </Card>
             </Box>
           </Box>
         </DialogContent>
@@ -977,7 +1099,8 @@ return (
             User Group Successfully Added
           </Typography>
           <Typography variant="body1" color="white">
-            <b>{createdGroupName}</b> has been created with {tempCount} permissions.
+            <b>{createdGroupName}</b> has been created with {tempCount}{" "}
+            permissions.
           </Typography>
         </DialogContent>
       </Dialog>
