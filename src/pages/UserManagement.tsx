@@ -301,10 +301,6 @@ return (
          <Header />
       
   <main className="container mx-auto p-1">
-  {/* Breadcrumbs */}
-  <Box sx={{ display: "flex", alignItems: "center", mb: 2, ml: -5 }}>
-    <DynamicBreadcrumb />
-  </Box>
 </main>
  {/* Breadcrumb + Title */}
       <div className="px-4">
