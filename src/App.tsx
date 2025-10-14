@@ -19,7 +19,22 @@ function App() {
       <Routes>
         <Route path="/" element={<RootHandler />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<h1>Register Page</h1>} />
+        <Route
+          path="/register"
+          element={
+            <ProtectedRoute>
+              <OutOfScope pageName="Register Page" />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/forgot-password"
+          element={
+            <ProtectedRoute>
+              <OutOfScope pageName="Forgot Password Page" />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/dashboard"
           element={
