@@ -246,7 +246,6 @@ const PerformanceDetails = () => {
             <main className="p-6">
                 <div className="text-sm text-gray-400 mb-2">
                     <DynamicBreadcrumb />
-                    <span className="text-white font-semibold">Performance Details</span>
                 </div>
                 <h1 className="text-3xl font-bold mb-6">Performance Details</h1>
                 <div className="flex items-center justify-between mb-4 flex-wrap gap-4">
