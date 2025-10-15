@@ -1,11 +1,13 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import usersData from "../data/users.json";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const navigate = useNavigate();
+  const notify = () => toast("You’ve successfully logged in.");
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,6 +23,7 @@ const LoginPage = () => {
         role: userData.roleId,
       };
       localStorage.setItem("user", JSON.stringify(data));
+      notify();
       navigate("/dashboard");
     } else {
       alert("Invalid email or password.");
