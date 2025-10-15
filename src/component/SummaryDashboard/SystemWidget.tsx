@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const GaugeBackground = () => {
     const ticks = Array.from({ length: 60 }); 
-    const radius = 50;
+    const radius = 55;
     const center = 60;
 
     return (
@@ -17,8 +17,8 @@ const GaugeBackground = () => {
                     const angle = (i / ticks.length) * 360;
                     const startX = center + radius * Math.cos(angle * Math.PI / 180);
                     const startY = center + radius * Math.sin(angle * Math.PI / 180);
-                    const endX = center + (radius - 5) * Math.cos(angle * Math.PI / 180);
-                    const endY = center + (radius - 5) * Math.sin(angle * Math.PI / 180);
+                    const endX = center + (radius - 10) * Math.cos(angle * Math.PI / 180);
+                    const endY = center + (radius - 10) * Math.sin(angle * Math.PI / 180);
                     return <line key={i} x1={startX} y1={startY} x2={endX} y2={endY} stroke="#555" strokeWidth="1.5" />;
                 })}
             </svg>
@@ -44,6 +44,11 @@ const GaugeChart = ({ data, icon }: { data: any, icon: React.ReactNode }) => (
                 width={120}
                 height={120}
                 slotProps={{ legend: { sx: { display: 'none' } } }}
+                sx={{
+                    '& .MuiPieArc-root': {
+                        stroke: 'none !important',
+                    }
+                }}
             />
 
             {/* center chart text */}

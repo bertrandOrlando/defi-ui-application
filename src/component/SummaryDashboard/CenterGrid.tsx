@@ -1,10 +1,14 @@
-import { Box, TextField} from "@mui/material";
+import { Box, TextField, Typography} from "@mui/material";
+import { useState } from "react";
 import UserWidget from "./UserWidget";
 import SystemWidget from "./SystemWidget";
 import PerformanceWidget from "./PerformanceWidget";
 import AlarmsWidget from "./AlarmsWidget";
 
 const CenterGrid = () => {
+    const [ searchQuery, setSearchQuery] = useState('');
+
+
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
             {/* search bar */}
@@ -13,7 +17,9 @@ const CenterGrid = () => {
                     fullWidth
                     variant="outlined"
                     size="small"
-                    placeholder="search"
+                    placeholder="Type for command"
+                    value={searchQuery}
+                    onChange={(event) => setSearchQuery(event.target.value)}
                     sx={{
                         '& .MuiInputBase-root': {
                             backgroundColor: 'white',
@@ -28,6 +34,40 @@ const CenterGrid = () => {
                 />
             </Box>
 
+            {/* result text */}
+            {searchQuery && (
+                <Box
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        mt: -1
+                    }}
+                >
+                    <Typography variant="body2" sx={{ color: '#bdbdbd' }}>
+                        Result for: {' '}
+                        <Box component="span" sx={{ fontWeight: 'bold', color: 'white '}}>
+                            {searchQuery}
+                        </Box>
+                    </Typography>
+
+                    <Typography
+                        variant="body2"
+                        onClick={() => setSearchQuery('')}
+                        sx={{
+                            cursor: 'pointer',
+                            textDecoration: 'underline',
+                            color: '#e0e0e0',
+                            '%:hover': {
+                                color: 'white',
+                            }
+                        }}
+                    >
+                        Clear
+                    </Typography>
+                </Box>
+            )}
+
             {/* mid widget */}
             <Box
                 sx={{
@@ -36,10 +76,10 @@ const CenterGrid = () => {
                     gap: 3,
                 }}
             >
-                <Box sx={{ flexGrow: 1, minWidth: '300px', flexBasis: '30%' }}>
+                <Box sx={{ flexGrow: 1, minWidth: '300px', flexBasis: {xs: '100%', md: '30%' } }}>
                     <UserWidget />
                 </Box>
-                <Box sx={{ flexGrow: 1, minWidth: '300px', flexBasis: '60%' }}>
+                <Box sx={{ flexGrow: 1, minWidth: '300px', flexBasis: {xs: '100%', md: '60%' } }}>
                     <SystemWidget />
                 </Box>
             </Box>
@@ -51,10 +91,10 @@ const CenterGrid = () => {
                     gap: 3,    
                 }}
             >
-                <Box sx={{ flexGrow: 1, minWidth: '300px', flexBasis: '50%'}}>
+                <Box sx={{ flexGrow: 1, minWidth: '300px', flexBasis: {xs: '100%', md: '50%' } }}>
                     <PerformanceWidget />
                 </Box>
-                <Box sx={{ flexGrow: 1, minWidth: '300px', flexBasis: '40%'}}>
+                <Box sx={{ flexGrow: 1, minWidth: '300px', flexBasis: {xs: '100%', md: '40%' } }}>
                     <AlarmsWidget />
                 </Box>
             </Box>
