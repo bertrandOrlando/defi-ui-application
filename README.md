@@ -9,7 +9,7 @@ Dibangun menggunakan **React + Vite + TypeScript + Tailwind CSS**.
 
 Pastikan Anda sudah menginstal:
 - [Node.js](https://nodejs.org/) (disarankan versi 18+)
-- npm (sudah termasuk dalam Node.js) atau [Yarn](https://yarnpkg.com/)
+- npm (sudah termasuk dalam Node.js)
 
 ---
 
@@ -24,10 +24,6 @@ Pastikan Anda sudah menginstal:
 2.  **Install dependencies**
     ```bash
     npm install
-    ```
-    atau
-    ```bash
-    yarn install
     ```
 
 3.  **Jalankan development server**
